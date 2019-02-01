@@ -1,38 +1,101 @@
+//系统库
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/Home'
-import Word from '../components/word/Word'
-import SignIn from '../components/sign/SignIn'
-import SignUp from '../components/sign/SignUp'
-import TRoutes from './test'
-import Comm from '../components/communicate/Comm'
+
+//三方库
+import cookie from '../static/js/cookie'
+
+//组件
+import app from '../views/app/app'
+import logHead from '../views/head/logHead'
+import login from '../views/login/login'
+import foot from '../views/foot/foot'
+import register from '../views/register/register'
 
 Vue.use(Router);
 
-export default new Router({
-  mode: 'history',
+let router = new Router({
   routes: [
-    ...TRoutes//测试用的路由.这里是数组解包
-    , {
-      path: '/',
-      name: 'Home',
-      component: Home
-    }, {
-      path: '/word',
-      name: 'Word',
-      component: Word
-    }, {
-      path: '/sign-in',
-      name: 'SignIn',
-      component: SignIn
-    }, {
-      path: '/sign-up',
-      name: 'SignUp',
-      component: SignUp
-    }, {
-      path: '/comm',
-      name: 'Comm',
-      component: Comm
+    {//伪根
+      path: '/app',
+      component: app,
+      children: [
+        {//登录
+          path: 'login',
+          name: 'login',
+          components: {
+            head: logHead,
+            content: login,
+            foot: foot
+          },
+          meta: {
+            title: "登录",
+            need_log: false
+          }
+        },
+        {//注册
+          path: 'register',
+          name: 'register',
+          components: {
+            head: logHead,
+            content: register,
+            foot: foot
+          },
+          meta: {
+            title: "注册",
+            need_log: false
+          }
+        },
+        //app子组件
+      ]
     }
   ]
 });
+
+//进行路由判断
+router.beforeEach((to, from, next) => {
+  let nextPath = cookie.getCookie('nextPath')
+  // console.log(nextPath)
+  if (nextPath === "pay") {
+    next({
+      path: '/app/home/member/order',
+    });
+  } else {
+    if (to !== undefined) {
+      if (to.meta.need_log) {
+        console.log(to.meta.need_log)
+        if (!store.state.userInfo.token) {
+          next({
+            path: '/app/login',
+          });
+        } else {
+          next();
+        }
+      } else {
+        if (to.path === '/') {
+          next({
+            path: '/app/home/index',
+          });
+        } else {
+          next();
+        }
+      }
+    } else {
+      if (to.path === '/') {
+        next({
+          path: '/app/home/index',
+        });
+      } else {
+        next();
+      }
+    }
+  }
+});
+
+//修改网页标题
+router.afterEach((to, from, next) => {
+  document.title = to.matched[to.matched.length - 1].meta.title;
+});
+
+//抛出路由
+export default router;
