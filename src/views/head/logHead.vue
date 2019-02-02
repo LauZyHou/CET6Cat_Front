@@ -28,6 +28,7 @@
     mounted() {
       this.checkRoute(this.$route);
     },
+    //FIXME
     beforeRouteUpdate(to,from,next) {//这里用不了,不是动态参数
       this.checkRoute(to);
       next();

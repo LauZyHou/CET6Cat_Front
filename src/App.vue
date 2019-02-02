@@ -50,4 +50,10 @@
   body, button, input, select, textarea {
     font: 12px/1.5 "Microsoft YaHei",Tahoma,Helvetica,Arial,simsun;
   }
+
+  ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
 </style>

@@ -35,7 +35,7 @@
       </div>
       <p id="endP">
         已有账号？
-        <router-link :to="'/app/login'">[立即登录]</router-link>
+        <router-link to="/app/login">[立即登录]</router-link>
       </p>
     </div>
   </section>
@@ -66,23 +66,11 @@
     background-color: #CCFF99;
   }
 
+  /*-----------------------------------------------------------------*/
+
   section > .fr {
     margin-top: 10px;
     margin-right: 200px;
-  }
-
-  .tab {
-    height: 30px;
-    border-bottom: 1px solid #dedede;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    font-size: medium;
-  }
-
-  #codeBtn {
-    float: right !important;
-    width: 103px;
-    font-size: 12px;
   }
 
   .form-box {
@@ -93,6 +81,18 @@
     background: #fff;
     color: #666;
   }
+
+  /*-----------------------------------------------------------------*/
+
+  .tab {
+    height: 30px;
+    border-bottom: 1px solid #dedede;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: medium;
+  }
+
+  /*-----------------------------------------------------------------*/
 
   .form-group {
     /*提示+输入框 外面的盒子*/
@@ -120,6 +120,8 @@
     border: 0;
   }
 
+  /*-----------------------------------------------------------------*/
+
   .verify-code {
     float: left;
     width: 180px !important;
@@ -129,13 +131,27 @@
     width: 87px !important;
   }
 
+  #codeBtn {
+    float: right !important;
+    width: 103px;
+    font-size: 12px;
+  }
+
+  /*-----------------------------------------------------------------*/
+
   #logBtn {
     width: 100%;
   }
+
+  /*-----------------------------------------------------------------*/
 
   #endP{
     width: 100%;
     margin-top: 20px;
     text-align: center;
+  }
+
+  #endP > a{
+    color: #fa8341;
   }
 </style>
