@@ -28,6 +28,8 @@
     /*padding: 0*/
   }
 
+  /*-----------------------------------------------------------------*/
+
   .fr{
     float: right !important;
   }
@@ -42,6 +44,29 @@
     visibility: hidden;
   }
 
+  /*-----------------------------------------------------------------*/
+
+  /*注意router-link最后也都渲染成a标签了,这里直接为a标签配置*/
+  a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  a:hover {
+    /*取消a标签下划线*/
+    text-decoration: none;
+    color: dodgerblue;
+  }
+
+  /*-----------------------------------------------------------------*/
+
+  dd img, li img, p img {
+    /* 	把此元素放置在父元素的中部*/
+    vertical-align: middle;
+  }
+
+  /*-----------------------------------------------------------------*/
+
   input{
     /*font-size: 12px;*/
     outline: 0;
@@ -51,7 +76,7 @@
     font: 12px/1.5 "Microsoft YaHei",Tahoma,Helvetica,Arial,simsun;
   }
 
-  ul{
+  ol,ul{
     list-style: none;
     margin: 0;
     padding: 0;

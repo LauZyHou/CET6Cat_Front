@@ -21,6 +21,10 @@ module.exports = {
         pathRewrite: {
           '^/api': ''
         }
+      },
+      //访问前端
+      '': {
+        target: 'http://localhost:8080'
       }
     },
 

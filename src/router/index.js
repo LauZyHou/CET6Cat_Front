@@ -11,6 +11,9 @@ import logHead from '../views/head/logHead'
 import login from '../views/login/login'
 import foot from '../views/foot/foot'
 import register from '../views/register/register'
+import head from '../views/head/head'
+import home from '../views/home/home'
+import index from '../views/home/index/index'
 
 Vue.use(Router);
 
@@ -46,7 +49,31 @@ let router = new Router({
             need_log: false
           }
         },
-        //app子组件
+        {//主体页
+          path: "home",
+          name: "home",
+          components: {
+            head: head,
+            content: home,
+            foot: foot
+          },
+          meta: {
+            need_log: false
+          },
+          children: [
+            {//主页
+              path: "index",
+              name: "index",
+              component: index,
+              meta: {
+                title: "主页",
+                need_log: false
+              }
+            },
+            //FIXME 添加/app/home的子路由
+          ]
+        }
+        //FIXME 添加/app的子路由
       ]
     }
   ]
