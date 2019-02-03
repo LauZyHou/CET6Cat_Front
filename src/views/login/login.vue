@@ -59,7 +59,7 @@
 
 <style scoped>
   section {
-    height: 500px;
+    height: 508px;
     background-color: #CCFF99;
   }
 

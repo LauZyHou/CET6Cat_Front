@@ -14,6 +14,7 @@ import register from '../views/register/register'
 import head from '../views/head/head'
 import home from '../views/home/home'
 import index from '../views/home/index/index'
+import word from '../views/home/word/word'
 
 Vue.use(Router);
 
@@ -68,6 +69,15 @@ let router = new Router({
               meta: {
                 title: "主页",
                 need_log: false
+              }
+            },
+            {//背单词页面
+              path: "word",
+              name: "word",
+              component: word,
+              meta: {
+                title: "背单词",
+                need_log: false //true
               }
             },
             //FIXME 添加/app/home的子路由

@@ -9,29 +9,21 @@
     name: "logHead",
     data() {
       return {
-        title: "xxx"
+
       }
     },
     methods: {
-      checkRoute(route) {
-        //判断是登录页还是注册页
-        let fuc = route.path.split("/")[2];
-        if (fuc === "login") {
-          this.title = "登录";
-        } else if (fuc === "register") {
-          this.title = "注册";
-        } else {
-          this.title = "未知";
+    },
+    computed:{
+      title(){
+        let fuc = this.$route.path.split("/")[2];
+        if(fuc === "login"){
+          return "登录";
+        }else if(fuc === "register"){
+          return "注册";
         }
+        return "未知";
       }
-    },
-    mounted() {
-      this.checkRoute(this.$route);
-    },
-    //FIXME
-    beforeRouteUpdate(to,from,next) {//这里用不了,不是动态参数
-      this.checkRoute(to);
-      next();
     }
   }
 </script>
