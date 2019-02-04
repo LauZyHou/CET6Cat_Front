@@ -15,6 +15,11 @@ import head from '../views/head/head'
 import home from '../views/home/home'
 import index from '../views/home/index/index'
 import word from '../views/home/word/word'
+import forum from '../views/home/forum/forum'
+import course from '../views/home/course/course'
+import reading from '../views/home/reading/reading'
+import online from '../views/home/online/online'
+import essay from '../views/home/essay/essay'
 
 Vue.use(Router);
 
@@ -80,6 +85,51 @@ let router = new Router({
                 need_log: false //true
               }
             },
+            {//交流论坛页面
+              path: "forum",
+              name: "forum",
+              component: forum,
+              meta: {
+                title: "交流论坛",
+                need_log: false
+              }
+            },
+            {//课程视频页面
+              path: "course",
+              name: "course",
+              component: course,
+              meta: {
+                title: "课程视频",
+                need_log: false
+              }
+            },
+            {//阅读分析页面
+              path: "reading",
+              name: "reading",
+              component: reading,
+              meta: {
+                title: "阅读分析",
+                need_log: false
+              }
+            },
+            {//在线模拟页面
+              path: "online",
+              name: "online",
+              component: online,
+              meta: {
+                title: "在线模拟",
+                need_log: false//true
+              }
+            },
+            {//作文交流页面
+              path: "essay",
+              name: "essay",
+              component: essay,
+              meta: {
+                title: "高分作文交流",
+                need_log: false
+              }
+            }
             //FIXME 添加/app/home的子路由
           ]
         }

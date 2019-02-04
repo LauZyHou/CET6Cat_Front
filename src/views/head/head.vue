@@ -52,12 +52,12 @@
             <el-menu-item index="2-4-3">选项3</el-menu-item>
           </el-submenu>
         </el-submenu>
-        <el-menu-item index="3" disabled>在线模拟</el-menu-item>
-        <el-menu-item index="4">慕课视频</el-menu-item>
-        <el-menu-item index="/comm">交流论坛</el-menu-item>
+        <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
+        <el-menu-item index="/app/home/course">慕课视频</el-menu-item>
+        <el-menu-item index="/app/home/forum">交流论坛</el-menu-item>
         <el-menu-item index="/app/home/word">背单词打卡</el-menu-item>
-        <el-menu-item index="7">阅读分析</el-menu-item>
-        <el-menu-item index="8">高分作文交流汇</el-menu-item>
+        <el-menu-item index="/app/home/reading">阅读分析</el-menu-item>
+        <el-menu-item index="/app/home/essay">高分作文交流汇</el-menu-item>
       </el-menu>
     </div>
   </header>
@@ -65,7 +65,13 @@
 
 <script>
   export default {
-    name: "head"
+    name: "head",
+    data() {
+      return {
+        select: "",
+        input5: ""
+      }
+    }
   }
 </script>
 
@@ -128,6 +134,7 @@
     flex: 7;
   }
 
+
   .el-select .el-input {
     width: 130px;
   }
@@ -149,6 +156,10 @@
     height: auto;
     max-width: 100%;
     max-height: 100%;
+  }
+
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
   }
 
   /*-----------------------------------------------------------------*/
