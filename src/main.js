@@ -5,9 +5,11 @@ import App from './App'
 import router from './router'
 //引入这个才能用this.$http.get之类的
 import VueResource from 'vue-resource'
-//导入ElementUI
+//ElementUI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+//Vuex
+import {store} from './store/store'
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
@@ -16,6 +18,7 @@ Vue.use(ElementUI);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store:store,
   router,
   components: {App},
   template: '<App/>'
