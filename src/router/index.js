@@ -20,6 +20,7 @@ import course from '../views/home/course/course'
 import reading from '../views/home/reading/reading'
 import online from '../views/home/online/online'
 import essay from '../views/home/essay/essay'
+import post from '../views/home/forum/post'
 
 Vue.use(Router);
 
@@ -128,6 +129,15 @@ let router = new Router({
               meta: {
                 title: "高分作文交流",
                 need_log: false
+              }
+            },
+            {//论坛发帖页面
+              path: "post",
+              name: "post",
+              component: post,
+              meta: {
+                title:"论坛发帖",
+                need_log: false//true
               }
             }
             //FIXME 添加/app/home的子路由
