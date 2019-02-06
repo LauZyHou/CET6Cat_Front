@@ -21,6 +21,7 @@ import reading from '../views/home/reading/reading'
 import online from '../views/home/online/online'
 import essay from '../views/home/essay/essay'
 import post from '../views/home/forum/post'
+import posts from '../views/home/forum/posts'
 
 Vue.use(Router);
 
@@ -136,8 +137,17 @@ let router = new Router({
               name: "post",
               component: post,
               meta: {
-                title:"论坛发帖",
+                title: "论坛发帖",
                 need_log: false//true
+              }
+            },
+            {//论坛帖子详情页
+              path: "posts/:id",
+              name: "posts",
+              component: posts,
+              meta: {
+                title: "查看帖子",
+                need_log: false
               }
             }
             //FIXME 添加/app/home的子路由

@@ -16,7 +16,7 @@ let cmpByLastTime=function(a,b){
       bTime=b.replies[bLen-1].time;
     else
       bTime=b.time;
-    console.log(bTime,aTime);
+    // console.log(bTime,aTime);
     return bTime-aTime;
   }
 

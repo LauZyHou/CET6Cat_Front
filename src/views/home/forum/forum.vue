@@ -18,8 +18,8 @@
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
     </div>
-    <!-- 4 发帖按钮 -->
-    <div id="post">
+    <!-- 4 操作按钮 -->
+    <div id="op">
       <el-button icon="el-icon-arrow-up" circle></el-button>
       <br>
       <br>
@@ -67,6 +67,7 @@ section {
   padding-top: 20px;
 }
 
+/* 1 标题 */
 /*-----------------------------------------------------------------*/
 
 .tit {
@@ -77,6 +78,7 @@ section {
   text-align: center;
 }
 
+/* 2 帖子的容器 */
 /*-----------------------------------------------------------------*/
 
 .container {
@@ -94,6 +96,8 @@ section {
   height: 70px;
 }
 
+
+/* 3 分页 */
 /*-----------------------------------------------------------------*/
 
 .pagination {
@@ -104,9 +108,11 @@ section {
   text-align: center;
 }
 
+
+/* 4 操作按钮 */
 /*-----------------------------------------------------------------*/
 
-#post {
+#op {
   position: fixed;
   bottom: 300px;
   right: 40px;
