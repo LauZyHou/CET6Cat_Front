@@ -25,7 +25,7 @@
         <el-col :span="18">{{detail.content}}</el-col>
       </el-row>
       <!-- 2-3 回帖(已经按时间顺序排好) -->
-      <el-row v-for="rep in detail.replies" class="building">
+      <el-row v-for="rep in detail.replies" v-bind:key="rep.time" class="building">
         <el-col :span="6" class="lft">{{rep.replyer.name}}</el-col>
         <el-col :span="18">{{rep.content}}</el-col>
       </el-row>

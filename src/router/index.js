@@ -22,6 +22,7 @@ import online from '../views/home/online/online'
 import essay from '../views/home/essay/essay'
 import post from '../views/home/forum/post'
 import posts from '../views/home/forum/posts'
+import videos from '../views/home/course/videos'
 
 Vue.use(Router);
 
@@ -148,6 +149,15 @@ let router = new Router({
               meta: {
                 title: "查看帖子",
                 need_log: false
+              }
+            },
+            {//课程视频详情页
+              path:"videos/:id",
+              name:"videos",
+              component: videos,
+              meta:{
+                title:"查看视频",
+                need_log:false
               }
             }
             //FIXME 添加/app/home的子路由
