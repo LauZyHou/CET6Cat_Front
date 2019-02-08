@@ -10,7 +10,7 @@
     </div>
     <!-- 2 帖子的容器 -->
     <div class="container">
-      <div class="post" v-for="post in posts">
+      <div class="post" v-for="post in posts" :key="post.id">
         <post-box v-bind:post="post"></post-box>
       </div>
     </div>

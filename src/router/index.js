@@ -102,7 +102,7 @@ let router = new Router({
               name: "course",
               component: course,
               meta: {
-                title: "课程视频",
+                title: "在线视频",
                 need_log: false
               }
             },

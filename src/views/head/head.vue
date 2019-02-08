@@ -39,7 +39,7 @@
         text-color="#fff"
         active-text-color="#ffd04b"
         router="true">
-        <el-menu-item index="/app/home/index">主页</el-menu-item>
+        <el-menu-item index="/app/home/index">首页</el-menu-item>
         <el-submenu index="2">
           <template slot="title">最新信息</template>
           <el-menu-item index="2-1">选项1</el-menu-item>
@@ -55,7 +55,7 @@
         <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
         <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
         <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
-        <el-menu-item index="/app/home/word">背单词打卡</el-menu-item>
+        <el-menu-item index="/app/home/word">六级词汇</el-menu-item>
         <el-menu-item index="/app/home/reading">阅读分析</el-menu-item>
         <el-menu-item index="/app/home/essay">高分作文交流汇</el-menu-item>
       </el-menu>

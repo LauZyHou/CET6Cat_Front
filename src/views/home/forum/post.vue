@@ -5,7 +5,7 @@
       <h2>发帖</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/app/home/forum' }">交流论坛</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/app/home/forum/1' }">交流论坛</el-breadcrumb-item>
         <el-breadcrumb-item>发帖</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
