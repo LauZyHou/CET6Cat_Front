@@ -88,8 +88,8 @@ let router = new Router({
                 need_log: false //true
               }
             },
-            {//交流论坛页面
-              path: "forum",
+            {//交流论坛list页
+              path: "forum/:page",
               name: "forum",
               component: forum,
               meta: {
@@ -97,8 +97,8 @@ let router = new Router({
                 need_log: false
               }
             },
-            {//课程视频页面
-              path: "course",
+            {//视频list页
+              path: "course/:page",
               name: "course",
               component: course,
               meta: {

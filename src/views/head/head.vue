@@ -1,7 +1,7 @@
 <template>
   <header>
     <!--顶部随动的注册,登录提示-->
-    <!------------------------------------------------------------->
+    <!------------------------------------------------------------>
     <div class="top-bar">
       <span>你好,欢迎来到CET6Cat</span>
       <span class="space">|</span>
@@ -10,7 +10,7 @@
       <router-link rel="nofollow" to="/app/login">登录</router-link>
     </div>
     <!--图标和搜索栏-->
-    <!------------------------------------------------------------->
+    <!------------------------------------------------------------>
     <div class="top-show">
       <div class="logo">
         <!--<h2>CET6Cat六级辅导</h2>-->
@@ -28,7 +28,7 @@
       </div>
     </div>
     <!--导航条-->
-    <!------------------------------------------------------------->
+    <!------------------------------------------------------------>
     <div class="top-nav">
       <el-menu
         :default-active="activeIndex2"
@@ -53,8 +53,8 @@
           </el-submenu>
         </el-submenu>
         <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
-        <el-menu-item index="/app/home/course">慕课视频</el-menu-item>
-        <el-menu-item index="/app/home/forum">交流论坛</el-menu-item>
+        <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
+        <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
         <el-menu-item index="/app/home/word">背单词打卡</el-menu-item>
         <el-menu-item index="/app/home/reading">阅读分析</el-menu-item>
         <el-menu-item index="/app/home/essay">高分作文交流汇</el-menu-item>

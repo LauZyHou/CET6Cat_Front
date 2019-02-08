@@ -5,7 +5,7 @@
       <h2>查看视频</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{path : '/app/home/course'}">在线视频</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path : '/app/home/course/1'}">在线视频</el-breadcrumb-item>
         <el-breadcrumb-item>查看视频</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -15,13 +15,16 @@
       <el-row>
         <el-col :span="20" id="video-tit">{{detail.title}}</el-col>
         <el-col :span="4" id="video-op">
-          <button :disabled="!mineOrAdmin">删除</button>
+          <button :disabled="!mineOrAdmin">删除视频</button>
         </el-col>
       </el-row>
       <!-- 2-2 视频内容 -->
-      <el-row>
-        <video width="320" height="840" controls="controls">
-          <source :src="'../../../../static/videos/'+vid+'.'+detail.type" :type="'video/'+detail.type">
+      <el-row id="video-box">
+        <video controls="controls">
+          <source
+            :src="'/static/videos/'+vid+'.'+detail.type"
+            :type="'video/'+detail.type"
+          >
           <p>你的浏览器不支持video标签</p>
         </video>
       </el-row>
@@ -47,7 +50,7 @@ export default {
       //TODO
       return {
         title: "课程视频" + vid,
-        type:"mp4"
+        type: "mp4"
       };
     }
   },
@@ -93,10 +96,24 @@ section {
 }
 
 /* 2-1 视频标题 */
+/*----------------------------------------*/
 #video-tit {
   background-color: #ccff99;
   font-size: 20px;
   height: 100%;
+}
+
+/* 2-2 视频内容 */
+/*----------------------------------------*/
+#video-box {
+  margin: 0 auto;
+}
+
+#video-box video {
+  background-color: black;
+  width: 80%;
+  height: 550px;
+  margin: 10px 10% 0 !important;
 }
 
 /*-----------------------------------------------------------------*/

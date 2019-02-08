@@ -11,8 +11,10 @@
     <!-- 2 课程的容器 -->
     <div class="container">
       <ul>
-        <li v-for="c in courses">
-          <router-link :to="'/app/home/videos/'+c.id">{{c.id}}</router-link>
+        <li v-for="v in videos" v-bind:key="v.id">
+          <router-link :to="'/app/home/videos/'+v.id">
+            <img :src="'/static/thumbnail/'+v.id+'.png'" :alt="v.name">
+          </router-link>
         </li>
       </ul>
     </div>
@@ -27,17 +29,15 @@
 export default {
   name: "course",
   data() {
-    return {
-      courses: [
-        { id: 1, name: "c" },
-        { id: 2, name: "c" },
-        { id: 3, name: "c" },
-        { id: 4, name: "c" },
-        { id: 5, name: "c" },
-        { id: 6, name: "c" },
-        { id: 7, name: "c" }
-      ]
-    };
+    return {};
+  },
+  computed:{
+    videos(){
+      //获取vuex的store中的帖子数据
+      let videos=this.$store.state.videos;
+      //TODO分页
+      return videos;
+    }
   }
 };
 </script>
@@ -92,6 +92,11 @@ li {
   height: 150px;
   border: 1px solid #222;
   margin: 10px;
+}
+
+li img{
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* 3 分页 */
