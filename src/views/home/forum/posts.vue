@@ -4,8 +4,8 @@
     <div class="tit">
       <h2>查看帖子</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item :to="{ path: '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{path : '/app/home/forum/1'}">交流论坛</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path : '/app/home/index' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path : '/app/home/forum/1' }">交流论坛</el-breadcrumb-item>
         <el-breadcrumb-item>查看帖子</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
@@ -48,6 +48,40 @@
       <!-- 向下 -->
       <el-button icon="el-icon-arrow-down"></el-button>
     </div>
+    <!-- 5 发表回复 -->
+    <div id="reply">
+      <!-- 5-1 回复模块标题 -->
+      <el-row>
+        <el-col :span="8">
+          <h3>发表回复</h3>
+        </el-col>
+        <el-col :span="16">发帖请遵守
+          <router-link to>CET6Cat社区规范</router-link>
+        </el-col>
+      </el-row>
+      <!-- 5-2 回复表单  -->
+      <el-form :model="form">
+        <!-- 5-2-1 内容 -->
+        <div class="padding-lr">
+          <el-input
+            type="textarea"
+            :autosize="{ minRows: 10, maxRows: 24}"
+            placeholder="请输入内容"
+            v-model="form.content"
+          ></el-input>
+        </div>
+        <!-- 5-2-2 操作 -->
+        <br>
+        <el-row class="padding-lr">
+          <el-col :span="2" :offset="16">
+            <el-button type="primary" @click="onSubmit">提交回复</el-button>
+          </el-col>
+          <el-col :span="6">
+            <el-button type="info" @click="onClear">清空</el-button>
+          </el-col>
+        </el-row>
+      </el-form>
+    </div>
   </section>
 </template>
 
@@ -61,7 +95,8 @@ export default {
         poster: {},
         replies: []
       },
-      mineOrAdmin: false //帖子是不是自己的
+      mineOrAdmin: false, //帖子是不是自己的
+      form: {}
     };
   },
   methods: {
@@ -90,7 +125,11 @@ export default {
       };
     },
     //只看楼主
-    onlyPoster() {}
+    onlyPoster() {},
+    //提交回复
+    onSubmit() {},
+    //清空输入的回复
+    onClear() {}
   },
   mounted() {
     this.pid = this.$route.params.id;
@@ -109,6 +148,7 @@ export default {
 section {
   background-color: #ccff99;
   padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 /* 1 标题 */
@@ -133,7 +173,7 @@ section {
   padding-bottom: 10px;
 }
 
-/* --------------------------------------------------- */
+/*---------------------------------------------------*/
 .container > div {
   border-bottom: 1px solid black;
 }
@@ -144,7 +184,7 @@ section {
   height: 100%;
 }
 
-/* --------------------------------------------------- */
+/*---------------------------------------------------*/
 .building,
 .building > div {
   min-height: 300px;
@@ -171,6 +211,35 @@ section {
   position: fixed;
   bottom: 300px;
   right: 40px;
+}
+
+/* 5 发表回复 */
+/*-----------------------------------------------------------------*/
+#reply {
+  background-color: white;
+  width: 80%;
+  min-height: 300px;
+  margin: 10px auto 0;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+/* 5-1 回复模块标题 */
+/*----------------------------------------------------*/
+
+#reply > div:first-child {
+  font-size: 14px;
+  font-weight: normal;
+  color: darkslategray;
+}
+
+#reply > div:first-child  a{
+  color: #fa8341;
+}
+
+.padding-lr {
+  padding: 0 10px 10px;
 }
 </style>
 

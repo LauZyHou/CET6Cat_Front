@@ -57,7 +57,7 @@
         <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
         <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
         <el-menu-item :index="'/app/home/word/'+wordGroup">六级词汇</el-menu-item>
-        <el-menu-item index="/app/home/reading">阅读分析</el-menu-item>
+        <el-menu-item index="/app/home/reading/1">阅读分析</el-menu-item>
         <el-menu-item index="/app/home/essay">高分作文交流汇</el-menu-item>
       </el-menu>
     </div>

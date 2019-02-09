@@ -23,6 +23,7 @@ import essay from '../views/home/essay/essay'
 import post from '../views/home/forum/post'
 import posts from '../views/home/forum/posts'
 import videos from '../views/home/course/videos'
+import papers from '../views/home/reading/papers'
 
 Vue.use(Router);
 
@@ -106,8 +107,8 @@ let router = new Router({
                 need_log: false
               }
             },
-            {//阅读分析页面
-              path: "reading",
+            {//阅读分析list页
+              path: "reading/:page",
               name: "reading",
               component: reading,
               meta: {
@@ -152,12 +153,21 @@ let router = new Router({
               }
             },
             {//课程视频详情页
-              path:"videos/:id",
-              name:"videos",
+              path: "videos/:id",
+              name: "videos",
               component: videos,
-              meta:{
-                title:"查看视频",
-                need_log:false
+              meta: {
+                title: "查看视频",
+                need_log: false
+              }
+            },
+            {//阅读分析详情页
+              path: "papers/:id",
+              name: "papers",
+              component: papers,
+              meta: {
+                title: "查看文章",
+                need_log: false
               }
             }
             //FIXME 添加/app/home的子路由

@@ -21,7 +21,9 @@
         arrow="always"
       >
         <el-carousel-item v-for="item in 20" :key="item">
-          <h3>{{ item }}</h3>
+          <!-- <h3>{{ item }}</h3> -->
+          <h2>imprinter</h2>
+          <h3>n.印刷机,压印机</h3>
         </el-carousel-item>
       </el-carousel>
       <!-- 2-2 操作 -->
@@ -47,7 +49,8 @@
           <td>
             跳转至第
             <input type="number" v-model="wordGroup">
-            组</td>
+            组
+          </td>
           <td>
             <el-button type="primary" icon="el-icon-arrow-down">下一组</el-button>
           </td>
@@ -64,18 +67,18 @@ export default {
   name: "word",
   data() {
     return {
-      auto: true,//自动切换
-      tranSec: 4,//切换间隔:秒
+      auto: true, //自动切换
+      tranSec: 4, //切换间隔:秒
       wordGroup: 1
     };
   },
   components: {
     card: card
   },
-  computed:{
+  computed: {
     //切换间隔:从秒计算毫秒
-    tranMs(){
-      return this.tranSec*1000;
+    tranMs() {
+      return this.tranSec * 1000;
     }
   }
 };
@@ -112,6 +115,10 @@ section {
 
 /* 2-1 背单词卡片 */
 /*-----------------------------------------------*/
+.el-carousel__item {
+  text-align: center;
+}
+
 .el-carousel__item h3 {
   color: #475669;
   font-size: 14px;
@@ -137,7 +144,7 @@ table {
   vertical-align: center;
 }
 
-table input{
+table input {
   width: 40px;
 }
 </style>
