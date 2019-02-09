@@ -80,11 +80,11 @@ let router = new Router({
               }
             },
             {//背单词页面
-              path: "word",
+              path: "word/:group",
               name: "word",
               component: word,
               meta: {
-                title: "背单词",
+                title: "六级词汇",
                 need_log: false //true
               }
             },

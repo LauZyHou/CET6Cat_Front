@@ -37,7 +37,7 @@
       <!-- 2-6 六级词汇 -->
       <div id="videos" class="hot">
         <h2>六级词汇</h2>
-        <router-link to="/app/home/word" target="_blank">更多</router-link>
+        <router-link :to="'/app/home/word/'+wordGroup" target="_blank">更多</router-link>
         <br>
         这里放个词云
       </div>
@@ -57,7 +57,12 @@
 
 <script>
 export default {
-  name: "index"
+  name: "index",
+  data(){
+    return{
+      wordGroup: 1 //如果用户已经登录了,要取他上次背到的那一组
+    }
+  }
 };
 </script>
 
