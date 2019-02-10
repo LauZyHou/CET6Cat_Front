@@ -4,9 +4,11 @@
 
 <script>
 export default {
-  name: "home"
+  name: "member"
 };
 </script>
 
 <style scoped>
 </style>
+
+

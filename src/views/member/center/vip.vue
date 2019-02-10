@@ -1,12 +1,14 @@
 <template>
-  <router-view></router-view>
+    <div>VIP服务</div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "vip"
 };
 </script>
 
 <style scoped>
 </style>
+
+

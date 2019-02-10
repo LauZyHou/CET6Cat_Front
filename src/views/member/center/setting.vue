@@ -1,12 +1,15 @@
 <template>
-  <router-view></router-view>
+    <div>设置</div>
 </template>
 
 <script>
 export default {
-  name: "home"
-};
+    name:"setting"
+}
 </script>
 
 <style scoped>
+
 </style>
+
+

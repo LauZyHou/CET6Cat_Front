@@ -12,6 +12,7 @@ import login from '../views/login/login'
 import foot from '../views/foot/foot'
 import register from '../views/register/register'
 import head from '../views/head/head'
+
 import home from '../views/home/home'
 import index from '../views/home/index/index'
 import word from '../views/home/word/word'
@@ -25,6 +26,13 @@ import posts from '../views/home/forum/posts'
 import videos from '../views/home/course/videos'
 import papers from '../views/home/reading/papers'
 import essays from '../views/home/essay/essays'
+
+import member from '../views/member/member'
+import center from '../views/member/center/center'
+import profile from '../views/member/center/profile'
+import favorite from '../views/member/center/favorite'
+import vip from '../views/member/center/vip'
+import setting from '../views/member/center/setting'
 
 Vue.use(Router);
 
@@ -181,6 +189,69 @@ let router = new Router({
               }
             }
             //FIXME 添加/app/home的子路由
+          ]
+        },
+        {//仅和用户自己相关的页
+          path: "member",
+          name: "member",
+          components: {
+            head: logHead,
+            content: member,
+            foot: foot
+          },
+          meta: {
+            need_log: false //true
+          },
+          children: [
+            {//个人中心
+              path: "center",
+              name: "center",
+              component: center,
+              meta: {
+                title: "个人中心",
+                need_log: false //true
+              },
+              children: [
+                {//我的资料
+                  path: "profile",
+                  name: "profile",
+                  component: profile,
+                  meta: {
+                    title: "我的资料-个人中心",
+                    need_log: false //true
+                  }
+                },
+                {//我的收藏
+                  path: "favorite",
+                  name: "favorite",
+                  component: favorite,
+                  meta: {
+                    title: "我的收藏-个人中心",
+                    need_log: false //true
+                  }
+                },
+                {//VIP服务
+                  path: "vip",
+                  name: "vip",
+                  component: vip,
+                  meta: {
+                    title: "VIP服务-个人中心",
+                    need_log: false //true
+                  }
+                },
+                {//设置
+                  path: "setting",
+                  name: "setting",
+                  component: setting,
+                  meta: {
+                    title: "设置-个人中心",
+                    need_log: false //true
+                  }
+                }
+                //FIXME 添加/app/member/setting的子路由
+              ]
+            }
+            //FIXME 添加/app/member的子路由
           ]
         }
         //FIXME 添加/app的子路由

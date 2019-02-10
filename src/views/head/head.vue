@@ -1,16 +1,23 @@
 <template>
   <header>
-    <!--顶部随动的注册,登录提示-->
-    <!------------------------------------------------------------>
-    <div class="top-bar">
-      <span>你好,欢迎来到CET6Cat</span>
+    <!-- 1 顶部随动的注册,登录提示 -->
+    <!-- 1-1 已登录 -->
+    <div v-if="isLogin" class="top-bar">
+      <span>你好,刘知昊</span>
+      <span class="space">|</span>
+      <router-link rel="nofollow" to="/app/member/center/profile">个人中心</router-link>
+      <!-- <span class="space">|</span> -->
+      <!-- <router-link rel="nofollow" to="">其它功能</router-link> -->
+    </div>
+    <!-- 1-2 未登录 -->
+    <div v-else class="top-bar">
+      <span>你好,访客</span>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/register">注册</router-link>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/login">登录</router-link>
     </div>
-    <!--图标和搜索栏-->
-    <!------------------------------------------------------------>
+    <!-- 2 图标和搜索栏 -->
     <div class="top-show">
       <div class="logo">
         <!--<h2>CET6Cat六级辅导</h2>-->
@@ -27,8 +34,7 @@
         </el-input>
       </div>
     </div>
-    <!--导航条-->
-    <!------------------------------------------------------------>
+    <!-- 3 导航条 -->
     <div class="top-nav">
       <el-menu
         :default-active="activeIndex2"
@@ -71,14 +77,15 @@ export default {
     return {
       select: "",
       input5: "",
-      wordGroup: 1 //如果用户已经登录了,要取他上次背到的那一组
+      wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
+      isLogin: true
     };
   }
 };
 </script>
 
 <style scoped>
-/*顶部随动的注册,登录提示*/
+/* 1 顶部随动的注册,登录提示 */
 /*-----------------------------------------------------------------*/
 
 .top-bar {
@@ -113,7 +120,7 @@ export default {
   color: #959595;
 }
 
-/*图标和搜索栏*/
+/* 2 图标和搜索栏 */
 /*-----------------------------------------------------------------*/
 
 .top-show {

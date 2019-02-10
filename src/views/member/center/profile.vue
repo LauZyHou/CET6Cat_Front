@@ -1,12 +1,15 @@
 <template>
-  <router-view></router-view>
+    <div>我的资料</div>
 </template>
 
 <script>
 export default {
-  name: "home"
-};
+    name: "profile"
+}
 </script>
 
 <style scoped>
+
 </style>
+
+

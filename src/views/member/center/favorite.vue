@@ -1,12 +1,14 @@
 <template>
-  <router-view></router-view>
+    <div>我的收藏</div>
 </template>
 
 <script>
 export default {
-  name: "home"
+  name: "favorite"
 };
 </script>
 
 <style scoped>
 </style>
+
+
