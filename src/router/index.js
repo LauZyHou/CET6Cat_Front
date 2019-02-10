@@ -24,6 +24,7 @@ import post from '../views/home/forum/post'
 import posts from '../views/home/forum/posts'
 import videos from '../views/home/course/videos'
 import papers from '../views/home/reading/papers'
+import essays from '../views/home/essay/essays'
 
 Vue.use(Router);
 
@@ -125,12 +126,12 @@ let router = new Router({
                 need_log: false//true
               }
             },
-            {//作文交流页面
-              path: "essay",
+            {//高分作文list页
+              path: "essay/:page",
               name: "essay",
               component: essay,
               meta: {
-                title: "高分作文交流",
+                title: "高分作文",
                 need_log: false
               }
             },
@@ -167,6 +168,15 @@ let router = new Router({
               component: papers,
               meta: {
                 title: "查看文章",
+                need_log: false
+              }
+            },
+            {//高分作文详情页
+              path: "essays/:id",
+              name: "essays",
+              component: essays,
+              meta: {
+                title: "查看作文",
                 need_log: false
               }
             }

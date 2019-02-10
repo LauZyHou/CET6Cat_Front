@@ -21,7 +21,7 @@ let cmpByLastTime = function (a, b) {
 }
 
 
-//对papers数组按时间从新到旧排序的比较函数
+//对papers/essays数组按时间从新到旧排序的比较函数
 let cmpByTime = function (a, b) {
     return b.time - a.time;
 }
@@ -80,6 +80,11 @@ export const store = new Vuex.Store({
             { id: 1, name: "测试文章A", time: 1531707123, content: "测试测试" },
             { id: 2, name: "测试文章B", time: 1531807123, content: "测试测试" },
             { id: 3, name: "测试文章C", time: 1531708123, content: "测试测试" },
+        ],
+        essays:[//作文(list信息)
+            { id: 1, name: "测试作文A", time: 1531707123, content: "测试测试" },
+            { id: 2, name: "测试作文B", time: 1531807123, content: "测试测试" },
+            { id: 3, name: "测试作文C", time: 1531708123, content: "测试测试" }, 
         ]
     },
     getters: {//getters中获取数据(只读不写)
@@ -91,6 +96,9 @@ export const store = new Vuex.Store({
         },
         sortPapersByTime(state, payload) {
             state.papers.sort(cmpByTime);
+        },
+        sortEssaysByTime(state, payload){
+            state.essays.sort(cmpByTime);
         }
     },
     actions: {//actions用于提交mutation,可以实现异步操作

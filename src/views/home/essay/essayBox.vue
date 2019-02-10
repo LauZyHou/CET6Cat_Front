@@ -2,12 +2,12 @@
   <el-row>
     <!-- 1 文章名+摘要 -->
     <el-col :span="22">
-      <router-link :to="'/app/home/papers/'+paper.id">{{paper.name}}</router-link>
+      <router-link :to="'/app/home/essays/'+essay.id">{{essay.name}}</router-link>
       <br>
       {{summary}}...
     </el-col>
     <!-- 2 发布时间 -->
-    <el-col :span="2">{{paper.time | formatDate}}</el-col>
+    <el-col :span="2">{{essay.time | formatDate}}</el-col>
   </el-row>
 </template>
 
@@ -15,9 +15,9 @@
 import { formatDate } from "../../../static/js/date.js";
 
 export default {
-  name: "paperBox",
+  name: "essayBox",
   props: {
-    paper: {
+    essay: {
       type: Object,
       required: true
     }
@@ -31,7 +31,7 @@ export default {
   computed: {
     summary() {
       //FIXME 取前面一部分
-      return this.paper.content;
+      return this.essay.content;
     }
   }
 };

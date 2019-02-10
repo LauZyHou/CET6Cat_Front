@@ -2,19 +2,19 @@
   <section>
     <!-- 1 标题 -->
     <div class="tit">
-      <h2>查看文章</h2>
+      <h2>查看作文</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path : '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path : '/app/home/reading/1' }">阅读分析</el-breadcrumb-item>
-        <el-breadcrumb-item>查看文章</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path : '/app/home/essay/1' }">高分作文</el-breadcrumb-item>
+        <el-breadcrumb-item>查看作文</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
     <!-- 2 文章主体 -->
     <div class="container">
       <!-- 2-1 文章标题 -->
       <el-row>
-        <el-col :span="20" id="paper-tit">{{detail.title}}</el-col>
-        <el-col :span="4" id="paper-op">
+        <el-col :span="20" id="essay-tit">{{detail.title}}</el-col>
+        <el-col :span="4" id="essay-op">
           <button @click="addEnshrine">添加收藏</button>
           <button :disabled="!mineOrAdmin">删除</button>
         </el-col>
@@ -23,16 +23,16 @@
       <div id="content">
         <!-- 2-2-1 文章内容 -->
         <div>
-          <pre>{{detail.content}}这里是{{pid}}篇</pre>
+          <pre>{{detail.content}}这里是{{id}}篇</pre>
         </div>
         <!-- 2-2-2 底部操作 -->
         <table>
           <tr>
             <td>
-              <el-button type="primary" icon="el-icon-arrow-up" @click="prePaper">上一篇</el-button>
+              <el-button type="primary" icon="el-icon-arrow-up" @click="preEssay">上一篇</el-button>
             </td>
             <td>
-              <el-button type="primary" icon="el-icon-arrow-down" @click="nextPaper">下一篇</el-button>
+              <el-button type="primary" icon="el-icon-arrow-down" @click="nextEssay">下一篇</el-button>
             </td>
           </tr>
         </table>
@@ -43,10 +43,10 @@
 
 <script>
 export default {
-  name: "papers",
+  name: "essays",
   data() {
     return {
-      pid: 0,
+      id: 0,
       mineOrAdmin: false,
       detail: {
         title: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
@@ -60,27 +60,27 @@ export default {
       //TODO添加收藏
       window.alert("添加收藏");
     },
-    //获取指定id的文章
-    getPaper(pid) {
+    //获取指定id的作文
+    getEssay(pid) {
       //TODO
     },
     //去上一篇
-    prePaper() {
-      this.$router.push({ name: "papers", params: { id: this.pid - 1 } });
+    preEssay() {
+      this.$router.push({ name: "essays", params: { id: this.id - 1 } });
     },
     //去下一篇
-    nextPaper() {
-      this.$router.push({ name: "papers", params: { id: this.pid + 1 } });
+    nextEssay() {
+      this.$router.push({ name: "essays", params: { id: this.id + 1 } });
     }
   },
   mounted() {
-    this.pid = parseInt(this.$route.params.id); //注意要转成int,这样后面+1,-1才能做数字操作
-    // this.detail = this.getPaper(this.pid);
+    this.id = parseInt(this.$route.params.id); //注意要转成int,这样后面+1,-1才能做数字操作
+    // this.detail = this.getPaper(this.id);
   },
   beforeRouteUpdate(to, from, next) {
     //在文章路由之间转移(上一篇下一篇时)
-    this.pid = parseInt(to.params.id);
-    // this.detail = this.getPaper(this.pid);
+    this.id = parseInt(to.params.id);
+    // this.detail = this.getPaper(this.id);
     next();
   }
 };
