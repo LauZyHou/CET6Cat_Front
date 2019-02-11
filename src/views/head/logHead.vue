@@ -20,11 +20,11 @@ export default {
       } else if (ra[len - 1] === "register") {
         return "注册";
       } else if (ra[len - 3] === "member" && ra[len - 2] === "center") {
-        if (ra[len - 1] === "profile") return "我的资料";
-        else if (ra[len - 1] === "favorite") return "我的收藏";
-        else if (ra[len - 1] === "vip") return "VIP服务";
-        else if (ra[len - 1] === "setting") return "设置";
-        else return "个人中心";
+        // if (ra[len - 1] === "profile") return "我的资料";
+        // else if (ra[len - 1] === "favorite") return "我的收藏";
+        // else if (ra[len - 1] === "vip") return "VIP服务";
+        // else if (ra[len - 1] === "setting") return "设置";
+        return "个人中心";
       }
       return "页面不存在";
     }

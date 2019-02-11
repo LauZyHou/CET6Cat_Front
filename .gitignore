@@ -3,4 +3,4 @@
 /ignore
 .vscode/
 /src/assets/videos
-/static/videos
+/static/*

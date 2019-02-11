@@ -44,7 +44,7 @@
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
-        router="true"
+        :router="true"
       >
         <el-menu-item index="/app/home/index">首页</el-menu-item>
         <el-submenu index="2">

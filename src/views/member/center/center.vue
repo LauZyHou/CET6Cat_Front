@@ -6,11 +6,11 @@
         <el-menu
           default-active="/app/member/center/profile"
           class="el-menu-vertical-demo"
-          router="true"
+          :router="true"
         >
           <el-menu-item index="/app/member/center/profile">
             <i class="el-icon-menu"></i>
-            <span slot="title">我的资料</span>
+            <span slot="title">个人资料</span>
           </el-menu-item>
           <el-menu-item index="/app/member/center/favorite">
             <i class="el-icon-star-on"></i>
@@ -57,11 +57,13 @@ section > div {
 }
 
 /* 1 左侧竖直导航栏 */
+/*-----------------------------------------------------------------*/
 .clearfix > .fl {
   width: 20%;
 }
 
 /* 2 右侧切到不同的视图 */
+/*-----------------------------------------------------------------*/
 .clearfix > .fr {
   min-height: 450px;
   width: 80%;

@@ -212,12 +212,12 @@ let router = new Router({
                 need_log: false //true
               },
               children: [
-                {//我的资料
+                {//个人资料
                   path: "profile",
                   name: "profile",
                   component: profile,
                   meta: {
-                    title: "我的资料-个人中心",
+                    title: "个人资料-个人中心",
                     need_log: false //true
                   }
                 },
