@@ -49,6 +49,7 @@ section {
   min-height: 496px;
   background-color: #ccff99;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 section > div {
