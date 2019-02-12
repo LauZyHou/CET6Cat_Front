@@ -12,17 +12,17 @@
       <!-- 2-1 走马灯 -->
       <el-carousel height="400px" style="margin-top: 5px">
         <el-carousel-item v-for="item in 4" :key="item">
-          <h3>{{ item }}</h3>
+          <img src="/static/carousel/rs.jpg" alt="走马灯">
         </el-carousel-item>
       </el-carousel>
       <!-- 2-2 广告栏 -->
       <div class="ad-hori">
-        广告位空缺
+        <img src="/static/advertisement/ver1.jpg" alt="广告">
       </div>
       <!-- 2-3 六级新闻 -->
       <div id="videos" class="hot">
         <h2>六级新闻</h2>
-        <router-link to="" target="_blank">更多</router-link>
+        <router-link to target="_blank">更多</router-link>
       </div>
       <!-- 2-4 热门视频 -->
       <div id="videos" class="hot">
@@ -38,8 +38,7 @@
       <div id="videos" class="hot">
         <h2>六级词汇</h2>
         <router-link :to="'/app/home/word/'+wordGroup" target="_blank">更多</router-link>
-        <br>
-        这里放个词云
+        <br>这里放个词云
       </div>
       <!-- 2-7 阅读分析 -->
       <div id="videos" class="hot">
@@ -58,10 +57,10 @@
 <script>
 export default {
   name: "index",
-  data(){
-    return{
+  data() {
+    return {
       wordGroup: 1 //如果用户已经登录了,要取他上次背到的那一组
-    }
+    };
   }
 };
 </script>
@@ -113,17 +112,31 @@ section {
   background-color: #d3dce6;
 }
 
+.el-carousel__item {
+  text-align: center;
+}
+
+.el-carousel__item img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* 2-2 横向广告栏 */
 /*-----------------------------------------------*/
-.ad-hori{
+.ad-hori {
   height: 80px;
   width: 100%;
   background-color: cadetblue;
   text-align: center;
 }
 
+.ad-hori > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /* 每个栏目的热门展示盒子 */
-.hot{
+.hot {
   min-height: 300px;
   border-bottom: 1px solid black;
 }

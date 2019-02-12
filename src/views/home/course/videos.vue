@@ -15,7 +15,8 @@
       <el-row>
         <el-col :span="20" id="video-tit">{{detail.title}}</el-col>
         <el-col :span="4" id="video-op">
-          <button :disabled="!mineOrAdmin">删除视频</button>
+          <button>添加收藏</button>
+          <button :disabled="!mineOrAdmin">删除</button>
         </el-col>
       </el-row>
       <!-- 2-2 视频内容 -->

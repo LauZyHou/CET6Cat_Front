@@ -129,7 +129,7 @@ export default {
 /*--------------------------------------------*/
 .fr > .alterable {
   min-height: 250px;
-  background-color: cornsilk;
+  /* background-color: cornsilk; */
 }
 
 .fr > .alterable .el-row {

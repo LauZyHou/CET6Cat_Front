@@ -3,7 +3,7 @@
     <!-- 1 顶部随动的注册,登录提示 -->
     <!-- 1-1 已登录 -->
     <div v-if="isLogin" class="top-bar">
-      <span>你好,刘知昊</span>
+      <span>你好，刘知昊</span>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/member/center/profile">个人中心</router-link>
       <!-- <span class="space">|</span> -->
@@ -11,7 +11,7 @@
     </div>
     <!-- 1-2 未登录 -->
     <div v-else class="top-bar">
-      <span>你好,访客</span>
+      <span>你好，访客</span>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/register">注册</router-link>
       <span class="space">|</span>
