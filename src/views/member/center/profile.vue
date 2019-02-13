@@ -16,9 +16,11 @@
         <!-- 2-2-1 不变的资料 -->
         <div class="immobile">
           <el-row>
-            <el-col :span="20"><p>TEL：18812341234</p></el-col>
+            <el-col :span="20">
+              <p>TEL：18812341234</p>
+            </el-col>
             <el-col :span="4">
-              <router-link to>个人主页</router-link>
+              <router-link :to="'/app/member/users/'+id">个人主页</router-link>
             </el-col>
           </el-row>
           <el-row>
@@ -56,6 +58,11 @@
 <script>
 export default {
   name: "profile",
+  data() {
+    return {
+      id: 1
+    };
+  },
   methods: {
     uploadHeadImg() {
       //TODO
@@ -121,8 +128,8 @@ export default {
   color: #fa8341;
 }
 
-.fr > .immobile p{
-    color: gray;
+.fr > .immobile p {
+  color: gray;
 }
 
 /* 2-2-2 可变的资料 */

@@ -29,6 +29,8 @@ export default {
         // else if (ra[len - 1] === "vip") return "VIP服务";
         // else if (ra[len - 1] === "setting") return "设置";
         return "个人中心";
+      } else if (ra[2] === "member" && ra[3] === "users") {
+        return "用户主页";
       }
       return "页面不存在";
     }

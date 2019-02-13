@@ -33,6 +33,7 @@ import profile from '../views/member/center/profile'
 import favorite from '../views/member/center/favorite'
 import vip from '../views/member/center/vip'
 import setting from '../views/member/center/setting'
+import users from '../views/member/users/users'
 
 Vue.use(Router);
 
@@ -250,6 +251,15 @@ let router = new Router({
                 }
                 //FIXME 添加/app/member/setting的子路由
               ]
+            },
+            {//用户主页
+              path: "users/:id",
+              name: "users",
+              component: users,
+              meta: {
+                title: "用户主页",
+                need_log: false //true
+              },
             }
             //FIXME 添加/app/member的子路由
           ]
