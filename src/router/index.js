@@ -34,6 +34,8 @@ import favorite from '../views/member/center/favorite'
 import vip from '../views/member/center/vip'
 import setting from '../views/member/center/setting'
 import users from '../views/member/users/users'
+import prepaid from '../views/member/prepaid/prepaid'
+
 
 Vue.use(Router);
 
@@ -260,6 +262,15 @@ let router = new Router({
                 title: "用户主页",
                 need_log: false //true
               },
+            },
+            {//重置页
+              path: "prepaid",
+              name: "prepaid",
+              component: prepaid,
+              meta: {
+                title: "Cat币充值",
+                need_log: false//true
+              }
             }
             //FIXME 添加/app/member的子路由
           ]

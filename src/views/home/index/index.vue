@@ -12,12 +12,12 @@
       <!-- 2-1 走马灯 -->
       <el-carousel height="400px" style="margin-top: 5px">
         <el-carousel-item v-for="item in 4" :key="item">
-          <img src="/static/carousel/rs.jpg" alt="走马灯">
+          <!-- <img src="/static/carousel/rs.jpg" alt="走马灯"> -->
         </el-carousel-item>
       </el-carousel>
       <!-- 2-2 广告栏 -->
       <div class="ad-hori">
-        <img src="/static/advertisement/ver1.jpg" alt="广告">
+        <!-- <img src="/static/advertisement/ver1.jpg" alt="广告"> -->
       </div>
       <!-- 2-3 六级新闻 -->
       <div id="videos" class="hot">

@@ -24,12 +24,16 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="3">关注 10</el-col>
-            <el-col :span="3">粉丝 10</el-col>
+            <el-col :span="3">关注 
+              <router-link to="">10</router-link>
+            </el-col>
+            <el-col :span="3">粉丝 
+              <router-link to="">3</router-link>
+            </el-col>
             <el-col :span="1">|</el-col>
             <el-col :span="3">Cat币 0</el-col>
             <el-col :span="3">
-              <router-link to>充值</router-link>
+              <router-link to="/app/member/prepaid">充值</router-link>
             </el-col>
           </el-row>
         </div>
@@ -49,6 +53,9 @@
             <el-col :span="12">学校：上海大学</el-col>
             <el-col :span="12">入学年份：2015</el-col>
           </el-row>
+          <div class="brief">个人简介：
+            <article>{{brief}}</article>
+          </div>
         </div>
       </div>
     </div>
@@ -60,7 +67,9 @@ export default {
   name: "profile",
   data() {
     return {
-      id: 1
+      id: 1,
+      brief:
+        "好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好"
     };
   },
   methods: {
@@ -136,7 +145,7 @@ export default {
 /*--------------------------------------------*/
 .fr > .alterable {
   min-height: 250px;
-  /* background-color: cornsilk; */
+  background-color: cornsilk;
 }
 
 .fr > .alterable .el-row {
@@ -146,6 +155,13 @@ export default {
 #update {
   color: #409eff;
   cursor: pointer;
+}
+
+.fr > .alterable > .brief {
+  padding-top: 10px;
+  width: 100%;
+  /* height: 200px; */
+  background-color: rgb(224, 231, 250);
 }
 </style>
 

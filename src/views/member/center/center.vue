@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 section {
-  min-height: 496px;
+  min-height: 472px;
   background-color: #ccff99;
   padding-top: 20px;
   padding-bottom: 20px;

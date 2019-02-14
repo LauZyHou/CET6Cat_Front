@@ -31,6 +31,8 @@ export default {
         return "个人中心";
       } else if (ra[2] === "member" && ra[3] === "users") {
         return "用户主页";
+      } else if (ra[2] === "member" && ra[3] === "prepaid") {
+        return "Cat币充值";
       }
       return "页面不存在";
     }
@@ -51,7 +53,7 @@ h2 {
 }
 
 a {
-  position: fixed;
+  position: absolute;
   left: 10px;
   top: 11px;
   color: lightblue;
