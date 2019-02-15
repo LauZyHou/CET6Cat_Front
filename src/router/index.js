@@ -36,6 +36,9 @@ import setting from '../views/member/center/setting'
 import users from '../views/member/users/users'
 import prepaid from '../views/member/prepaid/prepaid'
 
+import error from '../views/error/error'
+import E401 from '../views/error/E401'
+import E404 from '../views/error/E404'
 
 Vue.use(Router);
 
@@ -274,7 +277,41 @@ let router = new Router({
             }
             //FIXME 添加/app/member的子路由
           ]
-        }
+        },
+        {//error页父组件
+          path: 'error',
+          name: 'error',
+          components: {
+            head: logHead,
+            content: error,
+            foot: foot
+          },
+          meta: {
+            title: "未明确的错误页",
+            need_log: false
+          },
+          children: [
+            {//401 Unauthorized
+              path: '401',
+              name: 'E401',
+              component: E401,
+              meta: {
+                title: "请先登录",
+                need_log: false
+              }
+            },
+            {//404 Not Found
+              path: '404',
+              name: 'E404',
+              component: E404,
+              meta: {
+                title: "不存在的资源",
+                need_log: false
+              }
+            },
+            //FIXME 添加/app/error的子路由
+          ]
+        },
         //FIXME 添加/app的子路由
       ]
     }

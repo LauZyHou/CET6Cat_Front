@@ -16,6 +16,7 @@ export default {
     title() {
       let ra = this.$route.path.split("/"); //routeArray
       let len = ra.length;
+      //SUCCESSFUL Page
       if (ra[2] === "login") {
         //#/app/login
         return "登录";
@@ -24,15 +25,17 @@ export default {
         return "注册";
       } else if (ra[2] === "member" && ra[3] === "center") {
         //#/app/member/center
-        // if (ra[len - 1] === "profile") return "我的资料";
-        // else if (ra[len - 1] === "favorite") return "我的收藏";
-        // else if (ra[len - 1] === "vip") return "VIP服务";
-        // else if (ra[len - 1] === "setting") return "设置";
         return "个人中心";
       } else if (ra[2] === "member" && ra[3] === "users") {
         return "用户主页";
       } else if (ra[2] === "member" && ra[3] === "prepaid") {
         return "Cat币充值";
+      }
+      //ERROR Page
+      else if (ra[2] === "error") {
+        if (ra[3] === "401") {
+          return "请先登录";
+        }
       }
       return "页面不存在";
     }
