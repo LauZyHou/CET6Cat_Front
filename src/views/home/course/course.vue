@@ -8,19 +8,30 @@
         <el-breadcrumb-item>在线视频</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <!-- 2 课程的容器 -->
+    <!-- 2 视频的容器 -->
     <div class="container">
       <ul>
-        <li v-for="v in videos" v-bind:key="v.id">
+        <li v-for="v in videoList" v-bind:key="v.id">
+          <!-- <router-link :to="'/app/home/videos/'+v.id"> -->
+          <!-- <img :src="'/static/thumbnail/'+v.id+'.png'" :alt="v.name"> -->
+          <!-- </router-link> -->
           <router-link :to="'/app/home/videos/'+v.id">
-            <img :src="'/static/thumbnail/'+v.id+'.png'" :alt="v.name">
+            <img :src="v.thumb" :alt="v.name">
           </router-link>
         </li>
       </ul>
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination
+        ref="pagination"
+        background
+        layout="prev, pager, next"
+        :total="count"
+        :current-page="page"
+        :page-size="3"
+        @current-change="pageChange"
+      ></el-pagination>
     </div>
   </section>
 </template>
@@ -29,15 +40,41 @@
 export default {
   name: "course",
   data() {
-    return {};
+    return {
+      count: 0, //总条目数
+      nextPage: "", //上一页
+      prePage: "", //下一页
+      videoList: [], //返回的results
+      page: 1 //初始页为1
+    };
   },
-  computed:{
-    videos(){
+  computed: {
+    //[作废,不使用vuex]
+    videos() {
       //获取vuex的store中的帖子数据
-      let videos=this.$store.state.videos;
+      let videos = this.$store.state.videos;
       //TODO分页
       return videos;
     }
+  },
+  methods: {
+    //改变页码时请求那一页的list
+    pageChange(val) {
+      this.$axios.get("/api/videos/?page=" + val).then(res => {
+        this.nextPage = res["data"]["next"];
+        this.prePage = res["data"]["previous"];
+        this.videoList = res["data"]["results"];
+      });
+    }
+  },
+  created() {
+    //一开始请求的即是第一页的list
+    this.$axios.get("/api/videos/").then(res => {
+      this.count = res["data"]["count"];
+      this.nextPage = res["data"]["next"];
+      this.prePage = res["data"]["previous"];
+      this.videoList = res["data"]["results"];
+    });
   }
 };
 </script>
@@ -59,7 +96,7 @@ section {
   text-align: center;
 }
 
-/* 2 课程的容器 */
+/* 2 视频的容器 */
 /*-----------------------------------------------------------------*/
 .container {
   background-color: white;
@@ -94,7 +131,7 @@ li {
   margin: 10px;
 }
 
-li img{
+li img {
   max-width: 100%;
   max-height: 100%;
 }

@@ -13,7 +13,7 @@
     <div class="container">
       <!-- 2-1 视频标题 -->
       <el-row>
-        <el-col :span="20" id="video-tit">{{detail.title}}</el-col>
+        <el-col :span="20" id="video-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="video-op">
           <button>添加收藏</button>
           <button :disabled="!mineOrAdmin">删除</button>
@@ -22,10 +22,8 @@
       <!-- 2-2 视频内容 -->
       <el-row id="video-box">
         <video controls="controls">
-          <source
-            :src="'/static/videos/'+vid+'.'+detail.type"
-            :type="'video/'+detail.type"
-          >
+          <!-- axios是异步请求的,这里用v-if判断一下,请求完成后再加载这块DOM -->
+          <source v-if="detail.content" :src="detail.content" type="video/mp4">
           <p>你的浏览器不支持video标签</p>
         </video>
       </el-row>
@@ -41,28 +39,34 @@ export default {
       vid: "0",
       mineOrAdmin: false,
       detail: {
-        title: "",
-        type: ""
+        id: 0,
+        name: "无效的视频",
+        content: null,
+        category: 0,
+        uper: 0,
+        add_time: ""
       }
     };
   },
   methods: {
-    getVideo(vid) {
-      //TODO
-      return {
-        title: "课程视频" + vid,
-        type: "mp4"
-      };
+    getDetail() {
+      this.$axios.get("/api/videos/" + this.vid + "/").then(res => {
+        for (let key in res.data) {
+          this.$set(this.detail, key, res.data[key]);
+        }
+      });
     }
   },
-  mounted() {
+  created() {
     this.vid = this.$route.params.id;
-    this.detail = this.getVideo(this.vid);
+    this.getDetail();
   },
   beforeRouteUpdate(to, from, next) {
-    //在帖子路由之间转移
+    //在视频路由之间转移
     this.vid = to.params.id;
-    this.detail = this.getVideo(this.vid);
+    //配合v-if判断后面的请求完成后再加载视频,防止渲染之前的DOM
+    this.detail.content = null;
+    getDetail();
     next();
   }
 };

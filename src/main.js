@@ -9,17 +9,20 @@ import VueResource from 'vue-resource'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 //Vuex
-import {store} from './store/store'
+import { store } from './store/store'
+//Axios
+import Axios from 'axios'
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
 Vue.use(ElementUI);
+Vue.prototype.$axios = Axios;
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  store:store,
+  store: store,
   router,
-  components: {App},
+  components: { App },
   template: '<App/>'
 });
