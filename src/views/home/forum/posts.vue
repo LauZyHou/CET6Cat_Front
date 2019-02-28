@@ -10,10 +10,10 @@
       </el-breadcrumb>
     </div>
     <!-- 2 帖子主体 -->
-    <div class="container">
+    <div class="container" v-if="id!==0">
       <!-- 2-1 帖子标题 -->
       <el-row>
-        <el-col :span="20" id="post-tit">{{detail.title}}</el-col>
+        <el-col :span="20" id="post-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="post-op">
           <button @click="onlyPoster">只看楼主</button>
           <button :disabled="!mineOrAdmin">删除</button>
@@ -21,16 +21,22 @@
       </el-row>
       <!-- 2-2 帖子内容 -->
       <el-row class="building">
-        <el-col :span="6" class="lft">{{detail.poster.name}}</el-col>
+        <el-col :span="6" class="lft">
+          <h4>{{detail.uper.username}}</h4>
+          <img :src="detail.uper.head_img" :alt="detail.uper.username">
+        </el-col>
         <el-col :span="18">{{detail.content}}</el-col>
       </el-row>
       <!-- 2-3 回帖(已经按时间顺序排好) -->
-      <el-row v-for="rep in detail.replies" v-bind:key="rep.time" class="building">
-        <el-col :span="6" class="lft">{{rep.replyer.name}}</el-col>
+      <el-row v-for="rep in detail.replies" v-bind:key="rep.id" class="building">
+        <el-col :span="6" class="lft">
+          <h4>{{detail.uper.username}}</h4>
+          <img :src="detail.uper.head_img" :alt="detail.uper.username">
+        </el-col>
         <el-col :span="18">{{rep.content}}</el-col>
       </el-row>
     </div>
-    <!-- 3 分页 -->
+    <!-- 3 TODO分页 -->
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
     </div>
@@ -90,18 +96,27 @@ export default {
   name: "posts",
   data() {
     return {
-      pid: "0", //post id
       detail: {
-        poster: {},
-        replies: []
+        id: 0,
+        replies: null,
+        name: "帖子不存在",
+        content: "找不到你想访问的帖子",
+        category: 0,
+        add_time: "",
+        uper: 0
       },
-      mineOrAdmin: false, //帖子是不是自己的
       form: {}
     };
   },
   methods: {
     //根据帖子id获取帖子详细内容
-    getPost(pid) {
+    getDetail(pid) {
+      this.$axios.get("/api/posts/" + pid + "/").then(res => {
+        for (let key in res.data) {
+          this.$set(this.detail, key, res.data[key]);
+        }
+      });
+      /*
       //FIXME 考虑将以下全部改成发送请求来获取
       //获取vuex的store中的帖子数据
       let posts = this.$store.state.posts;
@@ -123,6 +138,7 @@ export default {
         time: new Date().getTime(),
         replies: []
       };
+      */
     },
     //只看楼主
     onlyPoster() {},
@@ -131,14 +147,13 @@ export default {
     //清空输入的回复
     onClear() {}
   },
-  mounted() {
-    this.pid = this.$route.params.id;
-    this.detail = this.getPost(this.pid);
+  created() {
+    this.getDetail(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    //在帖子路由之间转移
-    this.pid = to.params.id;
-    this.detail = this.getPost(this.pid);
+    //在帖子路由之间转移.id设置为0表示还没找到帖子不渲染DOM
+    this.detail.id = 0;
+    this.getDetail(to.params.id);
     next();
   }
 };
@@ -184,6 +199,7 @@ section {
   height: 100%;
 }
 
+/* 2-2 帖子内容 2-3 回帖 */
 /*---------------------------------------------------*/
 .building,
 .building > div {
@@ -192,6 +208,11 @@ section {
 
 .building > .lft {
   border-right: 1px solid black;
+}
+
+.building img {
+  width: 200px;
+  height: 200px;
 }
 
 /* 3 分页 */
@@ -234,7 +255,7 @@ section {
   color: darkslategray;
 }
 
-#reply > div:first-child  a{
+#reply > div:first-child a {
   color: #fa8341;
 }
 

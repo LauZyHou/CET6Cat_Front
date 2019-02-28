@@ -4,24 +4,24 @@
     <el-col :span="3">{{replyNum}}</el-col>
     <!-- 2 帖子标题链接+摘要 -->
     <el-col :span="16">
-      <router-link :to="path">{{post.title}}</router-link>
+      <router-link :to="path">{{post.name}}</router-link>
       <br>
       {{summary}}...
     </el-col>
     <!-- 3 发帖人+最后回帖人 -->
     <el-col :span="3">
-      <p>{{post.poster.name}}</p>
+      <p>{{post.uper.username}}</p>
       <br>
-      <p v-if="lastReply">{{lastReply.replyer.name}}</p>
+      <p v-if="lastReply">{{lastReply.uper.username}}</p>
       <p v-else>没有回帖</p>
     </el-col>
     <!-- 4 最后盖楼时间 -->
     <el-col :span="2">
         <template v-if="lastReply">
-            {{lastReply.time | formatDate}}
+            {{lastReply.add_time | formatDate}}
         </template>
         <template v-else>
-            {{post.time | formatDate}}
+            {{post.add_time | formatDate}}
         </template>
     </el-col>
   </el-row>
@@ -51,14 +51,17 @@ export default {
     },
     summary() {
       //FIXME 取前面一部分
-      return this.post.content;
+      // return this.post.content;
+      return "TODO去掉摘要功能";
     },
     lastReply() {
       //找时间最晚的那条
+      //服务器返回的是按自增id排序的,所以一定是最后一条
       let allReplies = this.post.replies;
       if (allReplies.length === 0) {
         return null; //没有回帖
       }
+      /*
       let lastReplyIndex = 0;
       for (let i = 1; i < allReplies.length; i++) {
         if (allReplies[i].time > allReplies[lastReplyIndex].time) {
@@ -67,6 +70,8 @@ export default {
       }
       // console.log(allReplies[0],allReplies[1],lastReplyIndex);
       return allReplies[lastReplyIndex];
+      */
+     return allReplies[allReplies.length-1];
     }
   },
   filters: {

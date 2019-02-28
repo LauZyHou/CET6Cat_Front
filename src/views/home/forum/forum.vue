@@ -10,13 +10,19 @@
     </div>
     <!-- 2 帖子的容器 -->
     <div class="container">
-      <div class="post" v-for="post in posts" :key="post.id">
+      <div class="post" v-for="post in postList" :key="post.id">
         <post-box v-bind:post="post"></post-box>
       </div>
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="count"
+        :page-size="3"
+        @current-change="pageChange"
+      ></el-pagination>
     </div>
     <!-- 4 操作按钮 -->
     <div id="op">
@@ -36,24 +42,45 @@ import postBox from "./postBox";
 
 export default {
   name: "forum",
-  data(){
-    return{
-    }
+  data() {
+    return {
+      count: 0,
+      nextPage: "",
+      prePage: "",
+      postList: []
+    };
   },
   methods: {
     toPost() {
       this.$router.push({ path: `/app/home/post` });
+    },
+    //改变页码时请求那一页的list
+    pageChange(val) {
+      this.$axios.get("/api/posts/?page=" + val).then(res => {
+        this.nextPage = res["data"]["next"];
+        this.prePage = res["data"]["previous"];
+        this.postList = res["data"]["results"];
+      });
     }
+  },
+  created() {
+    this.$axios.get("/api/posts/").then(res => {
+      this.count = res["data"]["count"];
+      this.nextPage = res["data"]["next"];
+      this.prePage = res["data"]["previous"];
+      this.postList = res["data"]["results"];
+    });
   },
   components: {
     "post-box": postBox
   },
-  computed:{
-    posts(){
+  computed: {
+    //[作废,排序后期由后端模拟实现]
+    posts() {
       //提交mutation:对sotre中的posts按最后操作时间排序
       this.$store.commit("sortPostsByLastTime");
       //获取vuex的store中的帖子数据
-      let posts=this.$store.state.posts;
+      let posts = this.$store.state.posts;
       //TODO分页
       return posts;
     }
@@ -96,7 +123,6 @@ section {
   height: 70px;
 }
 
-
 /* 3 分页 */
 /*-----------------------------------------------------------------*/
 
@@ -107,7 +133,6 @@ section {
   margin: 10px auto 0;
   text-align: center;
 }
-
 
 /* 4 操作按钮 */
 /*-----------------------------------------------------------------*/
