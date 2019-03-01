@@ -18,6 +18,11 @@ Vue.use(VueResource);
 Vue.use(ElementUI);
 Vue.prototype.$axios = Axios;
 
+//Axios读取UTF8乱码,进行该设置
+Axios.defaults.headers = {
+  "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+}
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -10,13 +10,19 @@
     </div>
     <!-- 2 文章list的容器 -->
     <div class="container">
-      <div class="paper" v-for="paper in papers" :key="paper.time">
-        <paper-box :paper="paper"></paper-box>
+      <div class="paper" v-for="r in readingList" :key="r.id">
+        <paper-box :paper="r"></paper-box>
       </div>
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="count"
+        page-size="3"
+        @current-change="pageChange"
+      ></el-pagination>
     </div>
   </section>
 </template>
@@ -27,9 +33,16 @@ import paperBox from "./paperBox";
 export default {
   name: "reading",
   data() {
-    return {};
+    return {
+      count: 0,
+      nextPage: "",
+      prePage: "",
+      readingList: []
+    };
   },
   computed: {
+    //[作废]
+    /*
     papers() {
       //提交mutation:对sotre中的papers按时间从新到旧排序
       this.$store.commit("sortPapersByTime");
@@ -38,9 +51,28 @@ export default {
       //TODO分页
       return papers;
     }
+    */
   },
   components: {
     "paper-box": paperBox
+  },
+  methods: {
+    //改变页码时请求那一页的list
+    pageChange(val) {
+      this.$axios.get("/api/readings/?page=" + val).then(res => {
+        this.nextPage = res["data"]["next"];
+        this.prePage = res["data"]["previous"];
+        this.readingList = res["data"]["results"];
+      });
+    }
+  },
+  created() {
+    this.$axios.get("/api/readings/").then(res => {
+      this.count = res["data"]["count"];
+      this.nextPage = res["data"]["next"];
+      this.prePage = res["data"]["previous"];
+      this.readingList = res["data"]["results"];
+    });
   }
 };
 </script>

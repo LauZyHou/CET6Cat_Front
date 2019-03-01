@@ -10,7 +10,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 帖子主体 -->
-    <div class="container" v-if="id!==0">
+    <div class="container" v-if="detail.id!==0">
       <!-- 2-1 帖子标题 -->
       <el-row>
         <el-col :span="20" id="post-tit">{{detail.name}}</el-col>

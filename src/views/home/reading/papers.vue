@@ -10,10 +10,10 @@
       </el-breadcrumb>
     </div>
     <!-- 2 文章主体 -->
-    <div class="container">
+    <div class="container" v-if="detail.id!==0">
       <!-- 2-1 文章标题 -->
       <el-row>
-        <el-col :span="20" id="paper-tit">{{detail.title}}</el-col>
+        <el-col :span="20" id="paper-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="paper-op">
           <button @click="addEnshrine">添加收藏</button>
           <button :disabled="!mineOrAdmin">删除</button>
@@ -23,7 +23,7 @@
       <div id="content">
         <!-- 2-2-1 文章内容 -->
         <div>
-          <pre>{{detail.content}}这里是{{pid}}篇</pre>
+          <p v-if="readingDetail">{{readingDetail}}</p>
         </div>
         <!-- 2-2-2 底部操作 -->
         <table>
@@ -46,15 +46,41 @@ export default {
   name: "papers",
   data() {
     return {
-      pid: 0,
       mineOrAdmin: false,
       detail: {
-        title: "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
-        content: "  测试一下。"
-      }
+        id: 0,
+        source_name: "无效的来源",
+        source_url: "无效的来源URL",
+        name: "文章不存在",
+        content: "找不到你想访问的文章",
+        add_time: "",
+        source: 0
+      },
+      //服务器上的文件文本内容读取到该字段中
+      readingDetail: ""
     };
   },
   methods: {
+    //根据文章id获取帖子详细内容
+    getDetail(rid) {
+      //获取detail
+      this.$axios
+        .get("/api/readings/" + rid + "/")
+        .then(res => {
+          for (let key in res.data) {
+            this.$set(this.detail, key, res.data[key]);
+          }
+          return this.detail.content;
+        })
+        .then(uri => {
+          //读取完成后读取其对应服务器上的文件资源
+          if (uri) {
+            this.$axios.get(uri).then(res => {
+              this.readingDetail = res.data;
+            });
+          }
+        });
+    },
     //添加收藏
     addEnshrine() {
       //TODO添加收藏
@@ -66,21 +92,21 @@ export default {
     },
     //去上一篇
     prePaper() {
-      this.$router.push({ name: "papers", params: { id: this.pid - 1 } });
+      this.$router.push({ name: "papers", params: { id: this.detail.id - 1 } });
     },
     //去下一篇
     nextPaper() {
-      this.$router.push({ name: "papers", params: { id: this.pid + 1 } });
+      this.$router.push({ name: "papers", params: { id: this.detail.id + 1 } });
     }
   },
-  mounted() {
-    this.pid = parseInt(this.$route.params.id); //注意要转成int,这样后面+1,-1才能做数字操作
-    // this.detail = this.getPaper(this.pid);
+  created() {
+    this.getDetail(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    //在文章路由之间转移(上一篇下一篇时)
-    this.pid = parseInt(to.params.id);
-    // this.detail = this.getPaper(this.pid);
+    //在文章路由之间转移(上一篇下一篇时).id设置为0表示还没找到帖子不渲染DOM
+    this.detail.id = 0;
+    this.readingDetail = "";
+    this.getDetail(to.params.id);
     next();
   }
 };
