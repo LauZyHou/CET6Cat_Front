@@ -10,13 +10,19 @@
     </div>
     <!-- 2 作文list的容器 -->
     <div class="container">
-      <div class="essay" v-for="essay in essays" :key="essay.time">
+      <div class="essay" v-for="essay in essayList" :key="essay.id">
         <essay-box :essay="essay"></essay-box>
       </div>
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :total="count"
+        :page-size="3"
+        @current-change="pageChange"
+      ></el-pagination>
     </div>
   </section>
 </template>
@@ -27,9 +33,15 @@ import essayBox from "./essayBox";
 export default {
   name: "essay",
   data() {
-    return {};
+    return {
+      count: 0,
+      nextPage: "",
+      prePage: "",
+      essayList: []
+    };
   },
   computed: {
+    /*
     essays() {
       //提交mutation:对sotre中的essays按时间从新到旧排序
       this.$store.commit("sortEssaysByTime");
@@ -38,9 +50,28 @@ export default {
       //TODO分页
       return essays;
     }
+    */
   },
   components: {
     "essay-box": essayBox
+  },
+  methods: {
+    //改变页码时请求那一页的list
+    pageChange(val) {
+      this.$axios.get("/api/essays/?page=" + val).then(res => {
+        this.nextPage = res["data"]["next"];
+        this.prePage = res["data"]["previous"];
+        this.essayList = res["data"]["results"];
+      });
+    }
+  },
+  created() {
+    this.$axios.get("/api/essays/").then(res => {
+      this.count = res["data"]["count"];
+      this.nextPage = res["data"]["next"];
+      this.prePage = res["data"]["previous"];
+      this.essayList = res["data"]["results"];
+    });
   }
 };
 </script>

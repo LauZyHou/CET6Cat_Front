@@ -61,7 +61,7 @@ export default {
     };
   },
   methods: {
-    //根据文章id获取帖子详细内容
+    //根据文章id获取详细内容
     getDetail(rid) {
       //获取detail
       this.$axios

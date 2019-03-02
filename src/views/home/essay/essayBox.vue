@@ -4,10 +4,10 @@
     <el-col :span="22">
       <router-link :to="'/app/home/essays/'+essay.id">{{essay.name}}</router-link>
       <br>
-      {{summary}}...
+      summary作废
     </el-col>
     <!-- 2 发布时间 -->
-    <el-col :span="2">{{essay.time | formatDate}}</el-col>
+    <el-col :span="2">{{essay.add_time | formatDate}}</el-col>
   </el-row>
 </template>
 
@@ -29,10 +29,12 @@ export default {
     }
   },
   computed: {
+    /*
     summary() {
       //FIXME 取前面一部分
       return this.essay.content;
     }
+    */
   }
 };
 </script>
