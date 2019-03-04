@@ -17,10 +17,11 @@ Vue.config.productionTip = false;
 Vue.use(VueResource);
 Vue.use(ElementUI);
 Vue.prototype.$axios = Axios;
+Vue.config.devtools = true;//开发者模式,能使用chrome上的vue工具
 
-//Axios读取UTF8乱码,进行该设置
+//这里不用"application/json"的话,使用post请求后台时没参数就没有放在body里,所以请求不到
 Axios.defaults.headers = {
-  "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+  "Content-Type": "application/json"
 }
 
 /* eslint-disable no-new */

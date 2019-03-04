@@ -2,8 +2,8 @@
   <header>
     <!-- 1 顶部随动的注册,登录提示 -->
     <!-- 1-1 已登录 -->
-    <div v-if="isLogin" class="top-bar">
-      <span>你好，刘知昊</span>
+    <div v-if="userInfo.name" class="top-bar">
+      <span>你好，{{userInfo.name}}</span>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/member/center/profile">个人中心</router-link>
       <!-- <span class="space">|</span> -->
@@ -71,6 +71,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "head",
   data() {
@@ -80,6 +82,12 @@ export default {
       wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
       isLogin: true
     };
+  },
+  computed: {
+    ...mapGetters([
+      //在这个传入的数组里写store中getters里的方法
+      "userInfo"
+    ])
   }
 };
 </script>

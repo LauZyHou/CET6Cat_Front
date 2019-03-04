@@ -1,8 +1,38 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import cookie from '../static/js/cookie';
 
 Vue.use(Vuex);
 
+export const store = new Vuex.Store({
+    state: {
+        //cookie中的用户信息
+        userInfo: {
+            name: cookie.getCookie('name') || '',
+            token: cookie.getCookie('token') || ''
+        }
+    },
+    getters: {
+        userInfo: (state) => {
+            return state.userInfo;
+        }
+    },
+    mutations: {
+        setUserInfo: (state, payload) => {
+            state.userInfo = {
+                name: cookie.getCookie('name'),
+                token: cookie.getCookie('token')
+            }
+        }
+    },
+    actions: {
+        setUserInfo: (context, payload) => {
+            context.commit("setUserInfo", payload);
+        }
+    }
+});
+
+/*
 //对posts数组按时间从新到旧排序的比较函数
 let cmpByLastTime = function (a, b) {
     let aTime, bTime;
@@ -81,10 +111,10 @@ export const store = new Vuex.Store({
             { id: 2, name: "测试文章B", time: 1531807123, content: "测试测试" },
             { id: 3, name: "测试文章C", time: 1531708123, content: "测试测试" },
         ],
-        essays:[//作文(list信息)
+        essays: [//作文(list信息)
             { id: 1, name: "测试作文A", time: 1531707123, content: "测试测试" },
             { id: 2, name: "测试作文B", time: 1531807123, content: "测试测试" },
-            { id: 3, name: "测试作文C", time: 1531708123, content: "测试测试" }, 
+            { id: 3, name: "测试作文C", time: 1531708123, content: "测试测试" },
         ]
     },
     getters: {//getters中获取数据(只读不写)
@@ -97,7 +127,7 @@ export const store = new Vuex.Store({
         sortPapersByTime(state, payload) {
             state.papers.sort(cmpByTime);
         },
-        sortEssaysByTime(state, payload){
+        sortEssaysByTime(state, payload) {
             state.essays.sort(cmpByTime);
         }
     },
@@ -105,3 +135,4 @@ export const store = new Vuex.Store({
 
     }
 });
+*/
