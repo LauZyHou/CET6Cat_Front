@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import cookie from '../static/js/cookie';
+import { stat } from "fs";
 
 Vue.use(Vuex);
 

@@ -6,6 +6,8 @@
       <span>你好，{{userInfo.name}}</span>
       <span class="space">|</span>
       <router-link rel="nofollow" to="/app/member/center/profile">个人中心</router-link>
+      <span class="space">|</span>
+      <a @click="onExit">退出</a>
       <!-- <span class="space">|</span> -->
       <!-- <router-link rel="nofollow" to="">其它功能</router-link> -->
     </div>
@@ -72,6 +74,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import cookie from "../../static/js/cookie";
 
 export default {
   name: "head",
@@ -82,6 +85,17 @@ export default {
       wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
       isLogin: true
     };
+  },
+  methods: {
+    onExit() {
+      //清除cookie
+      cookie.delCookie("token");
+      cookie.delCookie("name");
+      //用action提交mutation,更新store数据
+      this.$store.dispatch("setInfo");
+      //跳转到登录
+      this.$router.push({ name: "login" });
+    }
   },
   computed: {
     ...mapGetters([
@@ -126,6 +140,10 @@ export default {
 .space {
   padding: 0 8px;
   color: #959595;
+}
+
+a {
+  cursor: pointer;
 }
 
 /* 2 图标和搜索栏 */
