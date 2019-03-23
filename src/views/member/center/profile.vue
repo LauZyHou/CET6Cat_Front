@@ -4,11 +4,11 @@
     <div id="tit">
       <h2>个人资料</h2>
     </div>
-    <!-- 2 内容 -->
-    <div class="clearfix">
+    <!-- 2 内容(当axios异步请求完成后渲染) -->
+    <div class="clearfix" v-if="detail.username">
       <!-- 2-1 放头像 -->
       <div class="fl">
-        <img src="/static/headimg/1.jpg" alt="头像">
+        <img :src="detail.head_img" alt="头像">
         <el-button type="text" @click="uploadHeadImg">修改头像</el-button>
       </div>
       <!-- 2-2 放文本资料 -->
@@ -17,21 +17,23 @@
         <div class="immobile">
           <el-row>
             <el-col :span="20">
-              <p>TEL：18812341234</p>
+              <p>TEL：{{detail.mobile}}</p>
             </el-col>
             <el-col :span="4">
-              <router-link :to="'/app/member/users/'+id">个人主页</router-link>
+              <router-link :to="'/app/member/users/'+detail.id">个人主页</router-link>
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="3">关注 
-              <router-link to="">10</router-link>
+            <el-col :span="3">
+              关注
+              <router-link to>10</router-link>
             </el-col>
-            <el-col :span="3">粉丝 
-              <router-link to="">3</router-link>
+            <el-col :span="3">
+              粉丝
+              <router-link to>3</router-link>
             </el-col>
             <el-col :span="1">|</el-col>
-            <el-col :span="3">Cat币 0</el-col>
+            <el-col :span="3">Cat币 {{detail.catb}}</el-col>
             <el-col :span="3">
               <router-link to="/app/member/prepaid">充值</router-link>
             </el-col>
@@ -40,21 +42,26 @@
         <!-- 2-2-2可变的资料 -->
         <div class="alterable">
           <el-row>
-            <el-col :span="20">昵称：刘知昊</el-col>
+            <el-col :span="20">昵称：{{detail.name}}</el-col>
             <el-col :span="4">
               <a id="update" @click="uploadHeadImg">修改资料</a>
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="12">性别：男</el-col>
-            <el-col :span="12">生日：1997-05-02</el-col>
+            <el-col :span="12">
+              性别：
+              <template v-if="detail.gender">男</template>
+              <template v-else>女</template>
+            </el-col>
+            <el-col :span="12">生日：{{detail.birthday}}</el-col>
           </el-row>
           <el-row>
-            <el-col :span="12">学校：上海大学</el-col>
+            <el-col :span="12">学校：{{detail.college}}</el-col>
             <el-col :span="12">入学年份：2015</el-col>
           </el-row>
-          <div class="brief">个人简介：
-            <article>{{brief}}</article>
+          <div class="brief">
+            个人简介：
+            <article>{{detail.brief}}</article>
           </div>
         </div>
       </div>
@@ -63,20 +70,51 @@
 </template>
 
 <script>
+import { getUserProfile } from "../../../api/api";
+import cookie from "../../../static/js/cookie";
+
 export default {
   name: "profile",
   data() {
     return {
-      id: 1,
-      brief:
-        "好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好好"
+      detail: {
+        id: null,
+        username: null,
+        name: null,
+        birthday: null,
+        gender: false,
+        mobile: null,
+        email: null,
+        college: null,
+        catb: 0,
+        brief: null,
+        head_img: null,
+        switch_sec: null,
+        email_notice: null,
+        conti_punch: null,
+        last_punch: null,
+        words_num: 0,
+        vip: 0
+      }
     };
   },
   methods: {
+    getDetail() {
+      //获取用户信息并写入detail
+      var that = this;
+      getUserProfile({ token: cookie.getCookie("token") }).then(res => {
+        for (let key in res.data) {
+          this.$set(this.detail, key, res.data[key]);
+        }
+      });
+    },
     uploadHeadImg() {
       //TODO
       window.alert("上传成功");
     }
+  },
+  created() {
+    this.getDetail();
   }
 };
 </script>

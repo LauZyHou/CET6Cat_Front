@@ -24,6 +24,20 @@ Axios.defaults.headers = {
   "Content-Type": "application/json"
 }
 
+//http request拦截器,在这里为Axios请求提供Vuex管理的Token信息,以验证用户身份
+Axios.interceptors.request.use(
+  config => {
+    //判断是否存在token,如果存在的话,则每个http header都加上token
+    if (store.state.userInfo.token) {
+      //这里token前缀在DRF后端从JWT修改成了Bearer
+      config.headers.Authorization = `Bearer ${store.state.userInfo.token}`;
+    }
+    return config;
+  },
+  err => {
+    return Promise.reject(err);
+  });
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -17,3 +17,8 @@ export const login = params => {
 export const verifyCode = params => {
     return axios.post(`${local_host}/code/`, params);
 }
+
+//获取个人信息(id随便传个1就行,靠的是headers里的token来判断用户)
+export const getUserProfile = params => {
+    return axios.get(`${local_host}/users/1/`);
+}
