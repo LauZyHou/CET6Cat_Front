@@ -22,3 +22,23 @@ export const verifyCode = params => {
 export const getUserProfile = params => {
     return axios.get(`${local_host}/users/1/`);
 }
+
+//获取[收藏视频]
+export const listFavVideo = params => {
+    return axios.get(`${local_host}/favvideo/`)
+}
+
+//获取[收藏帖子]
+export const listFavPost = params => {
+    return axios.get(`${local_host}/favpost/`)
+}
+
+//获取[收藏阅读]
+export const listFavReading = params => {
+    return axios.get(`${local_host}/favreading/`)
+}
+
+//获取[收藏作文]
+export const listFavEssay = params => {
+    return axios.get(`${local_host}/favessay/`)
+}

@@ -3,11 +3,8 @@
     <!-- 1 小标题 -->
     <div id="tit">
       <el-row>
-        <el-col :span="19">
+        <el-col :span="20">
           <h2>我的收藏{{titmore}}</h2>
-        </el-col>
-        <el-col :span="1">
-          <a @click="only('all')">全部</a>
         </el-col>
         <el-col :span="1">
           <a @click="only('video')">视频</a>
@@ -25,49 +22,111 @@
     </div>
     <!-- 2 收藏list -->
     <div id="fav-list">
-      <el-row v-for="i in 10" :key="i">
-        <el-col :span="20">
-          <router-link to>2019英语六级词汇完全总结</router-link>
+      <el-row v-for="fav in favList" :key="fav.id">
+        <el-col :span="17">
+          <router-link :to="'/app/home/'+now_s+'s/'+fav.base.id" target="_blank">{{fav.base.name}}</router-link>
         </el-col>
         <!-- 2-2 收藏日期 -->
-        <el-col :span="3" class="fav-date">2019-01-13</el-col>
+        <el-col :span="5" class="fav-date">{{fav.add_time | formatDate}}</el-col>
         <!-- 2-3 取消收藏 -->
-        <el-col :span="1" class="cancel">
-          <a>取消</a>
+        <el-col :span="2" class="cancel">
+          <a>移除</a>
         </el-col>
       </el-row>
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
-      <el-pagination layout="prev, pager, next" :total="50"></el-pagination>
+      <el-pagination
+        ref="pagination"
+        background
+        layout="prev, pager, next"
+        :total="count"
+        :current-page="page"
+        :page-size="6"
+        @current-change="pageChange"
+      ></el-pagination>
     </div>
   </div>
 </template>
 
 <script>
+import {
+  listFavVideo,
+  listFavPost,
+  listFavReading,
+  listFavEssay
+} from "../../../api/api";
+import cookie from "../../../static/js/cookie";
+import { formatDate } from "../../../static/js/date";
+
 export default {
   name: "favorite",
   data() {
     return {
-      titmore: ""
+      now_s: "video",
+      titmore: ">视频",
+      favList: [],
+      count: 0, //总条目数
+      nextPage: "", //上一页
+      prePage: "", //下一页
+      page: 1 //初始页为1
     };
   },
   methods: {
+    //对获得的分页数据存储在data中
+    stoInData(res_dt) {
+      this.favList = res_dt["results"];
+      this.count = res_dt["count"];
+      this.nextPage = res_dt["next"];
+      this.prePage = res_dt["previous"];
+    },
+    //点击某个收藏类型时
     only(s) {
-      //TODO 实现过滤
-      if (s === "all") {
-        this.titmore = "";
-      } else if (s === "video") {
+      //记录当前切换到了哪个标签,用于后续下一页上一页
+      this.now_s = s;
+      //根据切换到的标签请求不同收藏的第一页(默认就是第一页)
+      if (s === "video") {
         this.titmore = ">视频";
+        listFavVideo({ token: cookie.getCookie("token") }).then(res => {
+          this.stoInData(res["data"]);
+        });
       } else if (s === "post") {
         this.titmore = ">帖子";
+        listFavPost({ token: cookie.getCookie("token") }).then(res => {
+          this.stoInData(res["data"]);
+        });
       } else if (s === "reading") {
         this.titmore = ">阅读";
+        listFavReading({ token: cookie.getCookie("token") }).then(res => {
+          this.stoInData(res["data"]);
+        });
       } else if (s === "essay") {
         this.titmore = ">作文";
+        listFavEssay({ token: cookie.getCookie("token") }).then(res => {
+          this.stoInData(res["data"]);
+        });
       } else {
-        this.titmore = s;
+        window.alert("无效的收藏名称,在only方法中将其添加");
       }
+    },
+    //改变页码时请求那一页的list
+    pageChange(val) {
+      this.$axios.get("/api/fav" + this.now_s + "/?page=" + val).then(res => {
+        this.stoInData(res["data"]);
+      });
+    }
+  },
+  created() {
+    //默认展示[收藏视频]
+    listFavVideo({ token: cookie.getCookie("token") }).then(res => {
+      this.stoInData(res["data"]);
+    });
+  },
+  filters: {
+    //用于add_time字段的过滤器
+    formatDate(time) {
+      var date = new Date(time); //Mon Jan 19 1970 01:28:27 GMT+0800 (中国标准时间)
+      return formatDate(date, "yyyy-MM-dd hh:mm");
     }
   }
 };
