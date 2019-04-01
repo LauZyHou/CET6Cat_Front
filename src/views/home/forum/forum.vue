@@ -26,13 +26,13 @@
     </div>
     <!-- 4 操作按钮 -->
     <div id="op">
-      <el-button icon="el-icon-arrow-up" circle></el-button>
+      <el-button icon="el-icon-arrow-up" circle @click="onTop"></el-button>
       <br>
       <br>
       <el-button type="primary" icon="el-icon-edit-outline" circle @click="toPost"></el-button>
       <br>
       <br>
-      <el-button icon="el-icon-arrow-down" circle></el-button>
+      <el-button icon="el-icon-arrow-down" circle @click="onBottom"></el-button>
     </div>
   </section>
 </template>
@@ -61,6 +61,15 @@ export default {
         this.prePage = res["data"]["previous"];
         this.postList = res["data"]["results"];
       });
+    },
+    //去底部
+    onBottom() {
+      var h = document.body.scrollHeight;
+      window.scrollTo(0, h); //到达文档底部
+    },
+    //去顶部
+    onTop() {
+      window.scrollTo(0, 0); //到达文档顶部
     }
   },
   created() {

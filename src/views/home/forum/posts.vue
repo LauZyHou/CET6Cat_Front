@@ -43,7 +43,7 @@
     <!-- 4 操作按钮 -->
     <div id="op">
       <!-- 向上 -->
-      <el-button icon="el-icon-arrow-up"></el-button>
+      <el-button icon="el-icon-arrow-up" @click="onTop"></el-button>
       <br>
       <!-- 回帖 -->
       <el-button type="primary" icon="el-icon-edit-outline"></el-button>
@@ -52,7 +52,7 @@
       <el-button type="warning" icon="el-icon-star-off"></el-button>
       <br>
       <!-- 向下 -->
-      <el-button icon="el-icon-arrow-down"></el-button>
+      <el-button icon="el-icon-arrow-down" @click="onBottom"></el-button>
     </div>
     <!-- 5 发表回复 -->
     <div id="reply">
@@ -61,7 +61,8 @@
         <el-col :span="8">
           <h3>发表回复</h3>
         </el-col>
-        <el-col :span="16">发帖请遵守
+        <el-col :span="16">
+          发帖请遵守
           <router-link to>CET6Cat社区规范</router-link>
         </el-col>
       </el-row>
@@ -145,7 +146,16 @@ export default {
     //提交回复
     onSubmit() {},
     //清空输入的回复
-    onClear() {}
+    onClear() {},
+    //去底部
+    onBottom() {
+      var h = document.body.scrollHeight;
+      window.scrollTo(0, h); //到达文档底部
+    },
+    //去顶部
+    onTop() {
+      window.scrollTo(0, 0); //到达文档顶部
+    }
   },
   created() {
     this.getDetail(this.$route.params.id);
