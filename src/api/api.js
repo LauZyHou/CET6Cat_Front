@@ -13,12 +13,12 @@ export const login = params => {
     return axios.post(`${local_host}/login/`, params)
 }
 
-//发送短信验证码
+//发送[短信验证码]
 export const verifyCode = params => {
     return axios.post(`${local_host}/code/`, params);
 }
 
-//获取个人信息(id随便传个1就行,靠的是headers里的token来判断用户)
+//获取[个人信息](id随便传个1就行,靠的是headers里的token来判断用户)
 export const getUserProfile = params => {
     return axios.get(`${local_host}/users/1/`);
 }
@@ -41,4 +41,9 @@ export const listFavReading = params => {
 //获取[收藏作文]
 export const listFavEssay = params => {
     return axios.get(`${local_host}/favessay/`)
+}
+
+//获取[首页轮播图]
+export const listBanner = params => {
+    return axios.get(`${local_host}/banners/`)
 }

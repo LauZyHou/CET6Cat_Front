@@ -11,8 +11,18 @@
     <div class="container">
       <!-- 2-1 走马灯 -->
       <el-carousel height="400px" style="margin-top: 5px">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <!-- <img src="/static/carousel/rs.jpg" alt="走马灯"> -->
+        <el-carousel-item :v-if="banners" v-for="b in banners" :key="b.id">
+          <!-- 这里判断一下path域即可知道是否使用了指定URI,如果path不为空则使用其指定的URI -->
+          <!-- 2-1-1 若path不为空且以'/'开头,则为站内其它资源(约定:站内资源省略服务器IP) -->
+          <img
+            v-if="b.path && b.path[0]==='/'"
+            :src="'/api' + b.path"
+            :alt="b.name ? b.name : '站内资源'"
+          >
+          <!-- 2-1-2 若path不为空且不以'/'开头,则为站外资源(约定:站外资源提供完整URI) -->
+          <img v-else-if="b.path" :src="b.path" :alt="b.name ? b.name : '站外资源'">
+          <!-- 2-1-3 否则,是数据库中的轮播图 -->
+          <img v-else :src="'/api'+b.img" :alt="b.name ? b.name : '数据库内轮播图'">
         </el-carousel-item>
       </el-carousel>
       <!-- 2-2 广告栏 -->
@@ -55,12 +65,21 @@
 </template>
 
 <script>
+import { listBanner } from "../../../api/api";
+
 export default {
   name: "index",
   data() {
     return {
-      wordGroup: 1 //如果用户已经登录了,要取他上次背到的那一组
+      wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
+      banners: null
     };
+  },
+  created() {
+    //获取首页轮播图
+    listBanner().then(res => {
+      this.banners = res["data"];
+    });
   }
 };
 </script>
