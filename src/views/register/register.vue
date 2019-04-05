@@ -171,7 +171,11 @@ export default {
 <style scoped>
 section {
   height: 513px;
-  background-color: #ccff99;
+  /* background-color: #ccff99; */
+  background-image: url("/api/media/img/register.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: bottom;
 }
 
 /*-----------------------------------------------------------------*/

@@ -15,8 +15,9 @@
 
 <style scoped>
   footer {
-    background: rgb(84, 92, 100);
-    height: 40px;
+    /* background: rgb(84, 92, 100); */
+    background-color: black;
+    height: 39px;
     padding-top: 25px;
   }
 

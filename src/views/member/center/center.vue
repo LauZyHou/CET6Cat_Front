@@ -37,9 +37,7 @@
 <script>
 export default {
   name: "center",
-  methods:{
-      
-  }
+  methods: {}
 };
 </script>
 
@@ -61,14 +59,15 @@ section > div {
 /*-----------------------------------------------------------------*/
 .clearfix > .fl {
   width: 20%;
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.18);
 }
-
 /* 2 右侧切到不同的视图 */
 /*-----------------------------------------------------------------*/
 .clearfix > .fr {
   min-height: 450px;
   width: 80%;
   background-color: white;
+  box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.18);
 }
 </style>
 

@@ -96,7 +96,7 @@ export default {
 
 <style scoped>
 section {
-  background-color: #ccff99;
+  /* background-color: #ccff99; */
   /* height: 1600px; */
   padding-top: 20px;
   padding-bottom: 20px;
