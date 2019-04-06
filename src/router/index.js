@@ -96,7 +96,7 @@ let router = new Router({
               }
             },
             {//背单词页面
-              path: "word/:group",
+              path: "word",
               name: "word",
               component: word,
               meta: {

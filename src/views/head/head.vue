@@ -64,7 +64,7 @@
         <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
         <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
         <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
-        <el-menu-item :index="'/app/home/word/'+wordGroup">六级词汇</el-menu-item>
+        <el-menu-item :index="'/app/home/word/'">六级词汇</el-menu-item>
         <el-menu-item index="/app/home/reading/1">阅读分析</el-menu-item>
         <el-menu-item index="/app/home/essay/1">高分作文</el-menu-item>
       </el-menu>
@@ -82,7 +82,6 @@ export default {
     return {
       select: "",
       input5: "",
-      wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
       isLogin: true
     };
   },

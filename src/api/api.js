@@ -62,3 +62,8 @@ export const addMyWatch = params => {
 export const delMyWatch = params => {
     return axios.delete(`${local_host}/mywatch/` + params.id, params)
 }
+
+//获取[指定组号的20个单词]
+export const getWords = params => {
+    return axios.get(`${local_host}/words/`, { params: params })
+}

@@ -9,7 +9,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 主体容器 -->
-    <div class="container">
+    <div class="container" :v-show="wordsList">
       <!-- <card></card> -->
       <!-- 2-1 背单词卡片(走马灯实现) -->
       <el-carousel
@@ -20,10 +20,10 @@
         indicator-position="none"
         arrow="always"
       >
-        <el-carousel-item v-for="item in 20" :key="item">
+        <el-carousel-item v-for="w in wordsList" :key="w.id">
           <!-- <h3>{{ item }}</h3> -->
-          <h2>imprinter</h2>
-          <h3>n.印刷机,压印机</h3>
+          <h2>{{ w.name }}</h2>
+          <h3>{{ w.explain }}</h3>
         </el-carousel-item>
       </el-carousel>
       <!-- 2-2 操作 -->
@@ -44,7 +44,7 @@
         </tr>
         <tr>
           <td>
-            <el-button type="primary" icon="el-icon-arrow-up">上一组</el-button>
+            <el-button type="primary" icon="el-icon-arrow-up" @click="onPre">上一组</el-button>
           </td>
           <td>
             跳转至第
@@ -52,7 +52,7 @@
             组
           </td>
           <td>
-            <el-button type="primary" icon="el-icon-arrow-down">下一组</el-button>
+            <el-button type="primary" icon="el-icon-arrow-down" @click="onNext">下一组</el-button>
           </td>
         </tr>
       </table>
@@ -62,14 +62,16 @@
 
 <script>
 import card from "./card";
+import { getWords } from "../../../api/api";
 
 export default {
   name: "word",
   data() {
     return {
       auto: true, //自动切换
-      tranSec: 4, //切换间隔:秒
-      wordGroup: 1
+      tranSec: 4, //切换间隔/秒
+      wordGroup: 12,
+      wordsList: []
     };
   },
   components: {
@@ -80,6 +82,39 @@ export default {
     tranMs() {
       return this.tranSec * 1000;
     }
+  },
+  methods: {
+    //获取当前组号对应单词
+    getWords() {
+      getWords({ page: this.wordGroup })
+        .then(res => {
+          this.wordsList = res.data.results;
+        })
+        .catch(error => {
+          window.alert("获取单词失败");
+        });
+    },
+    //去上一组
+    onPre() {
+      if (this.wordGroup < 2) {
+        window.alert("已经是第一组!");
+      } else {
+        this.wordGroup--;
+        this.getWords();
+      }
+    },
+    //去下一组
+    onNext() {
+      if (this.wordGroup >= 103) {
+        window.alert("已经是最后一组!");
+      } else {
+        this.wordGroup++;
+        this.getWords();
+      }
+    }
+  },
+  created() {
+    this.getWords();
   }
 };
 </script>
