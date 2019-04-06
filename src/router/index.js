@@ -266,7 +266,7 @@ let router = new Router({
                 need_log: false //true
               },
             },
-            {//重置页
+            {//充值页
               path: "prepaid",
               name: "prepaid",
               component: prepaid,

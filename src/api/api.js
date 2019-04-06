@@ -23,6 +23,11 @@ export const getUserProfile = params => {
     return axios.get(`${local_host}/users/1/`);
 }
 
+//获取[用户信息](需要指明用户的id)
+export const getUserMsg = params => {
+    return axios.get(`${local_host}/usermsg/` + params.id)
+}
+
 //获取[收藏视频]
 export const listFavVideo = params => {
     return axios.get(`${local_host}/favvideo/`)
@@ -46,4 +51,14 @@ export const listFavEssay = params => {
 //获取[首页轮播图]
 export const listBanner = params => {
     return axios.get(`${local_host}/banners/`)
+}
+
+//关注[指定用户]
+export const addMyWatch = params => {
+    return axios.post(`${local_host}/mywatch/`, params)
+}
+
+//取关[指定用户]
+export const delMyWatch = params => {
+    return axios.delete(`${local_host}/mywatch/` + params.id, params)
 }
