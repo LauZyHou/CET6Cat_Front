@@ -39,7 +39,7 @@
             秒
           </td>
           <td>
-            <el-button type="success" icon="el-icon-success">打卡</el-button>
+            <el-button type="success" icon="el-icon-success" @click="onPunch">打卡</el-button>
           </td>
         </tr>
         <tr>
@@ -48,7 +48,7 @@
           </td>
           <td>
             跳转至第
-            <input type="number" v-model="wordGroup">
+            <input type="number" v-model="groupNum">
             组
           </td>
           <td>
@@ -62,7 +62,7 @@
 
 <script>
 import card from "./card";
-import { getWords } from "../../../api/api";
+import { getWords, getGroupNum, putPunch } from "../../../api/api";
 
 export default {
   name: "word",
@@ -70,7 +70,7 @@ export default {
     return {
       auto: true, //自动切换
       tranSec: 4, //切换间隔/秒
-      wordGroup: 12,
+      groupNum: null, //当前背诵到的组号
       wordsList: []
     };
   },
@@ -86,7 +86,7 @@ export default {
   methods: {
     //获取当前组号对应单词
     getWords() {
-      getWords({ page: this.wordGroup })
+      getWords({ page: this.groupNum })
         .then(res => {
           this.wordsList = res.data.results;
         })
@@ -96,25 +96,54 @@ export default {
     },
     //去上一组
     onPre() {
-      if (this.wordGroup < 2) {
+      if (this.groupNum < 2) {
         window.alert("已经是第一组!");
       } else {
-        this.wordGroup--;
+        this.groupNum--;
         this.getWords();
       }
     },
     //去下一组
     onNext() {
-      if (this.wordGroup >= 103) {
+      if (this.groupNum >= 103) {
         window.alert("已经是最后一组!");
       } else {
-        this.wordGroup++;
+        this.groupNum++;
         this.getWords();
       }
+    },
+    //打卡
+    onPunch() {
+      putPunch({ words_num: this.groupNum })
+        .then(res => {
+          window.alert(
+            "打卡成功!\n姓名:" +
+              res.data["name"] +
+              "\n连续打卡:" +
+              res.data["conti_punch"] +
+              "\n最后打卡日期:" +
+              res.data["last_punch"] +
+              "\n背诵进度:" +
+              res.data["words_num"] +
+              "组"
+          );
+        })
+        .catch(error => {
+          window.alert("打卡失败!");
+        });
     }
   },
+  //只在该组件加载时调用一次,先获取组号再用组号获取这组20个单词
   created() {
-    this.getWords();
+    getGroupNum() //先调后端API获取组号
+      .then(res => {
+        this.groupNum = res.data["words_num"];
+        this.getWords(); //当获取并写入成功了以后再去调用这个获取单词的method
+      })
+      .catch(error => {
+        window.alert("todo获取组号失败");
+      });
+    // console.log("测试该钩子只执行了一次");
   }
 };
 </script>
