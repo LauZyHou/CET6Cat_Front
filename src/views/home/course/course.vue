@@ -9,7 +9,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 视频的容器 -->
-    <div class="container">
+    <div class="container" v-if="videoList">
       <ul>
         <li v-for="v in videoList" v-bind:key="v.id">
           <!-- <router-link :to="'/app/home/videos/'+v.id"> -->
@@ -20,6 +20,10 @@
           </router-link>
         </li>
       </ul>
+    </div>
+    <!-- 2.5 页面加载时展示 -->
+    <div v-else id="load-box" class="container">
+      <img src="/static/loading.gif" alt="加载中">
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
@@ -44,7 +48,7 @@ export default {
       count: 0, //总条目数
       nextPage: "", //上一页
       prePage: "", //下一页
-      videoList: [], //返回的results
+      videoList: null, //返回的results
       page: 1 //初始页为1
     };
   },
@@ -60,6 +64,7 @@ export default {
   methods: {
     //改变页码时请求那一页的list
     pageChange(val) {
+      this.videoList = null;
       this.$axios.get("/api/videos/?page=" + val).then(res => {
         this.nextPage = res["data"]["next"];
         this.prePage = res["data"]["previous"];
@@ -87,7 +92,6 @@ section {
 
 /* 1 标题 */
 /*-----------------------------------------------------------------*/
-
 .tit {
   background-color: white;
   width: 80%;
@@ -106,6 +110,8 @@ section {
   padding-bottom: 10px;
   /*border-box定义的盒子,不会随着padding和boder的加入而增大盒子的占用空间*/
   box-sizing: border-box;
+  /* 所以这里要270加上上面不增大盒子占用空间的20padding */
+  min-height: 290px;
 }
 
 ul {
@@ -136,9 +142,18 @@ li img {
   max-height: 100%;
 }
 
+/* 2.5 页面加载时展示 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
+}
+
 /* 3 分页 */
 /*-----------------------------------------------------------------*/
-
 .pagination {
   background-color: white;
   width: 80%;

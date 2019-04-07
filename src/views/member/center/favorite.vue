@@ -21,7 +21,7 @@
       </el-row>
     </div>
     <!-- 2 收藏list -->
-    <div id="fav-list">
+    <div id="fav-list" v-if="favList">
       <el-row v-for="fav in favList" :key="fav.id">
         <el-col :span="17">
           <router-link :to="'/app/home/'+now_s+'s/'+fav.base.id" target="_blank">{{fav.base.name}}</router-link>
@@ -33,6 +33,10 @@
           <a>移除</a>
         </el-col>
       </el-row>
+    </div>
+    <!-- 2.5 页面加载时展示 -->
+    <div v-else id="load-box">
+      <img src="/static/loading.gif" alt="加载中">
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
@@ -65,7 +69,7 @@ export default {
     return {
       now_s: "video",
       titmore: ">视频",
-      favList: [],
+      favList: null,
       count: 0, //总条目数
       nextPage: "", //上一页
       prePage: "", //下一页
@@ -82,6 +86,7 @@ export default {
     },
     //点击某个收藏类型时
     only(s) {
+      this.favList = null;
       //记录当前切换到了哪个标签,用于后续下一页上一页
       this.now_s = s;
       //根据切换到的标签请求不同收藏的第一页(默认就是第一页)
@@ -111,6 +116,7 @@ export default {
     },
     //改变页码时请求那一页的list
     pageChange(val) {
+      this.favList = null;
       this.$axios.get("/api/fav" + this.now_s + "/?page=" + val).then(res => {
         this.stoInData(res["data"]);
       });
@@ -189,9 +195,18 @@ export default {
   color: firebrick;
 }
 
+/* 2.5 页面加载时展示 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
+}
+
 /* 3 分页 */
 /*-----------------------------------------------------------------*/
-
 .pagination {
   background-color: white;
   width: 80%;

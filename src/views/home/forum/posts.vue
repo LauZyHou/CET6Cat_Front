@@ -22,16 +22,30 @@
       <!-- 2-2 帖子内容 -->
       <el-row class="building">
         <el-col :span="6" class="lft">
-          <h4>{{detail.uper.username}}</h4>
-          <img :src="detail.uper.head_img" :alt="detail.uper.username">
+          <h4>
+            <router-link
+              :to="'/app/member/users/'+detail.uper.id"
+              target="_blank"
+            >{{detail.uper.username}}</router-link>
+          </h4>
+          <router-link :to="'/app/member/users/'+detail.uper.id" target="_blank">
+            <img :src="detail.uper.head_img" :alt="detail.uper.username">
+          </router-link>
         </el-col>
         <el-col :span="18">{{detail.content}}</el-col>
       </el-row>
       <!-- 2-3 回帖(已经按时间顺序排好) -->
       <el-row v-for="rep in detail.replies" v-bind:key="rep.id" class="building">
         <el-col :span="6" class="lft">
-          <h4>{{detail.uper.username}}</h4>
-          <img :src="detail.uper.head_img" :alt="detail.uper.username">
+          <h4>
+            <router-link
+              :to="'/app/member/users/'+rep.uper.id"
+              target="_blank"
+            >{{rep.uper.username}}</router-link>
+          </h4>
+          <router-link :to="'/app/member/users/'+rep.uper.id" target="_blank">
+            <img :src="rep.uper.head_img" :alt="rep.uper.username">
+          </router-link>
         </el-col>
         <el-col :span="18">{{rep.content}}</el-col>
       </el-row>

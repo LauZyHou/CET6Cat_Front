@@ -9,7 +9,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 主体容器 -->
-    <div class="container" :v-show="wordsList">
+    <div class="container" v-if="wordsList">
       <!-- <card></card> -->
       <!-- 2-1 背单词卡片(走马灯实现) -->
       <el-carousel
@@ -57,6 +57,10 @@
         </tr>
       </table>
     </div>
+    <!-- 3 页面加载时展示 -->
+    <div v-else id="load-box" class="container">
+      <img src="/static/loading.gif" alt="加载中">
+    </div>
   </section>
 </template>
 
@@ -71,7 +75,7 @@ export default {
       auto: true, //自动切换
       tranSec: 4, //切换间隔/秒
       groupNum: null, //当前背诵到的组号
-      wordsList: []
+      wordsList: null
     };
   },
   components: {
@@ -99,6 +103,7 @@ export default {
       if (this.groupNum < 2) {
         window.alert("已经是第一组!");
       } else {
+        this.wordsList = null;
         this.groupNum--;
         this.getWords();
       }
@@ -108,6 +113,7 @@ export default {
       if (this.groupNum >= 103) {
         window.alert("已经是最后一组!");
       } else {
+        this.wordsList = null;
         this.groupNum++;
         this.getWords();
       }
@@ -166,7 +172,7 @@ section {
   text-align: center;
 }
 
-/* 2 主体容器 */
+/* 2 主体容器 & 加载容器 */
 /*-----------------------------------------------------------------*/
 
 .container {
@@ -210,5 +216,15 @@ table {
 
 table input {
   width: 40px;
+}
+
+/* 3 加载容器 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
 }
 </style>

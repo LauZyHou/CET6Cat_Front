@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="clearfix" :v-show="detail.vip!=null">
+    <div class="clearfix" v-if="detail.vip!==null">
       <!-- 1 头像+短文本信息 -->
       <div :class="{fl:true, male:detail.gender, female:!detail.gender}">
         <!-- 1-1 头像 -->
@@ -38,6 +38,10 @@
           <article>{{detail.brief?detail.brief:'这个人很懒，什么都没有留下哦。'}}</article>
         </div>
       </div>
+    </div>
+    <!-- 页面加载时展示 -->
+    <div v-else id="load-box">
+      <img src="/static/loading.gif" alt="加载中">
     </div>
   </section>
 </template>
@@ -213,6 +217,16 @@ section > div > .fr > .brief {
   width: 96%;
   height: 200px;
   background-color: rgb(247, 250, 224);
+}
+
+/* 页面加载 */
+/*------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 100px;
 }
 </style>
 

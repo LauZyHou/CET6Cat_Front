@@ -4,3 +4,4 @@
 .vscode/
 /src/assets/videos
 /static/*
+!/static/*.gif

@@ -9,10 +9,14 @@
       </el-breadcrumb>
     </div>
     <!-- 2 文章list的容器 -->
-    <div class="container">
+    <div class="container" v-if="readingList">
       <div class="paper" v-for="r in readingList" :key="r.id">
         <paper-box :paper="r"></paper-box>
       </div>
+    </div>
+    <!-- 2.5 页面加载时展示 -->
+    <div v-else id="load-box" class="container">
+      <img src="/static/loading.gif" alt="加载中">
     </div>
     <!-- 3 分页 -->
     <div class="pagination">
@@ -37,7 +41,7 @@ export default {
       count: 0,
       nextPage: "",
       prePage: "",
-      readingList: []
+      readingList: null
     };
   },
   computed: {
@@ -59,6 +63,7 @@ export default {
   methods: {
     //改变页码时请求那一页的list
     pageChange(val) {
+      this.readingList = null;
       this.$axios.get("/api/readings/?page=" + val).then(res => {
         this.nextPage = res["data"]["next"];
         this.prePage = res["data"]["previous"];
@@ -85,7 +90,6 @@ section {
 
 /* 1 标题 */
 /*-----------------------------------------------------------------*/
-
 .tit {
   background-color: white;
   width: 80%;
@@ -96,13 +100,13 @@ section {
 
 /* 2 文章的容器 */
 /*-----------------------------------------------------------------*/
-
 .container {
   background-color: white;
   width: 80%;
   margin: 0 auto;
   padding-top: 10px;
   padding-bottom: 10px;
+  min-height: 270px;
 }
 
 .paper {
@@ -112,9 +116,18 @@ section {
   height: 70px;
 }
 
+/* 2.5 页面加载时展示 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
+}
+
 /* 3 分页 */
 /*-----------------------------------------------------------------*/
-
 .pagination {
   background-color: white;
   width: 80%;

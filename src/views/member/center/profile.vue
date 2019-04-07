@@ -66,6 +66,10 @@
         </div>
       </div>
     </div>
+    <!-- 3 页面加载时展示 -->
+    <div v-else id="load-box">
+      <img src="/static/loading.gif" alt="加载中">
+    </div>
   </div>
 </template>
 
@@ -133,7 +137,8 @@ export default {
 
 /* 2 内容 */
 /*-----------------------------------------------------------------*/
-#tit + div {
+/* 这里用普通兄弟选择器(而不用相邻兄弟选择器)可以顺便把样式给load-box */
+#tit ~ div {
   margin-top: 20px;
   height: 300px;
 }
@@ -200,6 +205,16 @@ export default {
   width: 100%;
   /* height: 200px; */
   background-color: rgb(224, 231, 250);
+}
+
+/* 3 页面加载时展示 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
 }
 </style>
 
