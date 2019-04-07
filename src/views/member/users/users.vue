@@ -16,9 +16,9 @@
       </div>
       <!-- 2 进度+自我简介 -->
       <div class="fr">
-        <!-- 2-1 进度 -->
+        <!-- 2-1 进度(一共是103组) -->
         <h3>背单词进度</h3>
-        <el-progress :percentage="detail.words_num" color="#8e71c7"></el-progress>
+        <el-progress :percentage="detail.words_num / 103 *100" color="#8e71c7"></el-progress>
         <br>
         <!-- 2-2 活跃 -->
         <h3>活跃</h3>
@@ -69,8 +69,9 @@ export default {
   methods: {
     getDetail(uid) {
       var that = this;
-      //这里传token是为了后台判断"当前登录的用户有没有关注uid所指示的这个用户"
-      getUserMsg({ id: uid, token: cookie.getCookie("token") })
+      //传token是为了后台判断"当前登录的用户有没有关注uid所指示的这个用户"
+      //不用在这里手动传递Token,见main.js中的HTTP拦截器
+      getUserMsg({ id: uid })
         .then(res => {
           for (let key in res.data) {
             this.$set(this.detail, key, res.data[key]);

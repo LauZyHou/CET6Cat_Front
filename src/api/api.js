@@ -25,6 +25,13 @@ export const getUserProfile = params => {
     return axios.get(`${local_host}/users/1/`);
 }
 
+//----------------------------------[论坛帖子用]----------------------------------
+
+//添加[帖子](用户发帖)
+export const addPost = params => {
+    return axios.post(`${local_host}/posts/`, params);
+}
+
 //----------------------------------[用户主页用]----------------------------------
 
 //获取[用户信息](需要指明用户的id)

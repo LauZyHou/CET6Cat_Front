@@ -25,7 +25,7 @@
             </el-select>
           </el-col>
           <el-col :span="18">
-            <el-input placeholder="帖子标题" v-model="form.title" clearable></el-input>
+            <el-input placeholder="帖子标题" v-model="form.name" clearable></el-input>
           </el-col>
         </el-row>
         <br>
@@ -55,26 +55,32 @@
 </template>
 
 <script>
+import { addPost } from "../../../api/api";
+
 export default {
   name: "post",
   data() {
     return {
       form: {
-        category:"",
-        title:"",
-        content:"",
+        name: null,
+        content: null,
+        category: null
       },
       options: [
         {
-          value: "help",
+          value: 1,
           label: "求助"
         },
         {
-          value: "share",
+          value: 2,
           label: "分享"
         },
         {
-          value: "chat",
+          value: 3,
+          label: "综合"
+        },
+        {
+          value: 4,
           label: "闲聊"
         }
       ],
@@ -82,13 +88,26 @@ export default {
     };
   },
   methods: {
+    //点击[发帖]按钮
     onSubmit() {
-      //TODO
-      window.alert("表单提交");
+      var that = this;
+      if (null === this.form.name) window.alert("缺少标题");
+      else if (null === this.form.category) window.alert("缺少类别");
+      else if (null === this.form.content) window.alert("缺少内容");
+      else{
+        addPost(this.form)
+        .then(res => {
+          window.alert("发帖成功!");
+          //跳转到帖子页
+          that.$router.push({ path: "/app/home/posts/" + res.data["id"] });
+        })
+        .catch(error => {
+          window.alert("发帖失败!");
+        });
+      }
     },
     onClear() {
-      //TODO
-      window.alert("清空内容");
+      this.form.name = this.form.category = this.form.content = null;
     }
   }
 };
