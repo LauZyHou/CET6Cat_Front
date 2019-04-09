@@ -107,3 +107,17 @@ export const listHotVideo = params => {
     return axios.get(`${local_host}/hotvideo/`);
 }
 
+//获取[热门作文]
+export const listHotEssay = params => {
+    return axios.get(`${local_host}/hotessay/`);
+}
+
+//获取[热门帖子]
+export const listHotPost = params => {
+    return axios.get(`${local_host}/hotpost/`);
+}
+
+//获取[热门文章]
+export const listHotReading = params => {
+    return axios.get(`${local_host}/hotreading/`);
+}

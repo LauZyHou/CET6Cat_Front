@@ -42,7 +42,7 @@
           热门视频
           <router-link to="/app/home/course/1" target="_blank">->更多</router-link>
         </h2>
-        <home-video></home-video>
+        <hot-video></hot-video>
       </div>
       <!-- 2-5 近期热帖 -->
       <div id="videos" class="hot">
@@ -50,6 +50,7 @@
           近期热帖
           <router-link to="/app/home/forum/1" target="_blank">->更多</router-link>
         </h2>
+        <hot-post></hot-post>
       </div>
       <!-- 2-6 六级词汇 -->
       <div id="videos" class="hot">
@@ -65,6 +66,7 @@
           阅读分析
           <router-link to="/app/home/reading/1" target="_blank">->更多</router-link>
         </h2>
+        <hot-reading></hot-reading>
       </div>
       <!-- 2-8 高分作文 -->
       <div id="videos" class="hot">
@@ -72,6 +74,7 @@
           高分作文
           <router-link to="/app/home/essay/1" target="_blank">->更多</router-link>
         </h2>
+        <hot-essay></hot-essay>
       </div>
     </div>
   </section>
@@ -80,7 +83,10 @@
 <script>
 import { listBanner } from "../../../api/api";
 import WordCloud from "../../../components/echarts/WordCloud";
-import HomeVideo from "../../../components/home/HomeVideo";
+import HotVideo from "../../../components/hot/HotVideo";
+import HotReading from "../../../components/hot/HotReading";
+import HotEssay from "../../../components/hot/HotEssay";
+import HotPost from "../../../components/hot/HotPost";
 
 export default {
   name: "index",
@@ -97,7 +103,10 @@ export default {
   },
   components: {
     "word-cloud": WordCloud,
-    "home-video": HomeVideo
+    "hot-video": HotVideo,
+    "hot-reading": HotReading,
+    "hot-essay": HotEssay,
+    "hot-post": HotPost
   }
 };
 </script>

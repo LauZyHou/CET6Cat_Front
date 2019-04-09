@@ -21,7 +21,7 @@
 import { listHotVideo } from "../../api/api";
 
 export default {
-  name: "HomeVideo",
+  name: "HotVideo",
   data() {
     return {
       videoList: null
