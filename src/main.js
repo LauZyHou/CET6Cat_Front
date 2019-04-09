@@ -12,12 +12,19 @@ import 'element-ui/lib/theme-chalk/index.css'
 import { store } from './store/store'
 //Axios
 import Axios from 'axios'
+//Echarts
+import echarts from 'echarts'
+
+//这里不用import而是require,可以直接在node_modules下查找
+require('echarts-wordcloud');
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;//开发者模式,能使用chrome上的vue工具
 Vue.use(VueResource);
 Vue.use(ElementUI);
 Vue.prototype.$axios = Axios;
-Vue.config.devtools = true;//开发者模式,能使用chrome上的vue工具
+Vue.prototype.$echarts = echarts;
+
 
 //这里不用"application/json"的话,使用post请求后台时没参数就没有放在body里,所以请求不到
 Axios.defaults.headers = {

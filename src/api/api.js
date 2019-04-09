@@ -78,7 +78,7 @@ export const delMyWatch = params => {
     return axios.delete(`${local_host}/mywatch/` + params.id, params);
 }
 
-//----------------------------------[单词页用]----------------------------------
+//----------------------------------[单词相关]----------------------------------
 
 //获取[用户的组号]
 export const getGroupNum = params => {
@@ -95,4 +95,10 @@ export const putPunch = params => {
     return axios.put(`${local_host}/punch/1/`, params);
 }
 
+//获取词云
+export const listWordCloud = params => {
+    return axios.get(`${local_host}/wordcloud/`);
+}
+
 //----------------------------------[]----------------------------------
+

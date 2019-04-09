@@ -47,18 +47,18 @@
       <!-- 2-6 六级词汇 -->
       <div id="videos" class="hot">
         <h2>六级词汇</h2>
-        <router-link :to="'/app/home/word/'+wordGroup" target="_blank">更多</router-link>
-        <br>这里放个词云
+        <router-link :to="'/app/home/word/'" target="_blank">更多</router-link>
+        <word-cloud></word-cloud>
       </div>
       <!-- 2-7 阅读分析 -->
       <div id="videos" class="hot">
         <h2>阅读分析</h2>
-        <router-link to="/app/home/forum/reading/1" target="_blank">更多</router-link>
+        <router-link to="/app/home/reading/1" target="_blank">更多</router-link>
       </div>
       <!-- 2-8 高分作文 -->
       <div id="videos" class="hot">
         <h2>高分作文</h2>
-        <router-link to="/app/home/forum/essay/1" target="_blank">更多</router-link>
+        <router-link to="/app/home/essay/1" target="_blank">更多</router-link>
       </div>
     </div>
   </section>
@@ -66,12 +66,12 @@
 
 <script>
 import { listBanner } from "../../../api/api";
+import WordCloud from "../../../components/echarts/WordCloud";
 
 export default {
   name: "index",
   data() {
     return {
-      wordGroup: 1, //如果用户已经登录了,要取他上次背到的那一组
       banners: null
     };
   },
@@ -80,6 +80,9 @@ export default {
     listBanner().then(res => {
       this.banners = res["data"];
     });
+  },
+  components: {
+    "word-cloud": WordCloud
   }
 };
 </script>
