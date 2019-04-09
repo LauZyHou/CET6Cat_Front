@@ -100,5 +100,10 @@ export const listWordCloud = params => {
     return axios.get(`${local_host}/wordcloud/`);
 }
 
-//----------------------------------[]----------------------------------
+//----------------------------------[(主页上的)热门]----------------------------------
+
+//获取[热门视频]
+export const listHotVideo = params => {
+    return axios.get(`${local_host}/hotvideo/`);
+}
 

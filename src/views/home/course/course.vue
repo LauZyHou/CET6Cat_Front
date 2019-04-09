@@ -15,7 +15,7 @@
           <!-- <router-link :to="'/app/home/videos/'+v.id"> -->
           <!-- <img :src="'/static/thumbnail/'+v.id+'.png'" :alt="v.name"> -->
           <!-- </router-link> -->
-          <router-link :to="'/app/home/videos/'+v.id">
+          <router-link :to="'/app/home/videos/'+v.id" target="_blank">
             <img :src="v.thumb" :alt="v.name">
           </router-link>
         </li>

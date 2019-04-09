@@ -2,7 +2,7 @@
   <el-row>
     <!-- 1 文章名+摘要 -->
     <el-col :span="22">
-      <router-link :to="'/app/home/essays/'+essay.id">{{essay.name}}</router-link>
+      <router-link :to="'/app/home/essays/'+essay.id" target="_blank">{{essay.name}}</router-link>
       <br>
       summary作废
     </el-col>

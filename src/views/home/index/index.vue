@@ -31,34 +31,47 @@
       </div>
       <!-- 2-3 六级新闻 -->
       <div id="videos" class="hot">
-        <h2>六级新闻</h2>
-        <router-link to target="_blank">更多</router-link>
+        <h2>
+          六级新闻
+          <router-link to target="_blank">->更多</router-link>
+        </h2>
       </div>
       <!-- 2-4 热门视频 -->
       <div id="videos" class="hot">
-        <h2>热门视频</h2>
-        <router-link to="/app/home/course/1" target="_blank">更多</router-link>
+        <h2>
+          热门视频
+          <router-link to="/app/home/course/1" target="_blank">->更多</router-link>
+        </h2>
+        <home-video></home-video>
       </div>
       <!-- 2-5 近期热帖 -->
       <div id="videos" class="hot">
-        <h2>近期热帖</h2>
-        <router-link to="/app/home/forum/1" target="_blank">更多</router-link>
+        <h2>
+          近期热帖
+          <router-link to="/app/home/forum/1" target="_blank">->更多</router-link>
+        </h2>
       </div>
       <!-- 2-6 六级词汇 -->
       <div id="videos" class="hot">
-        <h2>六级词汇</h2>
-        <router-link :to="'/app/home/word/'" target="_blank">更多</router-link>
+        <h2>
+          六级词汇
+          <router-link :to="'/app/home/word/'" target="_blank">->更多</router-link>
+        </h2>
         <word-cloud></word-cloud>
       </div>
       <!-- 2-7 阅读分析 -->
       <div id="videos" class="hot">
-        <h2>阅读分析</h2>
-        <router-link to="/app/home/reading/1" target="_blank">更多</router-link>
+        <h2>
+          阅读分析
+          <router-link to="/app/home/reading/1" target="_blank">->更多</router-link>
+        </h2>
       </div>
       <!-- 2-8 高分作文 -->
       <div id="videos" class="hot">
-        <h2>高分作文</h2>
-        <router-link to="/app/home/essay/1" target="_blank">更多</router-link>
+        <h2>
+          高分作文
+          <router-link to="/app/home/essay/1" target="_blank">->更多</router-link>
+        </h2>
       </div>
     </div>
   </section>
@@ -67,6 +80,7 @@
 <script>
 import { listBanner } from "../../../api/api";
 import WordCloud from "../../../components/echarts/WordCloud";
+import HomeVideo from "../../../components/home/HomeVideo";
 
 export default {
   name: "index",
@@ -82,7 +96,8 @@ export default {
     });
   },
   components: {
-    "word-cloud": WordCloud
+    "word-cloud": WordCloud,
+    "home-video": HomeVideo
   }
 };
 </script>
@@ -159,7 +174,7 @@ section {
 
 /* 每个栏目的热门展示盒子 */
 .hot {
-  min-height: 300px;
+  min-height: 200px;
   border-bottom: 1px solid black;
 }
 </style>

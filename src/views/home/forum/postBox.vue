@@ -4,7 +4,7 @@
     <el-col :span="3">{{replyNum}}</el-col>
     <!-- 2 帖子标题链接+摘要 -->
     <el-col :span="16">
-      <router-link :to="path">{{post.name}}</router-link>
+      <router-link :to="path" target="_blank">{{post.name}}</router-link>
       <br>
       {{summary}}...
     </el-col>
