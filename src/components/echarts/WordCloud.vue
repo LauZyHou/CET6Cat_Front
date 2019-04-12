@@ -1,5 +1,5 @@
 <template>
-  <div id="myChart" :style="{width: '1000px', height: '280px'}"></div>
+  <div id="WordCloud" :style="{width: '1000px', height: '280px'}"></div>
 </template>
 <script>
 import { listWordCloud } from "../../api/api";
@@ -22,7 +22,7 @@ export default {
   methods: {
     drawLine(wordCloudList) {
       // 基于准备好的dom，初始化echarts实例
-      let myChart = this.$echarts.init(document.getElementById("myChart"));
+      let myChart = this.$echarts.init(document.getElementById("WordCloud"));
       // 绘制图表
       let option = {
         title: {
@@ -78,7 +78,7 @@ export default {
 };
 </script>
 <style scoped>
-#myChart {
+#WordCloud {
   margin: 0 auto;
   /* background-color: azure; */
 }

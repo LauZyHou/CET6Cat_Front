@@ -35,6 +35,7 @@ import vip from '../views/member/center/vip'
 import setting from '../views/member/center/setting'
 import users from '../views/member/users/users'
 import prepaid from '../views/member/prepaid/prepaid'
+import situation from '../views/member/situation/situation'
 
 import error from '../views/error/error'
 import E401 from '../views/error/E401'
@@ -272,6 +273,15 @@ let router = new Router({
               component: prepaid,
               meta: {
                 title: "Cat币充值",
+                need_log: false//true
+              }
+            },
+            {//学习情况(图表)页
+              path: "situation",
+              name: "situation",
+              component: situation,
+              meta: {
+                title: "学习情况",
                 need_log: false//true
               }
             }

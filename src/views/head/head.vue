@@ -5,7 +5,9 @@
     <div v-if="userInfo.name" class="top-bar">
       <span>你好，{{userInfo.name}}</span>
       <span class="space">|</span>
-      <router-link rel="nofollow" to="/app/member/center/profile">个人中心</router-link>
+      <router-link rel="nofollow" to="/app/member/center/profile" target="_blank">个人中心</router-link>
+      <span class="space">|</span>
+      <router-link rel="nofollow" to="/app/member/situation" target="_blank">学习情况</router-link>
       <span class="space">|</span>
       <a @click="onExit">退出</a>
       <!-- <span class="space">|</span> -->
