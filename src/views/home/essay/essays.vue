@@ -15,7 +15,7 @@
       <el-row>
         <el-col :span="20" id="essay-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="essay-op">
-          <button @click="addEnshrine">添加收藏</button>
+          <button @click="onFav">{{this.detail.isFaved?'取消':'添加'}}收藏</button>
           <button :disabled="!mineOrAdmin">删除</button>
         </el-col>
       </el-row>
@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { addFavEssay, delFavEssay } from "../../../api/api";
+
 export default {
   name: "essays",
   data() {
@@ -52,7 +54,8 @@ export default {
         name: "作文不存在",
         content: "找不到你想访问的作文",
         add_time: "",
-        source: 0
+        source: 0,
+        isFaved: false
       },
       //服务器上的文件文本内容读取到该字段中
       readingDetail: ""
@@ -79,10 +82,42 @@ export default {
           }
         });
     },
-    //添加收藏
-    addEnshrine() {
-      //TODO添加收藏
-      window.alert("添加收藏");
+    //点击[添加收藏/取消收藏]按钮
+    onFav() {
+      var that = this;
+      //已收藏,取消收藏
+      if (this.detail.isFaved) {
+        delFavEssay({ id: this.$route.params.id })
+          .then(res => {
+            window.alert("取消收藏成功!");
+            this.detail.isFaved = false;
+          })
+          .catch(error => {
+            window.alert("[error]取消收藏失败");
+          });
+      }
+      //未收藏,添加收藏
+      else {
+        addFavEssay({ base: this.$route.params.id })
+          .then(res => {
+            window.alert("添加收藏成功!");
+            this.detail.isFaved = true;
+          })
+          .catch(error => {
+            //添加失败,对失败原因进行提示
+            if (error.response && error.response.data) {
+              if ("non_field_errors" in error.response.data) {
+                window.alert(error.response.data["non_field_errors"]);
+                //这里都是因为视频已经收藏过了,说明前端收藏状态有点问题,这里切一下收藏状态
+                //什么时候可能出现这种问题?当用户没登录打开这个页面,登录了以后再在这个页面上点收藏时
+                //这样就不用去刷新整个页面了
+                that.detail.isFaved = true;
+              } else if ("base" in error.response.data) {
+                window.alert(error.response.data["base"]);
+              }
+            }
+          });
+      }
     },
     //获取指定id的作文
     getEssay(pid) {

@@ -62,8 +62,8 @@
       <!-- 回帖 -->
       <el-button type="primary" icon="el-icon-edit-outline"></el-button>
       <br>
-      <!-- 收藏 -->
-      <el-button type="warning" icon="el-icon-star-off"></el-button>
+      <!-- 收藏/取消收藏 -->
+      <el-button type="warning" :icon="'el-icon-star-'+(detail.isFaved?'on':'off')" @click="onFav"></el-button>
       <br>
       <!-- 向下 -->
       <el-button icon="el-icon-arrow-down" @click="onBottom"></el-button>
@@ -107,6 +107,8 @@
 </template>
 
 <script>
+import { addFavPost, delFavPost } from "../../../api/api";
+
 export default {
   name: "posts",
   data() {
@@ -118,7 +120,8 @@ export default {
         content: "找不到你想访问的帖子",
         category: 0,
         add_time: "",
-        uper: 0
+        uper: 0,
+        isFaved: false
       },
       form: {}
     };
@@ -169,6 +172,43 @@ export default {
     //去顶部
     onTop() {
       window.scrollTo(0, 0); //到达文档顶部
+    },
+    //点击[添加收藏/取消收藏]按钮
+    onFav() {
+      var that = this;
+      //已收藏,取消收藏
+      if (this.detail.isFaved) {
+        delFavPost({ id: this.$route.params.id })
+          .then(res => {
+            window.alert("取消收藏成功!");
+            this.detail.isFaved = false;
+          })
+          .catch(error => {
+            window.alert("[error]取消收藏失败");
+          });
+      }
+      //未收藏,添加收藏
+      else {
+        addFavPost({ base: this.$route.params.id })
+          .then(res => {
+            window.alert("添加收藏成功!");
+            this.detail.isFaved = true;
+          })
+          .catch(error => {
+            //添加失败,对失败原因进行提示
+            if (error.response && error.response.data) {
+              if ("non_field_errors" in error.response.data) {
+                window.alert(error.response.data["non_field_errors"]);
+                //这里都是因为视频已经收藏过了,说明前端收藏状态有点问题,这里切一下收藏状态
+                //什么时候可能出现这种问题?当用户没登录打开这个页面,登录了以后再在这个页面上点收藏时
+                //这样就不用去刷新整个页面了
+                that.detail.isFaved = true;
+              } else if ("base" in error.response.data) {
+                window.alert(error.response.data["base"]);
+              }
+            }
+          });
+      }
     }
   },
   created() {

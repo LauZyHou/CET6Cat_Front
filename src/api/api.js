@@ -39,7 +39,9 @@ export const getUserMsg = params => {
     return axios.get(`${local_host}/usermsg/` + params.id);
 }
 
-//----------------------------------[收藏/取消收藏]----------------------------------
+//----------------------------------[获取/添加/移除收藏]----------------------------------
+
+//--------------------获取
 
 //获取[收藏视频]
 export const listFavVideo = params => {
@@ -61,9 +63,48 @@ export const listFavEssay = params => {
     return axios.get(`${local_host}/favessay/`);
 }
 
-//获取[首页轮播图]
-export const listBanner = params => {
-    return axios.get(`${local_host}/banners/`);
+//--------------------添加
+
+//添加[收藏视频]
+export const addFavVideo = params => {
+    return axios.post(`${local_host}/favvideo/`, params);
+}
+
+//添加[收藏帖子]
+export const addFavPost = params => {
+    return axios.post(`${local_host}/favpost/`, params);
+}
+
+//添加[收藏阅读]
+export const addFavReading = params => {
+    return axios.post(`${local_host}/favreading/`, params);
+}
+
+//添加[收藏作文]
+export const addFavEssay = params => {
+    return axios.post(`${local_host}/favessay/`, params);
+}
+
+//--------------------移除
+
+//移除[收藏视频]
+export const delFavVideo = params => {
+    return axios.delete(`${local_host}/favvideo/` + params.id);
+}
+
+//移除[收藏帖子]
+export const delFavPost = params => {
+    return axios.delete(`${local_host}/favpost/` + params.id);
+}
+
+//移除[收藏阅读]
+export const delFavReading = params => {
+    return axios.delete(`${local_host}/favreading/` + params.id);
+}
+
+//移除[收藏作文]
+export const delFavEssay = params => {
+    return axios.delete(`${local_host}/favessay/` + params.id);
 }
 
 //----------------------------------[关注/取关]----------------------------------
@@ -120,4 +161,9 @@ export const listHotPost = params => {
 //获取[热门文章]
 export const listHotReading = params => {
     return axios.get(`${local_host}/hotreading/`);
+}
+
+//获取[首页轮播图]
+export const listBanner = params => {
+    return axios.get(`${local_host}/banners/`);
 }
