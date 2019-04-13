@@ -167,3 +167,10 @@ export const listHotReading = params => {
 export const listBanner = params => {
     return axios.get(`${local_host}/banners/`);
 }
+
+//----------------------------------[搜索]----------------------------------
+
+//主页顶部[全局模糊查询]
+export const searchGlobal = content => {
+    return axios.get(`${local_host}/globalsearch/?s=` + content);
+}

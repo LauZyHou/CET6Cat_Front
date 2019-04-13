@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <div id="StudyNum" :style="{width: '1000px', height: '320px'}"></div>
-  </div>
+  <div id="StudyNum" :style="{width: '1000px', height: '320px'}"></div>
 </template>
 <script>
 export default {

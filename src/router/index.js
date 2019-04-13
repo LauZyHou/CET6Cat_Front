@@ -11,7 +11,7 @@ import logHead from '../views/head/logHead'
 import login from '../views/login/login'
 import foot from '../views/foot/foot'
 import register from '../views/register/register'
-import head from '../views/head/head'
+import mainHead from '../views/head/head'
 
 import home from '../views/home/home'
 import index from '../views/home/index/index'
@@ -79,7 +79,7 @@ let router = new Router({
           path: "home",
           name: "home",
           components: {
-            head: head,
+            head: mainHead,
             content: home,
             foot: foot
           },

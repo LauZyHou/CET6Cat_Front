@@ -28,23 +28,22 @@
         <img src="../../assets/vue.png" alt="Vue.js">
       </div>
       <div class="top-search">
-        <el-input placeholder="请输入内容" v-model="input5" class="input-with-select">
+        <el-input placeholder="请输入内容" v-model="searchContent" class="input-with-select">
           <el-select v-model="select" slot="prepend" placeholder="请选择" value="2">
             <el-option label="课程" value="1"></el-option>
             <el-option label="新闻" value="2"></el-option>
             <el-option label="用户" value="3"></el-option>
           </el-select>
-          <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-button slot="append" icon="el-icon-search" @click="onSearch"></el-button>
         </el-input>
       </div>
     </div>
     <!-- 3 导航条 -->
     <div class="top-nav">
       <el-menu
-        :default-active="activeIndex2"
+        default-active="1"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b"
@@ -77,13 +76,14 @@
 <script>
 import { mapGetters } from "vuex";
 import cookie from "../../static/js/cookie";
+import { searchGlobal } from "../../api/api";
 
 export default {
-  name: "head",
+  name: "mainHead",
   data() {
     return {
       select: "",
-      input5: "",
+      searchContent: null,
       isLogin: true
     };
   },
@@ -96,6 +96,21 @@ export default {
       this.$store.dispatch("setInfo");
       //跳转到登录
       this.$router.push({ name: "login" });
+    },
+    //点击搜索
+    onSearch() {
+      if (this.searchContent != null) {
+        searchGlobal(this.searchContent)
+          .then(res => {
+            //todo 新页面,使用下面注释掉的跳转,或者加个模态框
+            console.table(res.data);
+          })
+          .catch(error => {
+            window.alert("[error]搜索错误!");
+          });
+      }
+      // let routeData = this.$router.resolve({ path: "/home", query: { id: 1 } });
+      // window.open(routeData.href, "_blank");
     }
   },
   computed: {
