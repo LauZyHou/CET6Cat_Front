@@ -16,7 +16,7 @@
         <el-col :span="20" id="post-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="post-op">
           <button @click="onlyPoster">只看楼主</button>
-          <button :disabled="!mineOrAdmin">删除</button>
+          <button :disabled="true">删除</button>
         </el-col>
       </el-row>
       <!-- 2-2 帖子内容 -->
@@ -52,7 +52,7 @@
     </div>
     <!-- 3 TODO分页 -->
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next" :total="1000"></el-pagination>
+      <el-pagination background layout="prev, pager, next" :total="50"></el-pagination>
     </div>
     <!-- 4 操作按钮 -->
     <div id="op">
@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { addFavPost, delFavPost } from "../../../api/api";
+import { addFavPost, delFavPost, addReply } from "../../../api/api";
 
 export default {
   name: "posts",
@@ -123,7 +123,10 @@ export default {
         uper: 0,
         isFaved: false
       },
-      form: {}
+      form: {
+        content: null,
+        post: null
+      }
     };
   },
   methods: {
@@ -160,10 +163,35 @@ export default {
     },
     //只看楼主
     onlyPoster() {},
-    //提交回复
-    onSubmit() {},
-    //清空输入的回复
-    onClear() {},
+    //点击[提交回复]按钮
+    onSubmit() {
+      var that = this;
+      if (null === this.form.content || 0 === this.form.content.length)
+        window.alert("缺少内容");
+      else {
+        //添加"回帖回的是哪个帖子"这一字段
+        this.form.post = this.detail.id;
+        console.log(this.form.uper);
+        //调用回帖API
+        addReply(this.form)
+          .then(res => {
+            window.alert("回帖成功!");
+            //回帖成功重新获取一下该帖子
+            this.getDetail(this.detail.id);
+            //清空一下
+            this.onClear();
+          })
+          .catch(error => {
+            if (null !== error.response && null !== error.response.data)
+              window.alert(error.response.data);
+            else window.alert("[error]回帖失败!");
+          });
+      }
+    },
+    //清空输入的回帖
+    onClear() {
+      this.form.content = null;
+    },
     //去底部
     onBottom() {
       var h = document.body.scrollHeight;

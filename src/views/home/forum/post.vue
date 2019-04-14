@@ -91,19 +91,22 @@ export default {
     //点击[发帖]按钮
     onSubmit() {
       var that = this;
-      if (null === this.form.name) window.alert("缺少标题");
-      else if (null === this.form.category) window.alert("缺少类别");
-      else if (null === this.form.content) window.alert("缺少内容");
-      else{
+      if (null === this.form.name || 0 === this.form.name.length)
+        window.alert("缺少标题");
+      else if (null === this.form.category || 0 === this.form.category.length)
+        window.alert("缺少类别");
+      else if (null === this.form.content || 0 === this.form.content.length)
+        window.alert("缺少内容");
+      else {
         addPost(this.form)
-        .then(res => {
-          window.alert("发帖成功!");
-          //跳转到帖子页
-          that.$router.push({ path: "/app/home/posts/" + res.data["id"] });
-        })
-        .catch(error => {
-          window.alert("发帖失败!");
-        });
+          .then(res => {
+            window.alert("发帖成功!");
+            //跳转到帖子页
+            that.$router.push({ path: "/app/home/posts/" + res.data["id"] });
+          })
+          .catch(error => {
+            window.alert("发帖失败!");
+          });
       }
     },
     onClear() {

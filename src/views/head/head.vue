@@ -65,7 +65,7 @@
         <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
         <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
         <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
-        <el-menu-item :index="'/app/home/word/'">六级词汇</el-menu-item>
+        <el-menu-item index="/app/home/word/">六级词汇</el-menu-item>
         <el-menu-item index="/app/home/reading/1">阅读分析</el-menu-item>
         <el-menu-item index="/app/home/essay/1">高分作文</el-menu-item>
       </el-menu>
@@ -76,7 +76,6 @@
 <script>
 import { mapGetters } from "vuex";
 import cookie from "../../static/js/cookie";
-import { searchGlobal } from "../../api/api";
 
 export default {
   name: "mainHead",
@@ -100,17 +99,13 @@ export default {
     //点击搜索
     onSearch() {
       if (this.searchContent != null) {
-        searchGlobal(this.searchContent)
-          .then(res => {
-            //todo 新页面,使用下面注释掉的跳转,或者加个模态框
-            console.table(res.data);
-          })
-          .catch(error => {
-            window.alert("[error]搜索错误!");
-          });
+        //到组件中去查
+        let routeData = this.$router.resolve({
+          path: "/app/search/Sglobal",
+          query: { s: this.searchContent }
+        });
+        window.open(routeData.href, "_blank");
       }
-      // let routeData = this.$router.resolve({ path: "/home", query: { id: 1 } });
-      // window.open(routeData.href, "_blank");
     }
   },
   computed: {

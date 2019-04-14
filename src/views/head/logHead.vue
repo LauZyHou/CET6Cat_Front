@@ -34,6 +34,8 @@ export default {
         return "我的学习情况";
       } else if (ra[2] === "train" && ra[3] === "Tword") {
         return "单词测验";
+      } else if (ra[2] === "search" && ra[3] === "Sglobal") {
+        return "全局搜索";
       }
       //ERROR Page
       else if (ra[2] === "error") {

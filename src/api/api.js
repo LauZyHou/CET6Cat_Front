@@ -32,6 +32,11 @@ export const addPost = params => {
     return axios.post(`${local_host}/posts/`, params);
 }
 
+//添加[回帖](用户回帖)
+export const addReply = params => {
+    return axios.post(`${local_host}/reply/`, params);
+}
+
 //----------------------------------[用户主页用]----------------------------------
 
 //获取[用户信息](需要指明用户的id)

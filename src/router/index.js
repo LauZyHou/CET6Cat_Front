@@ -44,6 +44,9 @@ import E404 from '../views/error/E404'
 import train from '../views/train/train'
 import Tword from '../views/train/Tword'
 
+import search from '../views/search/search';
+import Sglobal from '../views/search/Sglobal';
+
 Vue.use(Router);
 
 let router = new Router({
@@ -300,7 +303,7 @@ let router = new Router({
             foot: foot
           },
           meta: {
-            title: "未明确的错误页",
+            title: "未明确的error页",
             need_log: false
           },
           children: [
@@ -334,7 +337,7 @@ let router = new Router({
             foot: foot
           },
           meta: {
-            title: "未明确的错误页",
+            title: "未明确的train页",
             need_log: false
           },
           children: [
@@ -347,6 +350,30 @@ let router = new Router({
                 need_log: false //true
               }
             },
+          ]
+        },
+        {//搜索
+          path: 'search',
+          name: 'search',
+          components: {
+            head: logHead,
+            content: search,
+            foot: foot
+          },
+          meta: {
+            title: "未明确的search页",
+            need_log: false
+          },
+          children: [
+            {//全局搜索
+              path: 'Sglobal',
+              name: 'Sglobal',
+              component: Sglobal,
+              meta: {
+                title: "全局搜索",
+                need_log: false
+              }
+            }
           ]
         }
         //FIXME 添加/app的子路由
