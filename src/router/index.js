@@ -41,6 +41,9 @@ import error from '../views/error/error'
 import E401 from '../views/error/E401'
 import E404 from '../views/error/E404'
 
+import train from '../views/train/train'
+import Tword from '../views/train/Tword'
+
 Vue.use(Router);
 
 let router = new Router({
@@ -322,6 +325,30 @@ let router = new Router({
             //FIXME 添加/app/error的子路由
           ]
         },
+        {//专项训练
+          path: 'train',
+          name: 'train',
+          components: {
+            head: logHead,
+            content: train,
+            foot: foot
+          },
+          meta: {
+            title: "未明确的错误页",
+            need_log: false
+          },
+          children: [
+            {//单词测验
+              path: 'Tword',
+              name: 'Tword',
+              component: Tword,
+              meta: {
+                title: "单词测验",
+                need_log: false //true
+              }
+            },
+          ]
+        }
         //FIXME 添加/app的子路由
       ]
     }

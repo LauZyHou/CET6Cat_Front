@@ -32,7 +32,9 @@ export default {
         return "Cat币充值";
       } else if (ra[2] === "member" && ra[3] === "situation") {
         return "我的学习情况";
-      } 
+      } else if (ra[2] === "train" && ra[3] === "Tword") {
+        return "单词测验";
+      }
       //ERROR Page
       else if (ra[2] === "error") {
         if (ra[3] === "401") {

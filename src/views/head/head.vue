@@ -51,10 +51,10 @@
       >
         <el-menu-item index="/app/home/index">首页</el-menu-item>
         <el-submenu index="2">
-          <template slot="title">最新信息</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
+          <template slot="title">专项训练</template>
+          <el-menu-item index="/app/train/Tword">单词测验</el-menu-item>
+          <el-menu-item index="2-2">听力测验</el-menu-item>
+          <el-menu-item index="2-3">翻译测验</el-menu-item>
           <el-submenu index="2-4">
             <template slot="title">选项4</template>
             <el-menu-item index="2-4-1">选项1</el-menu-item>

@@ -36,7 +36,7 @@ export default {
   methods: {
     //点击某行时,在新窗口打开相应帖子的链接
     //fixme papers这个路由名字要改掉
-    onRowClick(row, column, event) {
+    onRowClick(row, event, column) {
       let routeData = this.$router.resolve({
         path: "/app/home/papers/" + row.id
       });
