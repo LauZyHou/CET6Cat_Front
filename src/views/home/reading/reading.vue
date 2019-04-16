@@ -24,7 +24,7 @@
         background
         layout="prev, pager, next"
         :total="count"
-        :page-size="3"
+        :page-size="7"
         @current-change="pageChange"
       ></el-pagination>
     </div>

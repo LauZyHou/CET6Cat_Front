@@ -1,27 +1,57 @@
 <template>
   <div id="s-global">
     <h2>用户</h2>
-    <el-table :data="userList" border style="width: 100%" align="center">
+    <el-table
+      :data="userList"
+      border
+      style="width: 100%"
+      @row-click="onUserRowClick"
+      align="center"
+    >
       <el-table-column prop="id" label="ID" width="180" align="center"></el-table-column>
       <el-table-column prop="name" label="用户" width="700" align="center"></el-table-column>
     </el-table>
     <h2>文章</h2>
-    <el-table :data="readingList" border style="width: 100%" align="center">
+    <el-table
+      :data="readingList"
+      border
+      style="width: 100%"
+      @row-click="onReadingRowClick"
+      align="center"
+    >
       <el-table-column prop="id" label="ID" width="180" align="center"></el-table-column>
       <el-table-column prop="name" label="文章" width="700" align="center"></el-table-column>
     </el-table>
     <h2>视频</h2>
-    <el-table :data="videoList" border style="width: 100%" align="center">
+    <el-table
+      :data="videoList"
+      border
+      style="width: 100%"
+      @row-click="onVideoRowClick"
+      align="center"
+    >
       <el-table-column prop="id" label="ID" width="180" align="center"></el-table-column>
       <el-table-column prop="name" label="视频" width="700" align="center"></el-table-column>
     </el-table>
     <h2>帖子</h2>
-    <el-table :data="postList" border style="width: 100%" align="center">
+    <el-table
+      :data="postList"
+      border
+      style="width: 100%"
+      @row-click="onPostRowClick"
+      align="center"
+    >
       <el-table-column prop="id" label="ID" width="180" align="center"></el-table-column>
       <el-table-column prop="name" label="帖子" width="700" align="center"></el-table-column>
     </el-table>
     <h2>作文</h2>
-    <el-table :data="essayList" border style="width: 100%" align="center">
+    <el-table
+      :data="essayList"
+      border
+      style="width: 100%"
+      @row-click="onEssayRowClick"
+      align="center"
+    >
       <el-table-column prop="id" label="ID" width="180" align="center"></el-table-column>
       <el-table-column prop="name" label="作文" width="700" align="center"></el-table-column>
     </el-table>
@@ -55,6 +85,44 @@ export default {
       .catch(error => {
         window.alert("[error]搜索错误!");
       });
+  },
+  methods: {
+    //on*RowClick:当点击*表格的行时新窗口打开相应的资源页
+    //用户
+    onUserRowClick(row, event, column) {
+      let routeData = this.$router.resolve({
+        path: "/app/member/users/" + row.id
+      });
+      window.open(routeData.href, "_blank");
+    },
+    //文章
+    onReadingRowClick(row, event, column) {
+      let routeData = this.$router.resolve({
+        path: "/app/home/papers/" + row.id
+      });
+      window.open(routeData.href, "_blank");
+    },
+    //视频
+    onVideoRowClick(row, event, column) {
+      let routeData = this.$router.resolve({
+        path: "/app/home/videos/" + row.id
+      });
+      window.open(routeData.href, "_blank");
+    },
+    //帖子
+    onPostRowClick(row, event, column) {
+      let routeData = this.$router.resolve({
+        path: "/app/home/posts/" + row.id
+      });
+      window.open(routeData.href, "_blank");
+    },
+    //作文
+    onEssayRowClick(row, event, column) {
+      let routeData = this.$router.resolve({
+        path: "/app/home/essays/" + row.id
+      });
+      window.open(routeData.href, "_blank");
+    }
   }
 };
 </script>

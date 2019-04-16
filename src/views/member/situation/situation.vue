@@ -1,6 +1,5 @@
 <template>
   <div>
-    学习情况
     <div class="chart-box">
       <word-cloud></word-cloud>
     </div>
