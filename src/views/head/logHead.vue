@@ -34,6 +34,10 @@ export default {
         return "我的学习情况";
       } else if (ra[2] === "train" && ra[3] === "Tword") {
         return "单词测验";
+      } else if (ra[2] === "train" && ra[3] === "Tlisten") {
+        return "听力测验";
+      } else if (ra[2] === "train" && ra[3] === "Ttranslate") {
+        return "翻译测验";
       } else if (ra[2] === "search" && ra[3] === "Sglobal") {
         return "全局搜索";
       }

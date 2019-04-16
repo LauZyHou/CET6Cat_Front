@@ -43,6 +43,9 @@ import E404 from '../views/error/E404'
 
 import train from '../views/train/train'
 import Tword from '../views/train/Tword'
+import Tlisten from '../views/train/Tlisten';
+import Ttranslate from '../views/train/Ttranslate';
+
 
 import search from '../views/search/search';
 import Sglobal from '../views/search/Sglobal';
@@ -112,7 +115,7 @@ let router = new Router({
               }
             },
             {//交流论坛list页
-              path: "forum/:page",
+              path: "forum",
               name: "forum",
               component: forum,
               meta: {
@@ -121,7 +124,7 @@ let router = new Router({
               }
             },
             {//视频list页
-              path: "course/:page",
+              path: "course",
               name: "course",
               component: course,
               meta: {
@@ -130,7 +133,7 @@ let router = new Router({
               }
             },
             {//阅读分析list页
-              path: "reading/:page",
+              path: "reading",
               name: "reading",
               component: reading,
               meta: {
@@ -148,7 +151,7 @@ let router = new Router({
               }
             },
             {//高分作文list页
-              path: "essay/:page",
+              path: "essay",
               name: "essay",
               component: essay,
               meta: {
@@ -347,6 +350,24 @@ let router = new Router({
               component: Tword,
               meta: {
                 title: "单词测验",
+                need_log: false //true
+              }
+            },
+            {//听力测验
+              path: 'Tlisten',
+              name: 'Tlisten',
+              component: Tlisten,
+              meta: {
+                title: "听力测验",
+                need_log: false //true
+              }
+            },
+            {//翻译测验
+              path: 'Ttranslate',
+              name: 'Ttranslate',
+              component: Ttranslate,
+              meta: {
+                title: "翻译测验",
                 need_log: false //true
               }
             },

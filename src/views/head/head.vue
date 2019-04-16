@@ -48,13 +48,15 @@
         text-color="#fff"
         active-text-color="#ffd04b"
         :router="true"
+        @select="selectMenu"
       >
         <el-menu-item index="/app/home/index">首页</el-menu-item>
-        <el-submenu index="2">
+        <!-- 这里因为只想用selectMenu处理,不用router,但又不能不定义index,所以这里的index都加了#符 -->
+        <el-submenu index="#train">
           <template slot="title">专项训练</template>
-          <el-menu-item index="/app/train/Tword">单词测验</el-menu-item>
-          <el-menu-item index="2-2">听力测验</el-menu-item>
-          <el-menu-item index="2-3">翻译测验</el-menu-item>
+          <el-menu-item index="#word">单词测验</el-menu-item>
+          <el-menu-item index="#listen">听力测验</el-menu-item>
+          <el-menu-item index="#translate">翻译测验</el-menu-item>
           <el-submenu index="2-4">
             <template slot="title">选项4</template>
             <el-menu-item index="2-4-1">选项1</el-menu-item>
@@ -63,11 +65,11 @@
           </el-submenu>
         </el-submenu>
         <el-menu-item index="/app/home/online" disabled>在线模拟</el-menu-item>
-        <el-menu-item index="/app/home/course/1">在线视频</el-menu-item>
-        <el-menu-item index="/app/home/forum/1">交流论坛</el-menu-item>
-        <el-menu-item index="/app/home/word/">六级词汇</el-menu-item>
-        <el-menu-item index="/app/home/reading/1">阅读分析</el-menu-item>
-        <el-menu-item index="/app/home/essay/1">高分作文</el-menu-item>
+        <el-menu-item index="/app/home/course">在线视频</el-menu-item>
+        <el-menu-item index="/app/home/forum">交流论坛</el-menu-item>
+        <el-menu-item index="/app/home/word">六级词汇</el-menu-item>
+        <el-menu-item index="/app/home/reading">阅读分析</el-menu-item>
+        <el-menu-item index="/app/home/essay">高分作文</el-menu-item>
       </el-menu>
     </div>
   </header>
@@ -87,6 +89,25 @@ export default {
     };
   },
   methods: {
+    //选中导航条中的某项时触发此方法
+    //回调参数:(index属性值,保存从根到此节点的路径上的所有index的数组)
+    selectMenu(index, indexPath) {
+      if (indexPath[0] === "#train") {
+        this.$confirm("进入[" + indexPath[1] + "测验]?")
+          .then(_ => {
+            //选择了确认,到测验页中去组卷,这里只要新窗口打开相应的测验页
+            let routeData = this.$router.resolve({
+              //去掉开头防使用index做router的#符
+              path: "/app/train/T" + indexPath[1].replace("#", "")
+            });
+            window.open(routeData.href, "_blank");
+          })
+          .catch(_ => {
+            //选择了取消,什么都不做
+          });
+      }
+    },
+    //点击[退出]
     onExit() {
       //清除cookie
       cookie.delCookie("token");
@@ -96,10 +117,10 @@ export default {
       //跳转到登录
       this.$router.push({ name: "login" });
     },
-    //点击搜索
+    //点击[搜索]
     onSearch() {
       if (this.searchContent != null) {
-        //到组件中去查
+        //到组件中去查,这里只要打开新窗口把URL参数跟过去
         let routeData = this.$router.resolve({
           path: "/app/search/Sglobal",
           query: { s: this.searchContent }
