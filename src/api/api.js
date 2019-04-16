@@ -179,3 +179,10 @@ export const listBanner = params => {
 export const searchGlobal = content => {
     return axios.get(`${local_host}/globalsearch/?s=` + content);
 }
+
+//----------------------------------[专项训练]----------------------------------
+
+//单词测验组卷
+export const listTword = params => {
+    return axios.get(`${local_host}/wordtrain/`);
+}

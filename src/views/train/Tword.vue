@@ -1,10 +1,14 @@
 <template>
   <div id="t-word">
-    <!-- 1 单词名 -->
-    <h2>{{TwordList[nowIndex].name}}</h2>
-    <br>
+    <!-- 1 单词名(选择该组正确的单词的name) -->
+    <h2>{{TwordList[nowIndex].check[TwordList[nowIndex].correct].name}}</h2>
     <!-- 2 进度条 -->
-    <el-progress :text-inside="true" :stroke-width="14" :percentage="nowIndex*10"></el-progress>
+    <el-progress
+      :text-inside="true"
+      :stroke-width="14"
+      :percentage="(nowIndex+1)*10"
+      :status="nowIndex==9?'success':'primary'"
+    ></el-progress>
     <br>
     <!-- 3 四个选项 -->
     <el-table
@@ -46,16 +50,16 @@
       <!-- 右列 -->
       <el-col :span="12">
         <!-- 套一个小红点 -->
-        <el-badge :is-dot="nowIndex>=1 && !isUpload">
+        <el-badge :is-dot="nowIndex>=9 && !isUpload">
           <!-- 按钮:下一词/交卷 -->
           <el-button
-            :type="nowIndex>=1?'success':'primary'"
+            :type="nowIndex>=9?'success':'primary'"
             @click="onNext"
-            :disabled="nowIndex>=1 && isUpload"
+            :disabled="nowIndex>=9 && isUpload"
           >
-            {{ nowIndex>=1?(isUpload?'已交卷':'交&nbsp;&nbsp;&nbsp;卷'):'下一词' }}
+            {{ nowIndex>=9?(isUpload?'已交卷':'交&nbsp;&nbsp;&nbsp;卷'):'下一词' }}
             <!-- 没到最后一页时,显示下一页的右箭头 -->
-            <i v-if="nowIndex<1" class="el-icon-arrow-right el-icon--right"></i>
+            <i v-if="nowIndex<9" class="el-icon-arrow-right el-icon--right"></i>
             <!-- 已经在最后一页时,显示交卷的上传箭头 -->
             <i v-else class="el-icon-upload2 el-icon--right"></i>
           </el-button>
@@ -66,16 +70,17 @@
 </template>
 
 <script>
+import { listTword } from "../../api/api";
+
 export default {
   name: "Tword",
   data() {
     return {
       //请求后台得到的10个单词*4个解释,带正确项下标的列表
-      TwordList: [
-        {
-          id: 1,
+      TwordList: null,
+      /*
+      [ {
           correct: 2,
-          name: "WordName1",
           check: [
             {
               name: "nnn",
@@ -96,9 +101,7 @@ export default {
           ]
         },
         {
-          id: 2,
           correct: 3,
-          name: "WordName2",
           check: [
             {
               name: "nnn",
@@ -118,11 +121,11 @@ export default {
             }
           ]
         }
-      ],
+      ]*/
       nowIndex: 0, //一共10个单词,当前所在单词的索引(0~9)
       isUpload: false, //是否已交卷
       //用户对每一题的选项,null表示没选
-      userCheck: [3, 0, null, null, null, null, null, null, null, null]
+      userCheck: [null, null, null, null, null, null, null, null, null, null]
     };
   },
   methods: {
@@ -171,6 +174,16 @@ export default {
           );
       }
     }
+  },
+  created() {
+    //页面加载时调用后端API组卷
+    listTword()
+      .then(res => {
+        this.TwordList = res.data;
+      })
+      .catch(error => {
+        window.alert("组卷失败!");
+      });
   }
 };
 </script>
@@ -184,6 +197,10 @@ export default {
   text-align: center;
   box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.18);
   transition-duration: 0.5s;
+}
+
+h2 {
+  font-size: 25px;
 }
 </style>
 
