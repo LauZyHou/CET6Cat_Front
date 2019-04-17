@@ -186,3 +186,20 @@ export const searchGlobal = content => {
 export const listTword = params => {
     return axios.get(`${local_host}/wordtrain/`);
 }
+
+//获取听力资源列表
+export const listAudio = () => {
+    return axios.get(`${local_host}/audios/`);
+}
+
+//获取指定的听力资源
+export const retrieveAudio = id => {
+    return axios.get(`${local_host}/audios/` + id);
+}
+
+//----------------------------------[向网络上的指定URI发起请求]----------------------------------
+
+//GET请求
+export const getURI = uri => {
+    return axios.get(uri);
+}
