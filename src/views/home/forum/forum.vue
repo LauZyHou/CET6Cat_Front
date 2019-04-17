@@ -130,7 +130,6 @@ section {
 }
 
 .post {
-  background-color: #ccff99;
   width: 90%;
   margin: 10px auto 10px;
   height: 70px;

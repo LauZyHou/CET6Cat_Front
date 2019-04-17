@@ -28,6 +28,13 @@
         @current-change="pageChange"
       ></el-pagination>
     </div>
+    <!-- 4 操作按钮 -->
+    <div id="op">
+      <el-button icon="el-icon-arrow-up" circle @click="onTop"></el-button>
+      <br>
+      <br>
+      <el-button icon="el-icon-arrow-down" circle @click="onBottom"></el-button>
+    </div>
   </section>
 </template>
 
@@ -68,6 +75,15 @@ export default {
         this.prePage = res["data"]["previous"];
         this.essayList = res["data"]["results"];
       });
+    },
+    //去底部
+    onBottom() {
+      var h = document.body.scrollHeight;
+      window.scrollTo(0, h); //到达文档底部
+    },
+    //去顶部
+    onTop() {
+      window.scrollTo(0, 0); //到达文档顶部
     }
   },
   created() {
@@ -109,7 +125,6 @@ section {
 }
 
 .essay {
-  background-color: #ccff99;
   width: 90%;
   margin: 10px auto 10px;
   height: 70px;
@@ -133,5 +148,13 @@ section {
   height: 40px;
   margin: 10px auto 0;
   text-align: center;
+}
+
+/* 4 操作按钮 */
+/*-----------------------------------------------------------------*/
+#op {
+  position: fixed;
+  bottom: 300px;
+  right: 40px;
 }
 </style>

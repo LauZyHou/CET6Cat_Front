@@ -1,13 +1,11 @@
 <template>
   <el-row>
     <!-- 1 文章名+摘要 -->
-    <el-col :span="22">
+    <el-col :span="20">
       <router-link :to="'/app/home/papers/'+paper.id" target="_blank">{{paper.name}}</router-link>
-      <br>
-      summary作废...
     </el-col>
     <!-- 2 发布时间 -->
-    <el-col :span="2">{{paper.add_time | formatDate}}</el-col>
+    <el-col :span="4">{{paper.add_time | formatDate}}</el-col>
   </el-row>
 </template>
 
@@ -40,6 +38,10 @@ export default {
 </script>
 
 <style scoped>
+.el-row {
+  font-size: 20px;
+  background-color: antiquewhite;
+}
 </style>
 
 

@@ -10,7 +10,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 文章主体 -->
-    <div class="container" v-if="detail.id!==0">
+    <div class="container">
       <!-- 2-1 文章标题 -->
       <el-row>
         <el-col :span="20" id="essay-tit">{{detail.name}}</el-col>
@@ -23,7 +23,8 @@
       <div id="content">
         <!-- 2-2-1 文章内容 -->
         <div>
-          <p>{{essayDetail}}</p>
+          <pre v-if="essayDetail">{{essayDetail}}</pre>
+          <img v-else id="absolute-load" src="/static/loading.gif" alt="加载中">
         </div>
         <!-- 2-2-2 底部操作 -->
         <table>
@@ -58,7 +59,7 @@ export default {
         isFaved: false
       },
       //服务器上的文件文本内容读取到该字段中
-      essayDetail: ""
+      essayDetail: null
     };
   },
   methods: {
@@ -79,6 +80,14 @@ export default {
             this.$axios.get(uri).then(res => {
               this.essayDetail = res.data;
             });
+          }
+        })
+        .catch(error => {
+          if (error.response && error.response.data) {
+            //直接根据HTTP状态码跳转到相应的错误页
+            this.$router.push({ path: "/app/error/" + error.response.status });
+          } else {
+            window.alert("[error]出现了非请求错误");
           }
         });
     },
@@ -119,10 +128,6 @@ export default {
           });
       }
     },
-    //获取指定id的作文
-    getEssay(pid) {
-      //TODO
-    },
     //去上一篇
     preEssay() {
       this.$router.push({ name: "essays", params: { id: this.detail.id - 1 } });
@@ -136,9 +141,7 @@ export default {
     this.getDetail(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    //在作文路由之间转移(上一篇下一篇时).id设置为0表示还没找到作文不渲染DOM
-    this.detail.id = 0;
-    this.essayDetail = "";
+    this.essayDetail = null;
     this.getDetail(to.params.id);
     next();
   }
@@ -190,6 +193,12 @@ section {
   width: 80%;
   background-color: lightsteelblue;
   font-size: 20px;
+}
+
+#absolute-load {
+  position: absolute;
+  left: 530px;
+  height: 300px;
 }
 
 /* 2-2-2 底部操作 */

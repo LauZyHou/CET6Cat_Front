@@ -5,8 +5,6 @@
     <!-- 2 帖子标题链接+摘要 -->
     <el-col :span="16">
       <router-link :to="path" target="_blank">{{post.name}}</router-link>
-      <br>
-      {{summary}}...
     </el-col>
     <!-- 3 发帖人+最后回帖人 -->
     <el-col :span="3">
@@ -17,12 +15,8 @@
     </el-col>
     <!-- 4 最后盖楼时间 -->
     <el-col :span="2">
-        <template v-if="lastReply">
-            {{lastReply.add_time | formatDate}}
-        </template>
-        <template v-else>
-            {{post.add_time | formatDate}}
-        </template>
+      <template v-if="lastReply">{{lastReply.add_time | formatDate}}</template>
+      <template v-else>{{post.add_time | formatDate}}</template>
     </el-col>
   </el-row>
 </template>
@@ -39,8 +33,7 @@ export default {
     }
   },
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     path() {
@@ -48,11 +41,6 @@ export default {
     },
     replyNum() {
       return this.post.replies.length;
-    },
-    summary() {
-      //FIXME 取前面一部分
-      // return this.post.content;
-      return "TODO去掉摘要功能";
     },
     lastReply() {
       //找时间最晚的那条
@@ -71,7 +59,7 @@ export default {
       // console.log(allReplies[0],allReplies[1],lastReplyIndex);
       return allReplies[lastReplyIndex];
       */
-     return allReplies[allReplies.length-1];
+      return allReplies[allReplies.length - 1];
     }
   },
   filters: {
@@ -84,6 +72,10 @@ export default {
 </script>
 
 <style scoped>
+.el-row {
+  font-size: 15px;
+  background-color: rgb(212, 237, 238);
+}
 </style>
 
 

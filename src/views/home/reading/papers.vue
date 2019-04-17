@@ -10,7 +10,7 @@
       </el-breadcrumb>
     </div>
     <!-- 2 文章主体 -->
-    <div class="container" v-if="detail.id!==0">
+    <div class="container">
       <!-- 2-1 文章标题 -->
       <el-row>
         <el-col :span="20" id="paper-tit">{{detail.name}}</el-col>
@@ -23,7 +23,8 @@
       <div id="content">
         <!-- 2-2-1 文章内容 -->
         <div>
-          <p v-if="readingDetail">{{readingDetail}}</p>
+          <pre v-if="readingDetail">{{readingDetail}}</pre>
+          <img v-else id="absolute-load" src="/static/loading.gif" alt="加载中">
         </div>
         <!-- 2-2-2 底部操作 -->
         <table>
@@ -60,7 +61,7 @@ export default {
         isFaved: false
       },
       //服务器上的文件文本内容读取到该字段中
-      readingDetail: ""
+      readingDetail: null
     };
   },
   methods: {
@@ -81,6 +82,14 @@ export default {
             this.$axios.get(uri).then(res => {
               this.readingDetail = res.data;
             });
+          }
+        })
+        .catch(error => {
+          if (error.response && error.response.data) {
+            //直接根据HTTP状态码跳转到相应的错误页
+            this.$router.push({ path: "/app/error/" + error.response.status });
+          } else {
+            window.alert("[error]出现了非请求错误");
           }
         });
     },
@@ -121,10 +130,6 @@ export default {
           });
       }
     },
-    //获取指定id的文章
-    getPaper(pid) {
-      //TODO
-    },
     //去上一篇
     prePaper() {
       this.$router.push({ name: "papers", params: { id: this.detail.id - 1 } });
@@ -138,9 +143,8 @@ export default {
     this.getDetail(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    //在文章路由之间转移(上一篇下一篇时).id设置为0表示还没找到帖子不渲染DOM
-    this.detail.id = 0;
-    this.readingDetail = "";
+    this.readingDetail = null;
+    this.detail.name = "Loading...";
     this.getDetail(to.params.id);
     next();
   }
@@ -192,6 +196,12 @@ section {
   width: 80%;
   background-color: lightsteelblue;
   font-size: 20px;
+}
+
+#absolute-load {
+  position: absolute;
+  left: 530px;
+  height: 300px;
 }
 
 /* 2-2-2 底部操作 */

@@ -32,4 +32,12 @@ section {
   box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.18);
   transition-duration: 0.5s;
 }
+
+/* 通用的文本样式 */
+pre {
+  font-size: 18px;
+  font-family: "微软雅黑";
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 </style>

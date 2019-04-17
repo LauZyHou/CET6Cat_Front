@@ -144,13 +144,6 @@ export default {
   border-left: 10px;
 }
 
-#content > pre {
-  font-size: 18px;
-  font-family: "微软雅黑";
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
 /* 3 左侧的听力控制 */
 /*-----------------------------------------------------------------*/
 #control {

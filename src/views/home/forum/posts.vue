@@ -32,7 +32,9 @@
             <img :src="detail.uper.head_img" :alt="detail.uper.username">
           </router-link>
         </el-col>
-        <el-col :span="18">{{detail.content}}</el-col>
+        <el-col :span="18">
+          <pre>{{detail.content}}</pre>
+        </el-col>
       </el-row>
       <!-- 2-3 回帖(已经按时间顺序排好) -->
       <el-row v-for="rep in detail.replies" v-bind:key="rep.id" class="building">
@@ -47,7 +49,9 @@
             <img :src="rep.uper.head_img" :alt="rep.uper.username">
           </router-link>
         </el-col>
-        <el-col :span="18">{{rep.content}}</el-col>
+        <el-col :span="18">
+          <pre>{{rep.content}}</pre>
+        </el-col>
       </el-row>
     </div>
     <!-- 3 TODO分页 -->
@@ -59,8 +63,8 @@
       <!-- 向上 -->
       <el-button icon="el-icon-arrow-up" @click="onTop"></el-button>
       <br>
-      <!-- 回帖 -->
-      <el-button type="primary" icon="el-icon-edit-outline"></el-button>
+      <!-- 回帖(就是向下到底) -->
+      <el-button type="primary" icon="el-icon-edit-outline" @click="onBottom"></el-button>
       <br>
       <!-- 收藏/取消收藏 -->
       <el-button type="warning" :icon="'el-icon-star-'+(detail.isFaved?'on':'off')" @click="onFav"></el-button>
@@ -286,7 +290,7 @@ section {
 }
 
 #post-tit {
-  background-color: #ccff99;
+  background-color: rgb(212, 237, 238);
   font-size: 20px;
   height: 100%;
 }
@@ -295,16 +299,23 @@ section {
 /*---------------------------------------------------*/
 .building,
 .building > div {
-  min-height: 300px;
+  min-height: 270px;
 }
 
 .building > .lft {
   border-right: 1px solid black;
+  text-align: center;
 }
 
-.building img {
+.building > .lft img {
   width: 200px;
   height: 200px;
+  border-radius: 100px;
+}
+
+.building h4 {
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 /* 3 分页 */
