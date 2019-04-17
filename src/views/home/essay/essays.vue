@@ -23,7 +23,7 @@
       <div id="content">
         <!-- 2-2-1 文章内容 -->
         <div>
-          <p>{{readingDetail}}</p>
+          <p>{{essayDetail}}</p>
         </div>
         <!-- 2-2-2 底部操作 -->
         <table>
@@ -58,7 +58,7 @@ export default {
         isFaved: false
       },
       //服务器上的文件文本内容读取到该字段中
-      readingDetail: ""
+      essayDetail: ""
     };
   },
   methods: {
@@ -77,7 +77,7 @@ export default {
           //读取完成后读取其对应服务器上的文件资源
           if (uri) {
             this.$axios.get(uri).then(res => {
-              this.readingDetail = res.data;
+              this.essayDetail = res.data;
             });
           }
         });
@@ -136,9 +136,9 @@ export default {
     this.getDetail(this.$route.params.id);
   },
   beforeRouteUpdate(to, from, next) {
-    //在文章路由之间转移(上一篇下一篇时).id设置为0表示还没找到帖子不渲染DOM
+    //在作文路由之间转移(上一篇下一篇时).id设置为0表示还没找到作文不渲染DOM
     this.detail.id = 0;
-    this.readingDetail = "";
+    this.essayDetail = "";
     this.getDetail(to.params.id);
     next();
   }

@@ -44,6 +44,7 @@ import E404 from '../views/error/E404'
 import train from '../views/train/train'
 import Tword from '../views/train/Tword'
 import Tlisten from '../views/train/Tlisten';
+import Tlistens from '../views/train/Tlistens';
 import Ttranslate from '../views/train/Ttranslate';
 
 
@@ -353,10 +354,19 @@ let router = new Router({
                 need_log: false //true
               }
             },
-            {//听力测验
+            {//听力测验(list页)
               path: 'Tlisten',
               name: 'Tlisten',
               component: Tlisten,
+              meta: {
+                title: "选择一套听力",
+                need_log: false //true
+              }
+            },
+            {//听力测验(详情页)
+              path: 'Tlistens/:id',
+              name: 'Tlistens',
+              component: Tlistens,
               meta: {
                 title: "听力测验",
                 need_log: false //true
