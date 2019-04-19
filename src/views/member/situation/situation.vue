@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="chart-box">
+      <h2>我经常错的单词</h2>
       <word-cloud></word-cloud>
     </div>
     <div class="chart-box">
+      <h2>我的近六周活跃情况</h2>
       <study-num></study-num>
     </div>
   </div>
@@ -26,8 +28,13 @@ export default {
 </script>
 
 <style scoped>
-.chart-box{
-  min-height: 400px;
+.chart-box {
+  min-height: 307px;
+}
+
+.chart-box > h2 {
+  text-align: center;
+  background-color: aliceblue;
 }
 </style>
 

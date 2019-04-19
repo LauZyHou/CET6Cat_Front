@@ -124,6 +124,16 @@ export const delMyWatch = params => {
     return axios.delete(`${local_host}/mywatch/` + params.id, params);
 }
 
+//获取[某用户关注的用户]
+export const listMyWatch = id => {
+    return axios.get(`${local_host}/mywatch/` + id);
+}
+
+//获取[关注某用户的用户]
+export const listMyFans = id => {
+    return axios.get(`${local_host}/watchme/` + id);
+}
+
 //----------------------------------[单词相关]----------------------------------
 
 //获取[用户的组号]

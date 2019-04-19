@@ -36,6 +36,8 @@ import setting from '../views/member/center/setting'
 import users from '../views/member/users/users'
 import prepaid from '../views/member/prepaid/prepaid'
 import situation from '../views/member/situation/situation'
+import watch_from from '../views/member/watch/watch_from';
+import watch_to from "../views/member/watch/watch_to";
 
 import error from '../views/error/error'
 import E401 from '../views/error/E401'
@@ -292,6 +294,24 @@ let router = new Router({
               component: situation,
               meta: {
                 title: "学习情况",
+                need_log: false//true
+              }
+            },
+            {//某用户关注的用户页
+              path: "watch_from/:id",
+              name: "watch_from",
+              component: watch_from,
+              meta: {
+                title: "此用户关注的人",
+                need_log: false//true
+              }
+            },
+            {//某用户的粉丝页
+              path: "watch_to/:id",
+              name: "watch_to",
+              component: watch_to,
+              meta: {
+                title: "此用户的粉丝",
                 need_log: false//true
               }
             }

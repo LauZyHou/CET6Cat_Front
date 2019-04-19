@@ -5,7 +5,7 @@
       <h2>查看文章</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path : '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path : '/app/home/reading/1' }">阅读分析</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path : '/app/home/reading' }">阅读分析</el-breadcrumb-item>
         <el-breadcrumb-item>查看文章</el-breadcrumb-item>
       </el-breadcrumb>
     </div>

@@ -28,12 +28,7 @@
         <img src="../../assets/vue.png" alt="Vue.js">
       </div>
       <div class="top-search">
-        <el-input placeholder="请输入内容" v-model="searchContent" class="input-with-select">
-          <el-select v-model="select" slot="prepend" placeholder="请选择" value="2">
-            <el-option label="课程" value="1"></el-option>
-            <el-option label="新闻" value="2"></el-option>
-            <el-option label="用户" value="3"></el-option>
-          </el-select>
+        <el-input placeholder="请输入内容" v-model="searchContent">
           <el-button slot="append" icon="el-icon-search" @click="onSearch"></el-button>
         </el-input>
       </div>
@@ -83,7 +78,6 @@ export default {
   name: "mainHead",
   data() {
     return {
-      select: "",
       searchContent: null,
       isLogin: true
     };

@@ -24,9 +24,15 @@
         <h3>活跃</h3>
         <div id="follow">
           关注：
-          <router-link to>{{detail.follow_num}}</router-link>&nbsp;&nbsp;
+          <router-link
+            :to="'/app/member/watch_from/'+detail.id"
+            target="_blank"
+          >{{detail.follow_num}}</router-link>&nbsp;&nbsp;
           粉丝：
-          <router-link to>{{detail.follower_num}}</router-link>
+          <router-link
+            :to="'/app/member/watch_to/'+detail.id"
+            target="_blank"
+          >{{detail.follower_num}}</router-link>
           &nbsp;&nbsp;
           连续打卡：{{detail.conti_punch}}&nbsp;&nbsp;
           发帖：{{detail.post_num}}
@@ -55,6 +61,7 @@ export default {
   data() {
     return {
       detail: {
+        id: null,
         name: null,
         gender: null,
         college: null,

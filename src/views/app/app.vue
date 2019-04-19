@@ -27,11 +27,13 @@ section {
   transition-duration: 0.5s;
 }
 
+/*
 .tit:hover,
 .container:hover {
   box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.18);
   transition-duration: 0.5s;
 }
+*/
 
 /* 通用的文本样式 */
 pre {

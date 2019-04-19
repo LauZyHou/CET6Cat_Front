@@ -26,11 +26,17 @@
           <el-row>
             <el-col :span="3">
               关注
-              <router-link to>10</router-link>
+              <router-link
+                :to="'/app/member/watch_from/'+detail.id"
+                target="_blank"
+              >{{detail.follow_num}}</router-link>
             </el-col>
             <el-col :span="3">
               粉丝
-              <router-link to>3</router-link>
+              <router-link
+                :to="'/app/member/watch_to/'+detail.id"
+                target="_blank"
+              >{{detail.follower_num}}</router-link>
             </el-col>
             <el-col :span="1">|</el-col>
             <el-col :span="3">Cat币 {{detail.catb}}</el-col>
@@ -98,7 +104,9 @@ export default {
         conti_punch: null,
         last_punch: null,
         words_num: 0,
-        vip: 0
+        vip: 0,
+        follow_num: null,
+        follower_num: null
       }
     };
   },

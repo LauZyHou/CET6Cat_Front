@@ -23,15 +23,24 @@ export default {
       } else if (ra[2] === "register") {
         //#/app/register
         return "注册";
-      } else if (ra[2] === "member" && ra[3] === "center") {
-        //#/app/member/center
-        return "个人中心";
-      } else if (ra[2] === "member" && ra[3] === "users") {
-        return "用户主页";
-      } else if (ra[2] === "member" && ra[3] === "prepaid") {
-        return "Cat币充值";
-      } else if (ra[2] === "member" && ra[3] === "situation") {
-        return "我的学习情况";
+      } else if (ra[2] === "member") {
+        //#/app/member/xxx
+        switch (ra[3]) {
+          case "center":
+            return "个人中心";
+          case "users":
+            return "用户主页";
+          case "prepaid":
+            return "Cat币充值";
+          case "situation":
+            return "我的学习情况";
+          case "watch_from":
+            return "此用户关注的人";
+          case "watch_to":
+            return "此用户的粉丝";
+          default:
+            return "不存在的的member页";
+        }
       } else if (ra[2] === "train" && ra[3] === "Tword") {
         return "单词测验";
       } else if (ra[2] === "train" && ra[3] === "Tlisten") {

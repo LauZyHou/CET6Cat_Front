@@ -5,7 +5,7 @@
       <h2>查看视频</h2>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ path: '/app/home/index' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{path : '/app/home/course/1'}">在线视频</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path : '/app/home/course'}">在线视频</el-breadcrumb-item>
         <el-breadcrumb-item>查看视频</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
