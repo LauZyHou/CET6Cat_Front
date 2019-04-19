@@ -197,6 +197,16 @@ export const retrieveAudio = id => {
     return axios.get(`${local_host}/audios/` + id);
 }
 
+//获取翻译资源列表
+export const listTranslate = () => {
+    return axios.get(`${local_host}/translate/`);
+}
+
+//获取指定的翻译资源
+export const retrieveTranslate = id => {
+    return axios.get(`${local_host}/translate/` + id);
+}
+
 //----------------------------------[向网络上的指定URI发起请求]----------------------------------
 
 //GET请求

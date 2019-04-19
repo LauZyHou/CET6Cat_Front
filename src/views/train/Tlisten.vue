@@ -1,7 +1,7 @@
 <template>
   <div id="t-listen">
     <!-- 1 标题 -->
-    <h2>听力资源列表</h2>
+    <h2>从下方选择一套听力</h2>
     <!-- 2 听力资源list -->
     <el-table
       v-if="TlistenList"

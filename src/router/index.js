@@ -46,7 +46,7 @@ import Tword from '../views/train/Tword'
 import Tlisten from '../views/train/Tlisten';
 import Tlistens from '../views/train/Tlistens';
 import Ttranslate from '../views/train/Ttranslate';
-
+import Ttranslates from '../views/train/Ttranslates';
 
 import search from '../views/search/search';
 import Sglobal from '../views/search/Sglobal';
@@ -359,7 +359,7 @@ let router = new Router({
               name: 'Tlisten',
               component: Tlisten,
               meta: {
-                title: "选择一套听力",
+                title: "听力资源列表",
                 need_log: false //true
               }
             },
@@ -372,10 +372,19 @@ let router = new Router({
                 need_log: false //true
               }
             },
-            {//翻译测验
+            {//翻译测验(list页)
               path: 'Ttranslate',
               name: 'Ttranslate',
               component: Ttranslate,
+              meta: {
+                title: "翻译资源列表",
+                need_log: false //true
+              }
+            },
+            {//翻译测验(详情页)
+              path: 'Ttranslates/:id',
+              name: 'Ttranslates',
+              component: Ttranslates,
               meta: {
                 title: "翻译测验",
                 need_log: false //true

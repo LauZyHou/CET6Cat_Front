@@ -35,10 +35,12 @@ export default {
       } else if (ra[2] === "train" && ra[3] === "Tword") {
         return "单词测验";
       } else if (ra[2] === "train" && ra[3] === "Tlisten") {
-        return "选择一套听力";
+        return "听力资源列表";
       } else if (ra[2] === "train" && ra[3] === "Tlistens") {
         return "听力测验";
       } else if (ra[2] === "train" && ra[3] === "Ttranslate") {
+        return "翻译资源列表";
+      } else if (ra[2] === "train" && ra[3] === "Ttranslates") {
         return "翻译测验";
       } else if (ra[2] === "search" && ra[3] === "Sglobal") {
         return "全局搜索";
