@@ -30,7 +30,7 @@
         <el-col :span="5" class="fav-date">{{fav.add_time | formatDate}}</el-col>
         <!-- 2-3 取消收藏 -->
         <el-col :span="2" class="cancel">
-          <a>移除</a>
+          <a @click="onDelFav(fav.base.id)">移除</a>
         </el-col>
       </el-row>
     </div>
@@ -58,7 +58,11 @@ import {
   listFavVideo,
   listFavPost,
   listFavReading,
-  listFavEssay
+  listFavEssay,
+  delFavVideo,
+  delFavPost,
+  delFavReading,
+  delFavEssay
 } from "../../../api/api";
 import cookie from "../../../static/js/cookie";
 import { formatDate } from "../../../static/js/date";
@@ -92,22 +96,22 @@ export default {
       //根据切换到的标签请求不同收藏的第一页(默认就是第一页)
       if (s === "video") {
         this.titmore = ">视频";
-        listFavVideo({ token: cookie.getCookie("token") }).then(res => {
+        listFavVideo().then(res => {
           this.stoInData(res["data"]);
         });
       } else if (s === "post") {
         this.titmore = ">帖子";
-        listFavPost({ token: cookie.getCookie("token") }).then(res => {
+        listFavPost().then(res => {
           this.stoInData(res["data"]);
         });
       } else if (s === "reading") {
         this.titmore = ">阅读";
-        listFavReading({ token: cookie.getCookie("token") }).then(res => {
+        listFavReading().then(res => {
           this.stoInData(res["data"]);
         });
       } else if (s === "essay") {
         this.titmore = ">作文";
-        listFavEssay({ token: cookie.getCookie("token") }).then(res => {
+        listFavEssay().then(res => {
           this.stoInData(res["data"]);
         });
       } else {
@@ -120,11 +124,39 @@ export default {
       this.$axios.get("/api/fav" + this.now_s + "/?page=" + val).then(res => {
         this.stoInData(res["data"]);
       });
+    },
+    //取消收藏.根据当前所在的类别标签不同,调用的接口不同
+    onDelFav(id) {
+      let delFav = null;
+      switch (this.now_s) {
+        case "video":
+          delFav = delFavVideo;
+          break;
+        case "post":
+          delFav = delFavPost;
+          break;
+        case "reading":
+          delFav = delFavReading;
+          break;
+        case "essay":
+          delFav = delFavEssay;
+          break;
+        default:
+          return;
+      }
+      delFav({ id: id })
+        .then(res => {
+          window.alert("取消收藏成功!");
+          this.pageChange(this.page); //重新获取这一页
+        })
+        .catch(error => {
+          window.alert("[error]取消收藏失败!");
+        });
     }
   },
   created() {
     //默认展示[收藏视频]
-    listFavVideo({ token: cookie.getCookie("token") }).then(res => {
+    listFavVideo().then(res => {
       this.stoInData(res["data"]);
     });
   },
