@@ -9,7 +9,7 @@
       <!-- 2-1 放头像 -->
       <div class="fl">
         <img :src="detail.head_img" alt="头像">
-        <el-button type="text" @click="uploadHeadImg">修改头像</el-button>
+        <el-button type="text" @click="headimgDialogVisible = true">修改头像</el-button>
       </div>
       <!-- 2-2 放文本资料 -->
       <div class="fr">
@@ -76,6 +76,25 @@
     <div v-else id="load-box">
       <img src="/static/loading.gif" alt="加载中">
     </div>
+    <!-- (额外)1 修改头像对话框 -->
+    <el-dialog title="修改头像" :visible.sync="headimgDialogVisible" width="50%" center>
+      <span id="headup">
+        <el-upload
+          class="upload-demo"
+          drag
+          action="http://localhost:8000/userheadimg/"
+          :multiple="false"
+          :headers="tokenHeader"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">
+            将文件拖到此处，或
+            <em>点击上传</em>
+          </div>
+          <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </span>
+    </el-dialog>
     <!-- (额外)2 修改资料对话框,使用行内表单 -->
     <el-dialog title="修改个人资料" :visible.sync="profileDialogVisible" width="50%" center>
       <el-form :model="detail" label-width="80px" :inline="true" label-position="right">
@@ -152,8 +171,9 @@ export default {
         follower_num: null
       },
       //[修改资料]对话框
-      profileDialogVisible: false
-      //todo修改头像对话框
+      profileDialogVisible: false,
+      //[修改头像]对话框
+      headimgDialogVisible: false
     };
   },
   methods: {
@@ -196,6 +216,12 @@ export default {
   },
   created() {
     this.getDetail();
+  },
+  computed: {
+    //上传文件因为没使用Axios,这里要手动加入Token
+    tokenHeader() {
+      return { Authorization: "Bearer " + cookie.getCookie("token") };
+    }
   }
 };
 </script>
@@ -295,8 +321,14 @@ export default {
   margin-top: 60px;
 }
 
-/* (额外)2 修改资料对话框 */
+/* (额外)1~2 */
 /*-----------------------------------------------------------------*/
+
+/* 上传头像 */
+#headup {
+  width: 100%;
+  text-align: center;
+}
 
 /* 个人简介 */
 .el-form-item:last-child div {
