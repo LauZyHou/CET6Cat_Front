@@ -20,9 +20,16 @@ export const verifyCode = params => {
     return axios.post(`${local_host}/code/`, params);
 }
 
+//----------------------------------[用户相关操作]----------------------------------
+
 //获取[个人信息](id随便传个1就行,靠的是headers里的token来判断用户)
 export const getUserProfile = params => {
     return axios.get(`${local_host}/users/1/`);
+}
+
+//部分更新[个人信息](id随便传个1就行,靠的是headers里的token来判断用户)
+export const patchUserProfile = params => {
+    return axios.patch(`${local_host}/users/0/`, params);
 }
 
 //----------------------------------[论坛帖子用]----------------------------------

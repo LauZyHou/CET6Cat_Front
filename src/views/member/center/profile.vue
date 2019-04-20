@@ -50,7 +50,7 @@
           <el-row>
             <el-col :span="20">昵称：{{detail.name}}</el-col>
             <el-col :span="4">
-              <a id="update" @click="uploadHeadImg">修改资料</a>
+              <a id="update" @click="profileDialogVisible = true">修改资料</a>
             </el-col>
           </el-row>
           <el-row>
@@ -76,11 +76,54 @@
     <div v-else id="load-box">
       <img src="/static/loading.gif" alt="加载中">
     </div>
+    <!-- (额外)2 修改资料对话框,使用行内表单 -->
+    <el-dialog title="修改个人资料" :visible.sync="profileDialogVisible" width="50%" center>
+      <el-form :model="detail" label-width="80px" :inline="true" label-position="right">
+        <el-form-item label="昵称" style="width:50%;">
+          <el-input v-model="detail.name" prefix-icon="el-icon-edit" style="width:107%;"></el-input>
+        </el-form-item>
+
+        <el-form-item label="性别">
+          <el-radio-group v-model="detail.gender">
+            <el-radio :label="true">男</el-radio>
+            <el-radio :label="false">女</el-radio>
+          </el-radio-group>
+        </el-form-item>
+
+        <el-form-item label="生日" style="width:50%;">
+          <el-date-picker
+            type="date"
+            placeholder="选择日期"
+            v-model="detail.birthday"
+            style="width: 100%;"
+            value-format="yyyy-MM-dd"
+          ></el-date-picker>
+        </el-form-item>
+
+        <el-form-item label="大学">
+          <el-input v-model="detail.college"></el-input>
+        </el-form-item>
+
+        <el-form-item label="简介" style="width:100%;">
+          <el-input
+            type="textarea"
+            :rows="4"
+            resize="none"
+            placeholder="请输入个人简介"
+            v-model="detail.brief"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="profileDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="uploadProfile">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getUserProfile } from "../../../api/api";
+import { getUserProfile, patchUserProfile } from "../../../api/api";
 import cookie from "../../../static/js/cookie";
 
 export default {
@@ -107,7 +150,10 @@ export default {
         vip: 0,
         follow_num: null,
         follower_num: null
-      }
+      },
+      //[修改资料]对话框
+      profileDialogVisible: false
+      //todo修改头像对话框
     };
   },
   methods: {
@@ -123,6 +169,29 @@ export default {
     uploadHeadImg() {
       //TODO
       window.alert("上传成功");
+    },
+    //上传个人资料
+    uploadProfile() {
+      //如上传图片后,服务器上图片改了,而这里的head_img字段可能还没改
+      //防止影响其它字段,所以把这些字段取出来,用部分更新
+      let form = {
+        name: this.detail.name,
+        gender: this.detail.gender,
+        birthday: this.detail.birthday,
+        college: this.detail.college,
+        brief: this.detail.brief
+      };
+      patchUserProfile(form)
+        .then(res => {
+          window.alert("更新成功!");
+          this.profileDialogVisible = false;
+        })
+        .catch(error => {
+          let str = "";
+          for (let k in error.response.data)
+            str += k + ":" + error.response.data[k] + "\n";
+          window.alert(str);
+        });
     }
   },
   created() {
@@ -145,8 +214,7 @@ export default {
 
 /* 2 内容 */
 /*-----------------------------------------------------------------*/
-/* 这里用普通兄弟选择器(而不用相邻兄弟选择器)可以顺便把样式给load-box */
-#tit ~ div {
+#tit + div {
   margin-top: 20px;
   height: 300px;
 }
@@ -211,18 +279,28 @@ export default {
 .fr > .alterable > .brief {
   padding-top: 10px;
   width: 100%;
-  /* height: 200px; */
+  height: 140px;
   background-color: rgb(224, 231, 250);
 }
 
 /* 3 页面加载时展示 */
 /*-----------------------------------------------------------------*/
 #load-box {
+  margin-top: 20px;
+  height: 300px;
   text-align: center;
 }
 
 #load-box > img {
   margin-top: 60px;
+}
+
+/* (额外)2 修改资料对话框 */
+/*-----------------------------------------------------------------*/
+
+/* 个人简介 */
+.el-form-item:last-child div {
+  width: 512px;
 }
 </style>
 
