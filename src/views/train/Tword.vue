@@ -1,5 +1,5 @@
 <template>
-  <div id="t-word">
+  <div id="t-word" v-if="TwordList">
     <!-- 1 单词名(选择该组正确的单词的name) -->
     <h2>{{TwordList[nowIndex].check[TwordList[nowIndex].correct].name}}</h2>
     <!-- 2 进度条 -->
@@ -7,7 +7,7 @@
       :text-inside="true"
       :stroke-width="14"
       :percentage="(nowIndex+1)*10"
-      :status="nowIndex==9?'success':'primary'"
+      :status="nowIndex==9?'success':null"
     ></el-progress>
     <br>
     <!-- 3 四个选项 -->
@@ -17,17 +17,26 @@
       style="width: 100%"
       highlight-current-row
       align="center"
+      height="309"
     >
       <el-table-column type="index" width="100"></el-table-column>
       <!-- 如果已经交卷了,就可以看答案(name列) -->
       <template v-if="isUpload">
         <el-table-column prop="name" label="单词" width="400" align="center"></el-table-column>
-        <el-table-column prop="explain" label="释义" width="500" align="center"></el-table-column>
+        <el-table-column label="释义" width="450" align="center">
+          <template slot-scope="scope">
+            <!-- 将正确的标记为绿色,其它为红色 -->
+            <el-tag
+              :type="scope.$index===TwordList[nowIndex].correct?'success':'danger'"
+            >{{scope.row.explain}}</el-tag>
+          </template>
+        </el-table-column>
       </template>
       <!-- 否则,在测验状态,只能去选择释义 -->
       <template v-else>
         <el-table-column prop="explain" label="请选择释义" width="750" align="center"></el-table-column>
-        <el-table-column label="选择" width="100" align="center">
+        <!-- [bug解决]ElementUI的表格通过循环产生,Vue在DOM重新渲染时有性能优化(相同DOM被复用),这里通过key标识当前行唯一不许复用 -->
+        <el-table-column label="选择" width="100" align="center" :key="666">
           <template slot-scope="scope">
             <el-button type="danger" plain @click="onSelect(scope.$index)">选择</el-button>
           </template>
@@ -70,7 +79,7 @@
 </template>
 
 <script>
-import { listTword } from "../../api/api";
+import { listTword, addFaultTWord } from "../../api/api";
 
 export default {
   name: "Tword",
@@ -159,12 +168,39 @@ export default {
           );
       }
     },
-    //去下一词/交卷
+    //去下一词/上传答卷
     onNext() {
+      //上传答卷
       if (this.nowIndex >= 9) {
-        //todo 交卷
-        window.alert("todo交卷");
-      } else {
+        //存10个数字(单词id)的数组,即最多错10个单词
+        let retArray = new Array(10);
+        let j = 0;
+        //检查用户的选项
+        for (let i = 0; i < 10; i++) {
+          let item = this.TwordList[i];
+          if (item.correct !== this.userCheck[i]) {
+            //发现单词选错了,将其加入数组中
+            retArray[j++] = item.check[item.correct].id;
+          }
+        }
+        //上传答卷
+        addFaultTWord({ faultWords: retArray })
+          .then(res => {
+            this.isUpload = true;
+            this.$message({
+              message: "答卷上传成功!CET6Cat已经记录您本次测验的错误单词。",
+              type: "success"
+            });
+          })
+          .catch(error => {
+            this.$message({
+              message: "答卷上传失败!请检查网络连接。",
+              type: "error"
+            });
+          });
+      }
+      //去下一词
+      else {
         this.nowIndex += 1;
         //表格中选中用户之前选的那一行
         let rowIdx = this.userCheck[this.nowIndex];
