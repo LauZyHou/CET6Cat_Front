@@ -204,9 +204,14 @@ export const listTword = params => {
     return axios.get(`${local_host}/wordtrain/`);
 }
 
-//上传错误单词id
+//上传当前用户的错误单词id
 export const addFaultTWord = params => {
     return axios.post(`${local_host}/wordtrain/`, params);
+}
+
+//获取当前用户的错误单词id
+export const getFaultWord = params => {
+    return axios.get(`${local_host}/wordtrain/0/`);
 }
 
 //获取听力资源列表

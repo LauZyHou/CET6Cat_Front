@@ -2,22 +2,42 @@
   <div id="WordCloud" :style="{width: '1000px', height: '280px'}"></div>
 </template>
 <script>
-import { listWordCloud } from "../../api/api";
+import { listWordCloud, getFaultWord } from "../../api/api";
 
 export default {
   name: "WordCloud",
   data() {
     return {};
   },
+  props: {
+    //父组件使用时传递此值:1->当前用户的测验常错词,0/其它->随机
+    kind: {
+      type: Number,
+      required: true
+    }
+  },
   mounted() {
-    //获取词云数据并生成词云
-    listWordCloud()
-      .then(res => {
-        this.drawLine(res.data);
-      })
-      .catch(errror => {
-        window.alert("获取词云失败!");
-      });
+    //根据父组件传递来的类型,获取单词数据并生成词云
+    switch (this.kind) {
+      case 1:
+        getFaultWord()
+          .then(res => {
+            this.drawLine(res.data);
+          })
+          .catch(error => {
+            window.alert("获取错误单词失败!");
+          });
+        break;
+      case 0:
+      default:
+        listWordCloud()
+          .then(res => {
+            this.drawLine(res.data);
+          })
+          .catch(errror => {
+            window.alert("获取词云失败!");
+          });
+    }
   },
   methods: {
     drawLine(wordCloudList) {

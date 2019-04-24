@@ -2,7 +2,7 @@
   <div>
     <div class="chart-box">
       <h2>我经常错的单词</h2>
-      <word-cloud></word-cloud>
+      <word-cloud :kind="1"></word-cloud>
     </div>
     <div class="chart-box">
       <h2>我的近六周活跃情况</h2>

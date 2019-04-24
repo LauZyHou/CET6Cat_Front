@@ -8,7 +8,7 @@
     <div class="clearfix" v-if="detail.username">
       <!-- 2-1 放头像 -->
       <div class="fl">
-        <img :src="detail.head_img" alt="头像">
+        <img :src="detail.head_img?detail.head_img:'/static/headimg/default.jpg'" alt="头像">
         <el-button type="text" @click="headimgDialogVisible = true">修改头像</el-button>
       </div>
       <!-- 2-2 放文本资料 -->

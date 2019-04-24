@@ -58,7 +58,7 @@
           六级词汇
           <router-link :to="'/app/home/word/'" target="_blank">->更多</router-link>
         </h2>
-        <word-cloud></word-cloud>
+        <word-cloud :kind="0"></word-cloud>
       </div>
       <!-- 2-7 阅读分析 -->
       <div class="hot">

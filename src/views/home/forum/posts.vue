@@ -26,10 +26,13 @@
             <router-link
               :to="'/app/member/users/'+detail.uper.id"
               target="_blank"
-            >{{detail.uper.name}}</router-link>
+            >{{detail.uper.name?detail.uper.name:'无名用户'}}</router-link>
           </h4>
           <router-link :to="'/app/member/users/'+detail.uper.id" target="_blank">
-            <img :src="detail.uper.head_img" :alt="detail.uper.name">
+            <img
+              :src="detail.uper.head_img?detail.uper.head_img:'/static/headimg/default.jpg'"
+              :alt="detail.uper.name"
+            >
           </router-link>
         </el-col>
         <el-col :span="18">
@@ -43,10 +46,13 @@
             <router-link
               :to="'/app/member/users/'+rep.uper.id"
               target="_blank"
-            >{{rep.uper.name}}</router-link>
+            >{{rep.uper.name?rep.uper.name:'无名用户'}}</router-link>
           </h4>
           <router-link :to="'/app/member/users/'+rep.uper.id" target="_blank">
-            <img :src="rep.uper.head_img" :alt="rep.uper.name">
+            <img
+              :src="rep.uper.head_img?rep.uper.head_img:'/static/headimg/default.jpg'"
+              :alt="rep.uper.name"
+            >
           </router-link>
         </el-col>
         <el-col :span="18">
