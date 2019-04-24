@@ -76,6 +76,10 @@
       </el-col>
     </el-row>
   </div>
+  <!-- 页面加载时展示 -->
+  <div v-else id="load-box">
+    <img src="/static/loading.gif" alt="加载中">
+  </div>
 </template>
 
 <script>
@@ -237,6 +241,18 @@ export default {
 
 h2 {
   font-size: 25px;
+}
+
+/* 页面加载时展示 */
+/*-----------------------------------------------------------------*/
+#load-box {
+  margin-top: 60px;
+  height: 300px;
+  text-align: center;
+}
+
+#load-box > img {
+  margin-top: 60px;
 }
 </style>
 

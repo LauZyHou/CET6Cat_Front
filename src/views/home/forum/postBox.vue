@@ -3,18 +3,18 @@
     <!-- 1 回帖数目 -->
     <el-col :span="3">{{replyNum}}</el-col>
     <!-- 2 帖子标题链接+摘要 -->
-    <el-col :span="16">
-      <router-link :to="path" target="_blank">{{post.name}}</router-link>
+    <el-col :span="14">
+      <router-link :to="path" target="_blank" style="font-size: 30px;">{{post.name}}</router-link>
     </el-col>
     <!-- 3 发帖人+最后回帖人 -->
     <el-col :span="3">
-      <p>{{post.uper.username}}</p>
+      <p>{{post.uper.name}}</p>
       <br>
-      <p v-if="lastReply">{{lastReply.uper.username}}</p>
+      <p v-if="lastReply">{{lastReply.uper.name}}</p>
       <p v-else>没有回帖</p>
     </el-col>
     <!-- 4 最后盖楼时间 -->
-    <el-col :span="2">
+    <el-col :span="4" style="font-size: 20px;">
       <template v-if="lastReply">{{lastReply.add_time | formatDate}}</template>
       <template v-else>{{post.add_time | formatDate}}</template>
     </el-col>
