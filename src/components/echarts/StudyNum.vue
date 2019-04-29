@@ -2,13 +2,33 @@
   <div id="StudyNum" :style="{width: '1000px', height: '320px'}"></div>
 </template>
 <script>
+import { getStudyNum } from "../../api/api";
 export default {
   name: "StudyNum",
   data() {
-    return {};
+    return {
+      videos: ["看视频", 0, 0, 0, 0, 0, 0],
+      forums: ["逛论坛", 0, 0, 0, 0, 0, 0],
+      readings: ["读文章", 0, 0, 0, 0, 0, 0],
+      essays: ["看作文", 0, 0, 0, 0, 0, 0]
+    };
   },
-  mounted() {
-    this.drawLine();
+  created() {
+    getStudyNum()
+      .then(res => {
+        //当前周在循环队列的下一周是时间意义上的第一周
+        let nextIdx = (res.data["week"] + 1) % 6;
+        for (let i = 0; i < 6; i++) {
+          this.videos[i + 1] = res.data["video"][(i + nextIdx) % 6];
+          this.forums[i + 1] = res.data["forum"][(i + nextIdx) % 6];
+          this.readings[i + 1] = res.data["reading"][(i + nextIdx) % 6];
+          this.essays[i + 1] = res.data["essay"][(i + nextIdx) % 6];
+        }
+        this.drawLine();
+      })
+      .catch(error => {
+        window.alert("[error]组件StudyNum的created钩子出错");
+      });
   },
   methods: {
     drawLine() {
@@ -24,10 +44,10 @@ export default {
         dataset: {
           source: [
             ["product", "上5周", "上4周", "上3周", "上2周", "上1周", "本周"],
-            ["看视频", 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
-            ["逛论坛", 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
-            ["读文章", 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
-            ["看作文", 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+            this.videos,
+            this.forums,
+            this.readings,
+            this.essays
           ]
         },
         xAxis: { type: "category" },

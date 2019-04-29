@@ -240,3 +240,11 @@ export const retrieveTranslate = id => {
 export const getURI = uri => {
     return axios.get(uri);
 }
+
+//----------------------------------[其它]----------------------------------
+
+//获取用户站内资源的学习次数
+export const getStudyNum = () => {
+    return axios.get(`${local_host}/userstudy/`);
+}
+
