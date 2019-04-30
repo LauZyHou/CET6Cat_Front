@@ -98,7 +98,7 @@ export default {
     //文章
     onReadingRowClick(row, event, column) {
       let routeData = this.$router.resolve({
-        path: "/app/home/papers/" + row.id
+        path: "/app/home/readings/" + row.id
       });
       window.open(routeData.href, "_blank");
     },

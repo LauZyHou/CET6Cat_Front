@@ -33,6 +33,8 @@ export const store = new Vuex.Store({
     }
 });
 
+export default store;
+
 /*
 //对posts数组按时间从新到旧排序的比较函数
 let cmpByLastTime = function (a, b) {

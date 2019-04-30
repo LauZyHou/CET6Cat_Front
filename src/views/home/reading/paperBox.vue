@@ -2,7 +2,7 @@
   <el-row>
     <!-- 1 文章名+摘要 -->
     <el-col :span="20">
-      <router-link :to="'/app/home/papers/'+paper.id" target="_blank">{{paper.name}}</router-link>
+      <router-link :to="'/app/home/readings/'+paper.id" target="_blank">{{paper.name}}</router-link>
     </el-col>
     <!-- 2 发布时间 -->
     <el-col :span="4">{{paper.add_time | formatDate}}</el-col>

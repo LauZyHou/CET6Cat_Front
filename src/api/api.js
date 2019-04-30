@@ -248,3 +248,12 @@ export const getStudyNum = () => {
     return axios.get(`${local_host}/userstudy/`);
 }
 
+//存储用户的翻译记录
+export const postUserTranslate = params => {
+    return axios.post(`${local_host}/usertranslate/`, params);
+}
+
+//获取用户的翻译记录
+export const getUserTranslate = tid => {
+    return axios.get(`${local_host}/usertranslate/` + tid);
+}

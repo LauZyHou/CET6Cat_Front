@@ -42,7 +42,7 @@ export default {
 <style scoped>
 #video-container {
   width: 100%;
-  background-color: gold;
+  background-color: rgb(220, 218, 255);
 }
 
 /* 1 热门视频列表 */
@@ -78,6 +78,7 @@ li {
   height: 150px;
   border: 1px solid #222;
   margin: 10px;
+  background-color: black;
 }
 
 li img {

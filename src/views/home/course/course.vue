@@ -33,7 +33,7 @@
         layout="prev, pager, next"
         :total="count"
         :current-page="page"
-        :page-size="3"
+        :page-size="8"
         @current-change="pageChange"
       ></el-pagination>
     </div>
@@ -135,6 +135,7 @@ li {
   height: 150px;
   border: 1px solid #222;
   margin: 10px;
+  background-color: black;
 }
 
 li img {

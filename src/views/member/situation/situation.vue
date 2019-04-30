@@ -30,6 +30,7 @@ export default {
 <style scoped>
 .chart-box {
   min-height: 307px;
+  /* background-color: antiquewhite; */
 }
 
 .chart-box > h2 {

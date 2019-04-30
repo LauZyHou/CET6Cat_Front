@@ -30,17 +30,19 @@
         <!-- <img src="/static/advertisement/ver1.jpg" alt="广告"> -->
       </div>
       <!-- 2-3 六级新闻 -->
+      <!--
       <div class="hot">
         <h2>
           六级新闻
           <router-link to target="_blank">->更多</router-link>
         </h2>
       </div>
+      -->
       <!-- 2-4 热门视频 -->
       <div class="hot">
         <h2>
           热门视频
-          <router-link to="/app/home/course/1" target="_blank">->更多</router-link>
+          <router-link to="/app/home/course/" target="_blank">->更多</router-link>
         </h2>
         <hot-video></hot-video>
       </div>
@@ -48,7 +50,7 @@
       <div class="hot">
         <h2>
           近期热帖
-          <router-link to="/app/home/forum/1" target="_blank">->更多</router-link>
+          <router-link to="/app/home/forum/" target="_blank">->更多</router-link>
         </h2>
         <hot-post></hot-post>
       </div>
@@ -64,7 +66,7 @@
       <div class="hot">
         <h2>
           阅读分析
-          <router-link to="/app/home/reading/1" target="_blank">->更多</router-link>
+          <router-link to="/app/home/reading/" target="_blank">->更多</router-link>
         </h2>
         <hot-reading></hot-reading>
       </div>
@@ -72,7 +74,7 @@
       <div class="hot">
         <h2>
           高分作文
-          <router-link to="/app/home/essay/1" target="_blank">->更多</router-link>
+          <router-link to="/app/home/essay/" target="_blank">->更多</router-link>
         </h2>
         <hot-essay></hot-essay>
       </div>

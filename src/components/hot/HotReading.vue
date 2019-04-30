@@ -38,7 +38,7 @@ export default {
     //fixme papers这个路由名字要改掉
     onRowClick(row, event, column) {
       let routeData = this.$router.resolve({
-        path: "/app/home/papers/" + row.id
+        path: "/app/home/readings/" + row.id
       });
       window.open(routeData.href, "_blank");
     }

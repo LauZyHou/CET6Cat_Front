@@ -4,6 +4,7 @@ import Router from 'vue-router'
 
 //三方库
 import cookie from '../static/js/cookie'
+import store from '../store/store'
 
 //组件
 import app from '../views/app/app'
@@ -114,7 +115,7 @@ let router = new Router({
               component: word,
               meta: {
                 title: "六级词汇",
-                need_log: false //true
+                need_log: true
               }
             },
             {//交流论坛list页
@@ -168,7 +169,7 @@ let router = new Router({
               component: post,
               meta: {
                 title: "论坛发帖",
-                need_log: false//true
+                need_log: true
               }
             },
             {//论坛帖子详情页
@@ -190,7 +191,7 @@ let router = new Router({
               }
             },
             {//阅读分析详情页
-              path: "papers/:id",
+              path: "readings/:id",
               name: "papers",
               component: papers,
               meta: {
@@ -219,7 +220,7 @@ let router = new Router({
             foot: foot
           },
           meta: {
-            need_log: false //true
+            need_log: true
           },
           children: [
             {//个人中心
@@ -228,7 +229,7 @@ let router = new Router({
               component: center,
               meta: {
                 title: "个人中心",
-                need_log: false //true
+                need_log: true
               },
               children: [
                 {//个人资料
@@ -237,7 +238,7 @@ let router = new Router({
                   component: profile,
                   meta: {
                     title: "个人资料-个人中心",
-                    need_log: false //true
+                    need_log: true
                   }
                 },
                 {//我的收藏
@@ -246,7 +247,7 @@ let router = new Router({
                   component: favorite,
                   meta: {
                     title: "我的收藏-个人中心",
-                    need_log: false //true
+                    need_log: true
                   }
                 },
                 {//VIP服务
@@ -255,7 +256,7 @@ let router = new Router({
                   component: vip,
                   meta: {
                     title: "VIP服务-个人中心",
-                    need_log: false //true
+                    need_log: true
                   }
                 },
                 {//设置
@@ -264,7 +265,7 @@ let router = new Router({
                   component: setting,
                   meta: {
                     title: "设置-个人中心",
-                    need_log: false //true
+                    need_log: true
                   }
                 }
                 //FIXME 添加/app/member/setting的子路由
@@ -276,7 +277,7 @@ let router = new Router({
               component: users,
               meta: {
                 title: "用户主页",
-                need_log: false //true
+                need_log: true
               },
             },
             {//充值页
@@ -285,7 +286,7 @@ let router = new Router({
               component: prepaid,
               meta: {
                 title: "Cat币充值",
-                need_log: false//true
+                need_log: true
               }
             },
             {//学习情况(图表)页
@@ -294,7 +295,7 @@ let router = new Router({
               component: situation,
               meta: {
                 title: "学习情况",
-                need_log: false//true
+                need_log: true
               }
             },
             {//某用户关注的用户页
@@ -303,7 +304,7 @@ let router = new Router({
               component: watch_from,
               meta: {
                 title: "此用户关注的人",
-                need_log: false//true
+                need_log: true
               }
             },
             {//某用户的粉丝页
@@ -312,7 +313,7 @@ let router = new Router({
               component: watch_to,
               meta: {
                 title: "此用户的粉丝",
-                need_log: false//true
+                need_log: true
               }
             }
             //FIXME 添加/app/member的子路由
@@ -371,7 +372,7 @@ let router = new Router({
               component: Tword,
               meta: {
                 title: "单词测验",
-                need_log: false //true
+                need_log: true
               }
             },
             {//听力测验(list页)
@@ -380,7 +381,7 @@ let router = new Router({
               component: Tlisten,
               meta: {
                 title: "听力资源列表",
-                need_log: false //true
+                need_log: true
               }
             },
             {//听力测验(详情页)
@@ -389,7 +390,7 @@ let router = new Router({
               component: Tlistens,
               meta: {
                 title: "听力测验",
-                need_log: false //true
+                need_log: true
               }
             },
             {//翻译测验(list页)
@@ -398,7 +399,7 @@ let router = new Router({
               component: Ttranslate,
               meta: {
                 title: "翻译资源列表",
-                need_log: false //true
+                need_log: true
               }
             },
             {//翻译测验(详情页)
@@ -407,7 +408,7 @@ let router = new Router({
               component: Ttranslates,
               meta: {
                 title: "翻译测验",
-                need_log: false //true
+                need_log: true
               }
             },
           ]

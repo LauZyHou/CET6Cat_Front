@@ -28,7 +28,12 @@
 </template>
 
 <script>
-import { retrieveTranslate, getURI } from "../../api/api";
+import {
+  retrieveTranslate,
+  getURI,
+  postUserTranslate,
+  getUserTranslate
+} from "../../api/api";
 
 export default {
   name: "Ttranslates",
@@ -77,15 +82,33 @@ export default {
           window.alert(error.response.data);
         else window.alert("[error]出现非请求错误");
       });
+    //请求用户存储的自己的翻译
+    getUserTranslate(id)
+      .then(res => {
+        this.userInput = res.data["content"];
+      })
+      .catch(error => {
+        console.log(error.response.data);
+        window.alert("[error]出现错误!见cosnole");
+      });
   },
   methods: {
     //切换视角
     onSwitch() {
       this.examMode = !this.examMode;
     },
-    //fixme 保存答卷
+    //保存答卷
     onUpload() {
-      window.alert("todo 保存答卷");
+      postUserTranslate({ tid: this.detail.id, content: this.userInput })
+        .then(res => {
+          this.$message({
+            message: "已经保存到服务器!",
+            type: "success"
+          });
+        })
+        .catch(error => {
+          this.$message.error(error.response.data["detail"]);
+        });
     }
   }
 };
