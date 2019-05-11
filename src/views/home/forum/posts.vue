@@ -15,8 +15,8 @@
       <el-row>
         <el-col :span="20" id="post-tit">{{detail.name}}</el-col>
         <el-col :span="4" id="post-op">
-          <button @click="onlyPoster">只看楼主</button>
-          <button :disabled="true">删除</button>
+          <!-- <button @click="onlyPoster">只看楼主</button> -->
+          <!-- <button :disabled="true">删除</button> -->
         </el-col>
       </el-row>
       <!-- 2-2 帖子内容 -->
@@ -61,9 +61,11 @@
       </el-row>
     </div>
     <!-- 3 TODO分页 -->
+    <!--
     <div class="pagination">
       <el-pagination background layout="prev, pager, next" :total="50"></el-pagination>
     </div>
+    -->
     <!-- 4 操作按钮 -->
     <div id="op">
       <!-- 向上 -->
