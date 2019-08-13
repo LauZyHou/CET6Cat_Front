@@ -7,6 +7,9 @@ CET6Cat英语六级辅导网前端，Vue.js+ElementUI+Echarts。
 ## 后端项目地址
 [CET6Cat_Back](https://github.com/LauZyHou/CET6Cat_Back)
 
+## 演示视频
+[CET6Cat演示视频-bilibili](https://www.bilibili.com/video/av63516010/)
+
 ## 前端运行展示
 ### 注册页
 ![](./README_PIC/1.png)
